@@ -1,0 +1,11 @@
+#login {
+    font-family: "futura-heavy", Fallback, sans-serif;
+}
+#bg-image {
+    height: relative;
+    width: 40%;
+}
+
+#loginWrapper {
+    height: 80vh;
+}
