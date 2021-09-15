@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "futura-heavy";
+    src: url("\src\assets\Futura-Std-Heavy.otf") format("opentype");
+}
+@font-face {
+    font-family: "futura-bold";
+    src: url("\src\assets\Futura-Std-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: "futura-medium";
+    src: url("\src\assets\Futura-Std-Medium.otf") format("opentype");
+}
+@font-face {
+    font-family: "futura-book";
+    src: url("\src\assets\Futura-Std-Book.otf") format("opentype");
+}
+
+
+h1 {
+    font-family: "futura-bold", Fallback, sans-serif;
+}
+
+body{
+    min-height: calc(100vh - 80px);
+    justify-content: space-between;
+    background: radial-gradient( #FFFFFF, #B9B9BA);
+    background-repeat: no-repeat;
+}
+
+button {
+    padding: 10px;
+    color: white;
+    border-radius: 10%;
+    border: none;
+}
+
+.rev-btn-confirm {
+    background-color: #72A4C2;
+}
