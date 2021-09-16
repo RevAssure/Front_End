@@ -1,43 +1,37 @@
-<!-- <div id="registerWrapper" class="col-4 offset-4 mb-5 bg-white border border-dark">
-    <div class="container mt-5">
-        <div class="col-4 offset-4 p-3">
-            <h1 class="text-center">Register</h1>
-            <div class="mb-3">
-                <label class="form-label">USERNAME:</label>
-                <input class="form-control" type="text" placeholder="Username">
-            </div>
-    
-            <div class="mb-3">
-                <label class="form-label">PASSWORD:</label>
-                <input class="form-control" type="password" placeholder="Password">
-            </div>
-            
-            <div class="text-center">
-                <button class="rev-btn-confirm mr-1" type="button" routerLink="/register">Register</button>
-            </div>
-    
-        </div>
-    </div>
-    
-</div> -->
 <div class="container">
     <div id="register-container" class="card col-4 offset-4 mb-5 shadow">
-        <div class="d-flex justify-content-center flex-column align-items-center">
+        <!-- <div class="d-flex justify-content-center flex-column align-items-center">
             <img src="..\..\..\assets\images\rev-logo.png" class="card-img-top py-4" alt="...">
             <div class="divider mb-4 mt-4"></div>
-        </div>
-        <div class="card-body px-3 pt-0">
+        </div> -->
+        <div class="card-body px-3">
             <h2 id="register-header" class="card-title">Register</h2>
             <div class="mb-3">
+                <label class="form-label">FIRST NAME:</label>
+                <input class="form-control" name="first-name" type="text" placeholder="First Name" autofocus>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">LAST NAME:</label>
+                <input class="form-control" name="last-name" type="text" placeholder="Last Name" autofocus>
+            </div>
+            <div class="mb-3">
                 <label class="form-label">USERNAME:</label>
-                <input class="form-control" type="text" placeholder="Username" autofocus>
+                <input class="form-control" name="username" type="text" placeholder="Username" autofocus>
             </div>
             <div class="mb-3">
                 <label class="form-label">PASSWORD:</label>
-                <input class="form-control" type="password" placeholder="Password">
+                <input class="form-control" name="password" type="password" placeholder="Password">
             </div>
-            <div>
-                <button class="rev-btn-confirm mr-1" type="button" routerLink="/register">Register</button>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="true" id="is-trainer">
+                <label class="form-check-label" for="is-trainer">
+                    Register as Trainer
+                </label>
+            </div>
+            <div class="d-flex align-items-center">
+                <button class="rev-btn-confirm mr-3" type="button" routerLink="/register">Register</button>
+                <a id="login-link" routerLink="/login">
+                    Back to Login</a>
             </div>
         </div>
     </div>

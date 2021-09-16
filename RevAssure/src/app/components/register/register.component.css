@@ -12,8 +12,16 @@ img {
     height: auto;
 }
 
+label {
+    font-family: "futura-medium", Fallback, sans-serif;
+}
+
 #register-container {
     border: 1px solid  #F26925;
+}
+
+#login-link {
+    text-decoration: underline;
 }
 
 #register-header {
