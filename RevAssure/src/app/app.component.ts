@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CalendarOptions } from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,7 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'RevAssure';
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth'
+  };
 }
