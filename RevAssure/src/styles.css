@@ -21,19 +21,49 @@ h1 {
 }
 
 body{
-    min-height: calc(100vh - 80px);
-    justify-content: space-between;
+    min-height: 100vh;
     background: radial-gradient( #FFFFFF, #B9B9BA);
-    background-repeat: no-repeat;
+}
+
+app-root {
+    min-height: 100vh;
 }
 
 button {
-    padding: 10px;
+    padding: 5px 10px;
     color: white;
-    border-radius: 10%;
+    border-radius: 2px;
     border: none;
 }
 
 .rev-btn-confirm {
-    background-color: #72A4C2;
+    background-color: #F26925;
+    box-sizing: border-box;
+    border: 1px solid #F26925;
+    transition: all .25s ease-in-out;
 }
+
+.rev-btn-confirm:hover {
+    background-color: #c9571e;
+}
+
+/* .rev-btn-confirm:hover {
+    background-color: white;
+    color: #F26925;
+
+} */
+
+.rev-btn-secondary {
+    background-color: #474C55;
+    border: 1px solid #474C55;
+    transition: all .25s ease-in-out;
+}
+
+.rev-btn-secondary:hover {
+    background-color: #393d44;
+}
+
+/* .rev-btn-secondary:hover {
+    background-color: white;
+    color: #474C55;
+} */
