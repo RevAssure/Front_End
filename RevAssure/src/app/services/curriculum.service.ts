@@ -72,10 +72,44 @@ export class CurriculumService {
     },
   ]
 
+  topics = [
+    {
+      title: "Spring Boot",
+      tech_category: {id: 1, name: "Java"},
+    },
+    {
+      title: "Topic 2",
+      tech_category: {id: 1, name: "Docker"},
+    },
+    {
+      title: "Topic 3",
+      tech_category: {id: 1, name: "AWS"},
+    },
+    {
+      title: "Topic 4",
+      tech_category: {id: 1, name: "SQL"},
+    },
+
+  ]
+
+  
   constructor() { }
 
   getEvents() {
     return this.calendarEvents;
   }
 
+  getTopics() {
+    return this.topics;
+  }
+
 }
+
+// topic_id: number;
+// trainer_id: number;
+// titie: string;
+// description: string;
+// estimated_duration: number;
+// tech_category_id: number;
+// lecture_notes: string;
+// github_repo_link: string;
