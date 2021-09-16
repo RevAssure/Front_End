@@ -13,10 +13,12 @@ export class DayViewComponent implements OnInit {
 
   params: any = ""
   events: any[] = []
+  allTopics: any[] = []
 
   ngOnInit(): void {
     this.params = this.activatedRoutes.snapshot.paramMap.get("date")
     this.events = this.service.getEvents().filter(e => e.date === this.params)
+    this.allTopics = this.service.getTopics()
   }
 
 }

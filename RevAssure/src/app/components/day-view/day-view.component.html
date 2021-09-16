@@ -1,1 +1,7 @@
+<h1>{{params}}</h1>
 <p *ngFor="let e of events">{{e.title}}</p>
+
+<select name="">
+    <option *ngFor="let t of allTopics"> {{t.tech_category.name}}: {{t.title}}</option>
+</select>
+<button class="rev-btn-confirm" type="button">ADD</button>
