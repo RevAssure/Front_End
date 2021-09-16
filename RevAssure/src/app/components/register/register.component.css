@@ -16,6 +16,10 @@ img {
     border: 1px solid  #F26925;
 }
 
+#register-header {
+    font-family: "futura-heavy", Fallback, sans-serif;
+}
+
 .divider {
     height: 1px;
     background-color:  #B9B9BA;
