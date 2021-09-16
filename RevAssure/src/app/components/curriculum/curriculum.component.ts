@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Calendar } from '@fullcalendar/core';
 import { CalendarOptions } from '@fullcalendar/common';
+import { CurriculumService } from 'src/app/services/curriculum.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-curriculum',
@@ -9,86 +11,26 @@ import { CalendarOptions } from '@fullcalendar/common';
 })
 export class CurriculumComponent implements OnInit {
 
-  constructor() { }
+  events: any[] = []
+
+  constructor(private service: CurriculumService, private router: Router) { }
 
   ngOnInit(): void {
+    
   }
 
   handleDateClick (arg: any) {
-    alert("Date clicked " + arg.dateStr)
+    this.router.navigate([`/curriculum/${arg.dateStr}`])
   }
+
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     fixedWeekCount: false,
     dateClick: this.handleDateClick.bind(this),
+    selectable: true,
     dayMaxEventRows: true,
-    events: [
-      {
-        title: "Test",
-        date: "2021-09-16"
-      },
-      {
-        title: "Test",
-        date: "2021-09-16"
-      },
-      {
-        title: "Test",
-        date: "2021-09-16"
-      },
-      {
-        title: "Test",
-        date: "2021-09-16"
-      },
-      {
-        title: "Test",
-        date: "2021-09-07"
-      },
-      {
-        title: "Test",
-        date: "2021-09-07"
-      },
-      {
-        title: "Test",
-        date: "2021-09-07"
-      },
-      {
-        title: "Test",
-        date: "2021-09-01"
-      },
-      {
-        title: "Test",
-        date: "2021-09-01"
-      },
-      {
-        title: "Test",
-        date: "2021-09-01"
-      },
-      {
-        title: "Test",
-        date: "2021-09-23"
-      },
-      {
-        title: "Test",
-        date: "2021-09-23"
-      },
-      {
-        title: "Test",
-        date: "2021-09-23"
-      },
-      {
-        title: "Test",
-        date: "2021-09-30"
-      },
-      {
-        title: "Test",
-        date: "2021-09-30"
-      },
-      {
-        title: "Test",
-        date: "2021-09-30"
-      },
-    ]
+    events: this.service.getEvents()
   };
 
 }
