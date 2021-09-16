@@ -1,6 +1,31 @@
+input {
+    border: 1px solid  #F26925;
+    font-family: "futura-medium", Fallback, sans-serif;
+}
+
+img {
+    width: 85%;
+    height: auto;
+}
+
+.divider {
+    height: 1px;
+    background-color:  #B9B9BA;
+    width: 85%;
+}
+
+#login-container {
+    border: 1px solid  #F26925; 
+}
+
 #login {
     font-family: "futura-heavy", Fallback, sans-serif;
 }
+
+#login-header {
+    font-family: "futura-heavy", Fallback, sans-serif;
+}
+
 #bg-image {
     height: relative;
     width: 40%;

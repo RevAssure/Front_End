@@ -1,3 +1,23 @@
 #registerWrapper {
     height: 80vh;
 }
+
+input {
+    border: 1px solid  #F26925;
+    font-family: "futura-medium", Fallback, sans-serif;
+}
+
+img {
+    width: 85%;
+    height: auto;
+}
+
+#register-container {
+    border: 1px solid  #F26925;
+}
+
+.divider {
+    height: 1px;
+    background-color:  #B9B9BA;
+    width: 85%;
+}
