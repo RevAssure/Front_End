@@ -6,8 +6,6 @@ pipeline {
     stage('Install') {
       steps { 
           echo 'Installing...'
-          sh 'ls'
-          sh 'ls'
 
           sh 'npm install'
           sh 'npm install -g @angular/cli'
@@ -17,7 +15,9 @@ pipeline {
     stage('Build') {
       steps { 
           echo 'Building...'
+          sh 'ls'
           sh 'ng build' 
+          sh 'ls'
           archiveArtifacts artifacts: '**/RevAssure/dist*'
       }
     }
