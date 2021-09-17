@@ -6,7 +6,9 @@ pipeline {
     stage('Install') {
       steps { 
           echo 'Installing...'
+          
           sh 'cd RevAssure'
+          echo $PWD
           sh 'npm install'
           sh 'npm install -g @angular/cli'
       }
