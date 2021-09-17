@@ -8,6 +8,7 @@ pipeline {
           echo 'Installing...'
           sh 'ls'
           sh 'cd RevAssure'
+          sh 'ls'
 
           sh 'npm install'
           sh 'npm install -g @angular/cli'
