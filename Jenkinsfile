@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying'
-                sh 'make publish'
+                sh 'ng serve --open'
             }
     }
     
