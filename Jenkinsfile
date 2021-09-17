@@ -3,13 +3,6 @@ pipeline {
   tools {nodejs "node"}
   stages {
       
-      stage('Clone'){
-          steps{
-              echo 'Cloning from GitHub...'
-              git 'https://github.com/RevAssure/Front_End.git'
-          }
-      }
-      
     stage('Install') {
       steps { 
           echo 'Installing...'
