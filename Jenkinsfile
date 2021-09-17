@@ -15,9 +15,7 @@ pipeline {
     stage('Build') {
       steps { 
           echo 'Building...'
-          sh 'ls'
           sh 'ng build' 
-          sh 'ls'
       }
     }
     
