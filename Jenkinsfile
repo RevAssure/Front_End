@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
                 echo 'Deploying'
-                sh 'ng serve --open'
+                sh 'ng serve'
             }
     }
     
