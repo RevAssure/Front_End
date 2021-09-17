@@ -8,7 +8,7 @@ pipeline {
           echo 'Installing...'
           
           sh 'cd RevAssure'
-          echo $PWD
+          echo env.WORKSPACE
           sh 'npm install'
           sh 'npm install -g @angular/cli'
       }
