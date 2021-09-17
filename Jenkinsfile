@@ -7,7 +7,7 @@ pipeline {
       steps { 
           echo 'Installing...'
           sh 'ls'
-          sh 'cd RevAssure'
+          sh 'cd */RevAssure'
           sh 'ls'
 
           sh 'npm install'
