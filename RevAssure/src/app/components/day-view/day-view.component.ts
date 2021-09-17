@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CalendarOptions } from '@fullcalendar/angular';
 import { CurriculumService } from 'src/app/services/curriculum.service';
 
 @Component({
@@ -20,5 +21,13 @@ export class DayViewComponent implements OnInit {
     this.events = this.service.getEvents().filter(e => e.date === this.params)
     this.allTopics = this.service.getTopics()
   }
+
+  calendarOptions: CalendarOptions = {
+    initialView: "dayViewDay",
+    // fixedWeekCount: false,
+    // selectable: true,
+    dayMaxEventRows: true,
+    events: this.service.getEvents()
+  };
 
 }
