@@ -18,7 +18,7 @@ pipeline {
           sh 'ls'
           sh 'ng build' 
           sh 'ls'
-          archiveArtifacts artifacts: '**/RevAssure/dist*'
+          archiveArtifacts artifacts: 'dist'
       }
     }
     
