@@ -70,6 +70,10 @@ export class CurriculumService {
       title: "Test",
       date: "2021-09-30"
     },
+    {
+      title: "Test",
+      date: "2021-08-31"
+    },
   ]
 
   topics = [
