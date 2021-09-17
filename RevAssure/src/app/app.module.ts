@@ -12,6 +12,11 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
 import { CurriculumComponent } from './components/curriculum/curriculum.component'; // a plugin!
 import { DayViewComponent } from './components/day-view/day-view.component'
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ModulesComponent } from './components/modules/modules.component';
+import { CreateModuleComponent } from './components/create-module/create-module.component';
+import { CreateTopicComponent } from './components/create-topic/create-topic.component';
+import { TopicComponent } from './components/topic/topic.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -25,7 +30,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     RegisterComponent,
     NavbarComponent,
     CurriculumComponent,
-    DayViewComponent
+    DayViewComponent,
+    DashboardComponent,
+    ModulesComponent,
+    CreateModuleComponent,
+    CreateTopicComponent,
+    TopicComponent
   ],
   imports: [
     BrowserModule,
