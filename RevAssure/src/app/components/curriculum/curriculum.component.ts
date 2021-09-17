@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Calendar } from '@fullcalendar/core';
 import { CalendarOptions } from '@fullcalendar/common';
 import { CurriculumService } from 'src/app/services/curriculum.service';
 import { Router } from '@angular/router';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-curriculum',
@@ -12,19 +13,42 @@ import { Router } from '@angular/router';
 export class CurriculumComponent implements OnInit {
 
   events: any[] = []
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
-  constructor(private service: CurriculumService, private router: Router) { }
+  constructor(private service: CurriculumService, private router: Router) { 
+    
+  }
 
   ngOnInit(): void {
     
   }
 
+  getCalendarApi() {
+    return this.calendarComponent.getApi();
+  }
+
   handleDateClick (arg: any) {
-    this.router.navigate([`/curriculum/${arg.dateStr}`])
+    // this.router.navigate([`/curriculum/${arg.dateStr}`])
+    let calendarApi = this.getCalendarApi()
+    calendarApi.changeView("dayGridDay", arg.dateStr)
   }
 
 
   calendarOptions: CalendarOptions = {
+    customButtons: {
+      backToMonth: {
+        text: 'Month',
+        click: () => {
+          let calendarApi = this.calendarComponent.getApi();
+          calendarApi.changeView("dayGridMonth")
+        }
+      }
+    },
+    headerToolbar: {
+      right: 'today,backToMonth prev,next',
+      left: 'title',
+      center:''
+    },
     initialView: 'dayGridMonth',
     fixedWeekCount: false,
     dateClick: this.handleDateClick.bind(this),
