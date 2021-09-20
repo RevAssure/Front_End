@@ -9,11 +9,11 @@
             <h2 id="login-header" class="card-title">Login</h2>
             <div class="mb-3">
                 <label class="form-label">USERNAME:</label>
-                <input class="form-control" type="text" placeholder="Username" autofocus>
+                <input class="form-control" [(ngModel)]="username" type="text" placeholder="Username" autofocus>
             </div>
             <div class="mb-3">
                 <label class="form-label">PASSWORD:</label>
-                <input class="form-control" type="password" placeholder="Password">
+                <input class="form-control" [(ngModel)]="password" type="password" placeholder="Password">
             </div>
             <div class="text-left">
                 <button class="rev-btn-confirm mr-2" type="button" (click)="login()">Login</button>
