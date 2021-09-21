@@ -9,6 +9,7 @@ pipeline {
 
           sh 'npm install'
           sh 'npm install -g @angular/cli'
+          sh 'ng add @jefiozie/ngx-aws-deploy'
       }
     }
 
