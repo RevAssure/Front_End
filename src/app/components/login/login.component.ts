@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 import { UserService } from 'src/app/services/user.service';
 import { servicesVersion } from 'typescript';
 
@@ -10,7 +11,7 @@ import { servicesVersion } from 'typescript';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router : Router, private service: UserService) { }
+  constructor(private router : Router, private userService: UserService, private authService: AuthorizationService) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +20,15 @@ export class LoginComponent implements OnInit {
   password: string;
 
   login() {
-    this.service.login(this.username, this.password).subscribe(result => console.log(result))
-    // this.router.navigateByUrl("/dashboard");
+    this.userService.login(this.username, this.password).subscribe((result) => {
+      this.authService.setJwt(result);
+      this.getFullName();
+      this.router.navigateByUrl("/dashboard");
+    })
+    
+  }
+
+  getFullName() {
+    this.userService.getFullName(this.authService.jwt)
   }
 }
