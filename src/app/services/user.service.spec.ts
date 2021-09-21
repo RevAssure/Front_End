@@ -40,7 +40,7 @@ describe('CurriculumService', () => {
       expect(user.id).toEqual(dummyUserOutput.id);
       expect(user.username).toEqual(dummyUserOutput.username);
     });
-    const request = httpMock.expectOne("http://localhost:8081/revuser/register");
+    const request = httpMock.expectOne("http://localhost:8080/revuser/register");
     expect(request.request.method).toBe('POST');
     request.flush(dummyUserOutput);
   });
@@ -55,7 +55,7 @@ describe('CurriculumService', () => {
     service.login(dummyUsername, dummyPassword).subscribe((jwt) => {
       expect(jwt.jwt).toEqual(dummyJwt.jwt);
     });
-    const request = httpMock.expectOne("http://localhost:8081/revuser/authenticate");
+    const request = httpMock.expectOne("http://localhost:8080/revuser/authenticate");
     expect(request.request.method).toBe('POST');
     request.flush(dummyJwt);
   });
