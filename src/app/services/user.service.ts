@@ -25,10 +25,10 @@ export class UserService {
   private lastNameChange = new Subject<string>();
   public lastName$ = this.lastNameChange.asObservable();
 
-  httpOptions: any = {
+  httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      "Authorization": ""
+      'Content-Type': "application/json",
+      'Authorization': ""
     })
   };
 
@@ -63,9 +63,10 @@ export class UserService {
   //This needs to set the First and Last Name still
   getFullName(jwt: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${jwt}`);
-    console.log(this.httpOptions)
-    this.http.get(`${this.url}`, this.httpOptions).subscribe((result) => {
-      console.log(result)
+    console.log(this.httpOptions);
+    this.http.get<User>(`${this.url}`, this.httpOptions).subscribe((user) => {
+      this.setFirstName(user.firstName);
+      this.setLastName(user.lastName);
     });
   }
 }
