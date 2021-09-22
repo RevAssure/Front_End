@@ -19,10 +19,22 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
+  firstName: string;
+  lastName: string;
+
   login() {
     this.userService.login(this.username, this.password).subscribe((result) => {
+      console.log("boop");
       this.authService.setJwt(result);
       this.getFullName();
+      this.userService.getFirstName().subscribe(firstName => {
+        this.firstName = firstName;
+        console.log(firstName);
+      });
+      this.userService.getLastName().subscribe(lastName => {
+        this.lastName = lastName;
+        console.log(lastName);
+      });
       this.router.navigateByUrl("/dashboard");
     })
     

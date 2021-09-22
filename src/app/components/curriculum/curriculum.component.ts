@@ -59,7 +59,7 @@ export class CurriculumComponent implements OnInit {
     weekends: false,
     initialView: 'dayGridMonth',
     fixedWeekCount: false,
-    dateClick: this.handleDateClick.bind(this),
+    //dateClick: this.handleDateClick.bind(this),
     selectable: true,
     dayMaxEventRows: true,
     events: this.service.getEvents(),

@@ -4,8 +4,9 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { UserService } from './user.service';
 import { User } from '../user';
 import { Jwt } from '../jwt';
+import { HttpHeaders } from '@angular/common/http';
 
-describe('CurriculumService', () => {
+describe('UserService', () => {
   let service: UserService;
   let injector: TestBed;
   let httpMock: HttpTestingController;
@@ -22,6 +23,18 @@ describe('CurriculumService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('getFirstName() should return an Observable updatable via setFirstName()', async() => {
+    const expectedName: string = "Test";
+    service.getFirstName().subscribe(name => expect(name).toBe(expectedName));
+    service.setFirstName(expectedName);
+  });
+
+  it('getLastName() should return an Observable updatable via setLastName()', async() => {
+    const expectedName: string = "Test";
+    service.getLastName().subscribe(name => expect(name).toBe(expectedName));
+    service.setLastName(expectedName);
   });
 
   it('should return a JSON of User when registerNewUser() is called', () => {
@@ -58,6 +71,32 @@ describe('CurriculumService', () => {
     const request = httpMock.expectOne("http://localhost:8080/revuser/authenticate");
     expect(request.request.method).toBe('POST');
     request.flush(dummyJwt);
+  });
+
+  it('should set new firstName/lastName when getFullName() called', async() => {
+    const mockJwt = "mock jwt";
+    const mockHttpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': "application/json",
+        'Authorization': mockJwt
+      })
+    }
+    const dummyFirstName: string = "Test1";
+    const dummyLastName: string = "Test2";
+    const dummyUserOutput: User = {
+      id: 0,
+      firstName: dummyFirstName,
+      lastName: dummyLastName,
+      username: "test",
+      trainer: false
+    }
+
+    service.getFirstName().subscribe(name => expect(name).toBe(dummyFirstName));
+    service.getLastName().subscribe(name => expect(name).toBe(dummyLastName));
+    service.getFullName(mockJwt);
+    const request = httpMock.expectOne("http://localhost:8080/revuser");
+    expect(request.request.method).toBe('GET');
+    request.flush(dummyUserOutput);
   });
 
   afterEach(() => {
