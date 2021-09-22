@@ -24,12 +24,34 @@ export class UserService {
   private lastNameChange = new Subject<string>();
   public lastName$ = this.lastNameChange.asObservable();
 
-  httpOptions: any = {
+  httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      "Authorization": ""
+      'Content-Type': "application/json",
+      'Authorization': ""
     })
   };
+
+  /**
+   * Getters for firstName and lastName which return AN OBSERVABLE.
+   */
+  getFirstName(): Observable<string> {
+    return this.firstName$;
+  }
+  getLastName(): Observable<string> {
+    return this.lastName$;
+  }
+
+  /**
+   * Setters for firstName and lastName, includes functionality to push changes to the respective Observable.
+   */
+  setFirstName(newFirstName: string) {
+    this.firstName = newFirstName;
+    this.firstNameChange.next(newFirstName);
+  }
+  setLastName(newLastName: string) {
+    this.lastName = newLastName;
+    this.lastNameChange.next(newLastName);
+  }
 
   /**
    * Sends a POST request to "/revuser/register" to register a new user
@@ -37,7 +59,7 @@ export class UserService {
    * @returns Observable of persisted User object if successful.
    */
   registerNewUser(newUser: User): Observable<User> {
-    return this.http.post<User>(`${this.url}/register`, newUser)
+    return this.http.post<User>(`${this.url}/register`, newUser);
   }
 
   /**
@@ -57,9 +79,10 @@ export class UserService {
   //This needs to set the First and Last Name still
   getFullName(jwt: string) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${jwt}`);
-    console.log(this.httpOptions)
-    this.http.get(`${this.url}`, this.httpOptions).subscribe((result) => {
-      console.log(result)
+    console.log(this.httpOptions);
+    this.http.get<User>(`${this.url}`, this.httpOptions).subscribe((user) => {
+      this.setFirstName(user.firstName);
+      this.setLastName(user.lastName);
     });
   }
 }
