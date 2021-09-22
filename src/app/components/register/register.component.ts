@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
     this.service.registerNewUser(newUser).subscribe((result) => {
       console.log(result)
       returnedUser = result
+      console.log(returnedUser)
     });
   }
 
