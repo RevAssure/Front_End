@@ -34,7 +34,7 @@ export class CurriculumComponent implements OnInit {
   }
 
 
-  calendarOptions: CalendarOptions = {
+  calendarOptions: CalendarOptions & {dateClick: any} = {
     customButtons: {
       month: {
         text: 'Month',
