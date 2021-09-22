@@ -1,10 +1,40 @@
-export interface Topic {
-    topic_id: number;
-    trainer_id: number;
-    titie: string;
-    description: string;
-    estimated_duration: number;
-    tech_category_id: number;
-    lecture_notes: string;
-    github_repo_link: string;
+import { Injectable } from '@angular/core';
+import { Adapter } from './adapter';
+import { Module } from './module';
+import { TechnologyCategory } from './technologycategory';
+import { User } from './user';
+
+export class Topic {
+    constructor(
+    public id: number,
+    public title: string,
+    public description: string,
+    public estimatedDuration: number,
+    public lectureNotes: string,
+    public topics: Topic[],
+    public githubRepo: string,
+    public trainer: User,
+    public technologyCategory: TechnologyCategory,
+    public modules: Module[]
+    ){}
+}
+
+@Injectable({
+    providedIn: 'root',
+  })
+export class TopicAdapter implements Adapter<Topic>{
+    adapt(newTopic:any):Topic{
+        return new Topic(
+            newTopic.id,
+            newTopic.title,
+            newTopic.description,
+            newTopic.estimatedDuration,
+            newTopic.lectureNotes,
+            newTopic.topics,
+            newTopic.githubRepo,
+            newTopic.trainer,
+            newTopic.technologyCategory,
+            newTopic.modules
+        )
+    }
 }
