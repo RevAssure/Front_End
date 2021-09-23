@@ -9,3 +9,19 @@
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+.curriculum {
+    color: white;
+    background-color: #474C55;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 4px;
+}
+
+.curriculum:hover {
+    background-color: #393d44;
+}
+
+a {
+    text-decoration: none;
+}

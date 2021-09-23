@@ -3,6 +3,7 @@ import { User } from 'src/app/user';
 import { UserService } from 'src/app/services/user.service';
 import { Curriculum } from 'src/app/curriculum';
 import { CurriculumService } from 'src/app/services/curriculum.service';
+import { Module } from 'src/app/module';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,15 +17,31 @@ export class DashboardComponent implements OnInit {
   trainer: boolean;
   username: string;
   curriculums: Curriculum[];
-  // curriculums: string[];
+  // modules: Module[];
+  show: boolean = false;
+
+  /**
+   * Set trainer, username, and curriculums to current user logged in
+   */
   ngOnInit() {
     this.trainer = this.userService.isTrainer();
     this.username = this.userService.getUsername();
-    this.curriculums = this.curriculumService.getCurriculum();
-    console.log(this.curriculums)
+    this.curriculums = this.userService.getOwnedCurricula();
+    this.curriculumService.getCurriculum().subscribe(result => console.log(result))
+    // this.modules = this.userService.getModules();
   }
 
 
-
+  /**
+   * Function to switch state wheather to show 
+   * the list of curriculums or not
+   */
+  showCurriculum() {
+    if(this.show) {
+      this.show = false;
+    } else {
+      this.show = true;
+    }
+  }
   
 }
