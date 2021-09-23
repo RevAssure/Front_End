@@ -23,6 +23,7 @@ import { TopicComponent } from './components/topic/topic.component';
 import { UserService } from './services/user.service';
 import { CurriculumService } from './services/curriculum.service';
 import { AuthorizationService } from './services/authorization.service';
+import { TopicService } from './services/topic.service';
 import { UserAdapter } from './user';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -53,7 +54,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     //HttpClientTestingModule
   ],
-  providers: [UserService, CurriculumService, AuthorizationService, UserAdapter],
+  providers: [UserService, CurriculumService, TopicService, AuthorizationService, UserAdapter],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
