@@ -15,6 +15,9 @@
                 <label class="form-label">PASSWORD:</label>
                 <input class="form-control" [(ngModel)]="password" type="password" placeholder="Password">
             </div>
+            <div *ngIf="failedLogin" id="error-text">
+                Failed to login! Check username and password!
+            </div>
             <div class="text-left">
                 <button class="rev-btn-confirm mr-2" type="button" (click)="login()">Login</button>
                 <button class="rev-btn-secondary mr-1" type="button" routerLink="/register">Register</button>

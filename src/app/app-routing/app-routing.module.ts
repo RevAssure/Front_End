@@ -12,7 +12,7 @@ import { CreateTopicComponent } from '../components/create-topic/create-topic.co
 import { TopicComponent } from '../components/topic/topic.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/login'},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'curriculum', component: CurriculumComponent},
