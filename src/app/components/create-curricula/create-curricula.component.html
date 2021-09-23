@@ -1,0 +1,16 @@
+<div class="container mt-5"> 
+    <div class="card shadow col-6 offset-3">
+        <div class="card-body">
+            <h3 class="card-title">Create a New Curriculum</h3>
+            <div class="mb-3">
+                <label for="title" class="form-label">Curriculum Title</label>
+                <input id="title" class="form-control" type="text" [(ngModel)]="newCurriculumTitle">
+            </div>
+            <div>
+                <button id="submit" class="rev-btn-confirm mr-2" (click)="create()">Submit</button>
+                <button class="rev-btn-confirm" routerLink="/dashboard">Back to Dashboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+

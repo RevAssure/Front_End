@@ -24,11 +24,12 @@ export class LoginComponent implements OnInit {
       this.failedLogin = false;
       this.authService.setJwt(result);
       console.log(this.userService.getFirstName());
+      console.log(this.userService.getCurricula())
       this.router.navigateByUrl("/dashboard");
     },
-    (error) => {
-      console.log(error);
-      this.failedLogin = true;
-    })
+      (error) => {
+        console.log(error);
+        this.failedLogin = true;
+      })
   }
 }
