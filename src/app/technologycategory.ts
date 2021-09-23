@@ -17,11 +17,18 @@ export class TechnologyCategory {
   })
 export class TechnologyCategoryAdapter implements Adapter<TechnologyCategory>{
     adapt(newTechnologyCategory:any):TechnologyCategory{
-        return new TechnologyCategory(
+        let techCategory = new TechnologyCategory(
             newTechnologyCategory.id,
             newTechnologyCategory.name,
-            newTechnologyCategory.topics,
-            newTechnologyCategory.modules
+            [],
+            []
         )
+        if(newTechnologyCategory.topics){
+            techCategory.topics = newTechnologyCategory.topics;
+        }
+        if(newTechnologyCategory.modules){
+            techCategory.modules = newTechnologyCategory.modules;
+        }
+        return techCategory;
     }
 }

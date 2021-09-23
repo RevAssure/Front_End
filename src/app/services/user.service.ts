@@ -83,6 +83,12 @@ export class UserService {
   /**
    * Getters for the User object kept by UserService.
    */
+  getUserObject() : User {
+    return this.user;
+  }
+  getUserId() : number {
+    return this.user?.id;
+  }
   getUsername(): string {
     return this.user?.username;
   }
