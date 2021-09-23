@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: HttpClient, private userAdapter: UserAdapter) { }
 
-  url: string = `${environment.revAssureBase}/revuser`;
+  url: string = `${environment.revAssureBase}revuser`;
 
   private user: User;
 
@@ -52,8 +52,12 @@ export class UserService {
       username,
       password
     }
+    console.log(`${this.url}/authenticate`);
     return this.http.post(`${this.url}/authenticate`, authObject).pipe(
-      switchMap((jwt:any) => this.getUser(jwt))
+      switchMap((jwt:any) => {
+        console.log(`Now about to call getUser() with jwt: ${jwt}`);
+        return this.getUser(jwt)
+      })
     );
   }
 

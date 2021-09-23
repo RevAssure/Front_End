@@ -51,7 +51,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule,
     HttpClientModule,
     FormsModule,
-    HttpClientTestingModule
+    //HttpClientTestingModule
   ],
   providers: [UserService, CurriculumService, AuthorizationService, UserAdapter],
   bootstrap: [AppComponent]

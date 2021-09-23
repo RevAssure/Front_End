@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       this.authService.setJwt(result);
       console.log(this.userService.getFirstName());
       this.router.navigateByUrl("/dashboard");
-    })
-    
+    },
+    (error) => console.log(error))
   }
 }
