@@ -4,14 +4,16 @@
 
 
     <div class="curriculumBoard">
-        <button class="rev-btn-secondary" routerLink="/createCurriculum">New Curriculum</button>
+        <button *ngIf="trainer" class="rev-btn-secondary" routerLink="/createCurriculum">New Curriculum</button>
 
-        <div class="board rev-btn-confirm text-white" routerLink="/curriculum" type="button">
+        <div class="board rev-btn-confirm text-white" (click)="showCurriculum()" type="button">
             <!-- <button routerLink="/curriculum" class="rev-btn-confirm" type="button">Curriculum</button> -->
             Curriculum
         </div>
-        <div *ngFor="let item of curriculums">
-            <h2><a routerLink="/curriculum/{{item.id}}">{{item.name}}</a></h2>
+        <div *ngIf="show">
+            <div class="col-10 offset-1" *ngFor="let item of curriculums">
+                <a routerLink="/curriculum/{{item.id}}"><h2 class="curriculum text-center">{{item.name}}</h2></a>
+            </div>
         </div>
     </div>
 

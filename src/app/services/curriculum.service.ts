@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Curriculum } from '../curriculum';
 import { CurriculumAdapter } from '../curriculum';
 import { map } from 'rxjs/operators';
-import { UserService } from './user.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -104,7 +104,7 @@ export class CurriculumService {
   ]
 
   
-  constructor(private userService: UserService, private authService: AuthorizationService, private http: HttpClient, private curriculumAdapter: CurriculumAdapter) { }
+  constructor(private authService: AuthorizationService, private http: HttpClient, private curriculumAdapter: CurriculumAdapter) { }
 
   url: string = `${environment.revAssureBase}curriculum`;
 
@@ -126,12 +126,13 @@ export class CurriculumService {
   }
 
 
-  createCurriculum(newTitle: string) {
+  createCurriculum(newTitle: string){
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
-    return this.http.post(this.url, {
+    this.http.post<Curriculum>(this.url, {
       name: newTitle,
       associates: []  
     }, this.httpOptions)
+
   }
 
   addEvent(event: any) {
@@ -141,7 +142,8 @@ export class CurriculumService {
   }
 
   getCurriculum() {
-    return this.userService.getOwnedCurricula()
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
+      return this.http.get(this.url, this.httpOptions);
   }
  
 }
