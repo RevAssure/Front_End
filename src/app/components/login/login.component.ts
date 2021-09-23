@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { TechCategoryService } from 'src/app/services/tech-category.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router : Router, private userService: UserService, private authService: AuthorizationService) { }
+  constructor(private router : Router, private userService: UserService, private authService: AuthorizationService,
+    private techCategoryService : TechCategoryService) { }
 
   ngOnInit(): void {
   }
@@ -24,8 +26,9 @@ export class LoginComponent implements OnInit {
       this.failedLogin = false;
       this.authService.setJwt(result);
       console.log(this.userService.getFirstName());
-      console.log(this.userService.getCurricula())
-      this.router.navigateByUrl("/dashboard");
+      this.techCategoryService.getAllCategories(result.jwt).subscribe( (_) => {
+        console.log(_);
+        this.router.navigateByUrl("/dashboard")});
     },
       (error) => {
         console.log(error);

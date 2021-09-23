@@ -135,6 +135,12 @@ export class CurriculumService {
 
   }
 
+  addEvent(event: any) {
+    console.log(this.authService.jwt)
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
+    return this.http.post(`${environment.revAssureBase}event`, event, this.httpOptions)
+  }
+
   getCurriculum() {
       this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
       return this.http.get(this.url, this.httpOptions);
