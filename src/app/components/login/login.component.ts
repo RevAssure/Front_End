@@ -19,15 +19,20 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
+  failedLogin: boolean = false;
 
   login() {
     this.userService.login(this.username, this.password).subscribe((result) => {
+      this.failedLogin = false;
       this.authService.setJwt(result);
       console.log(this.userService.getFirstName());
       this.techCategoryService.getAllCategories(result.jwt).subscribe( (_) => {
         console.log(_);
         this.router.navigateByUrl("/dashboard")});
     },
-    (error) => console.log(error))
+      (error) => {
+        console.log(error);
+        this.failedLogin = true;
+      })
   }
 }

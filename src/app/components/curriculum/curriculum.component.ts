@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EventHoveringArg } from '@fullcalendar/core';
+import { Calendar, EventHoveringArg } from '@fullcalendar/core';
 import { CalendarOptions } from '@fullcalendar/common';
 import { CurriculumService } from 'src/app/services/curriculum.service';
 import { Router } from '@angular/router';
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import { Event } from 'src/app/event';
 
 @Component({
   selector: 'app-curriculum',
@@ -12,16 +13,20 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 })
 export class CurriculumComponent implements OnInit {
 
-  events: any[] = []
-  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
+
 
   constructor(private service: CurriculumService, private router: Router) { 
     
   }
 
   ngOnInit(): void {
-    
+    this.topics = this.service.getTopics()
   }
+
+  events: any[] = []
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
+  currentView: string;
+  topics: any[] = []
 
   getCalendarApi() {
     return this.calendarComponent.getApi();
@@ -31,16 +36,29 @@ export class CurriculumComponent implements OnInit {
     // this.router.navigate([`/curriculum/${arg.dateStr}`])
     let calendarApi = this.getCalendarApi()
     calendarApi.changeView("dayGridDay", arg.dateStr)
+    this.currentView = this.calendarComponent.getApi().view.type
   }
 
+  // public id: number,
+  // public curriculum: Curriculum,
+  // public startDatetime: number,
+  // public topic: Topic
+  // createEvent() {
+  //   let newEvent: Event = {
+  //     id: 0,
 
-  calendarOptions: CalendarOptions & { dateClick: any } = {
+  //   }
+  // }
+
+
+  calendarOptions: CalendarOptions & {dateClick: any} = {
     customButtons: {
       month: {
         text: 'Month',
         click: () => {
           let calendarApi = this.calendarComponent.getApi();
           calendarApi.changeView("dayGridMonth")
+          this.currentView = this.calendarComponent.getApi().view.type
         }
       },
       week: {
@@ -48,6 +66,7 @@ export class CurriculumComponent implements OnInit {
         click: () => {
           let calendarApi = this.calendarComponent.getApi();
           calendarApi.changeView("dayGridWeek")
+          this.currentView = this.calendarComponent.getApi().view.type
         }
       }
     },

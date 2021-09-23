@@ -26,6 +26,7 @@ import { AuthorizationService } from './services/authorization.service';
 import { TopicService } from './services/topic.service';
 import { UserAdapter } from './user';
 import { TechCategoryService } from './services/tech-category.service';
+import { CreateCurriculaComponent } from './components/create-curricula/create-curricula.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -44,7 +45,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ModulesComponent,
     CreateModuleComponent,
     CreateTopicComponent,
-    TopicComponent
+    TopicComponent,
+    CreateCurriculaComponent
   ],
   imports: [
     BrowserModule,
