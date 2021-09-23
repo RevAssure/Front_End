@@ -1,7 +1,7 @@
 export interface Topic {
     topic_id: number;
     trainer_id: number;
-    titie: string;
+    title: string;
     description: string;
     estimated_duration: number;
     tech_category_id: number;
