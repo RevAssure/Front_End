@@ -1,14 +1,20 @@
 <app-navbar></app-navbar>
-<div>
+<div class="col-6 offset-3">
     
-    <div class="board rev-btn-confirm text-white col-6 offset-3" routerLink="/curriculum" type="button">
+    <div class="rev-btn-confirm text-white">
+        <a>Create Curriculum</a>
+    </div>
+    <div class="board rev-btn-confirm text-white" routerLink="/curriculum" type="button">
         <!-- <button routerLink="/curriculum" class="rev-btn-confirm" type="button">Curriculum</button> -->
         Curriculum
+    </div>
+    <div *ngFor="let curricula of curriculums">
+        <h2>{{curricula}}</h2>
     </div>
 
 
 
-    <div *ngIf="trainer" class="board rev-btn-confirm text-white col-6 offset-3" routerLink="/modules" type="button">
+    <div *ngIf="trainer" class="board rev-btn-confirm text-white" routerLink="/modules" type="button">
         <!-- <button routerLink="/modules" class="rev-btn-confirm">Modules</button> -->
         <span class="translate-middle">Modules</span>
     </div>

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
 import { UserAdapter } from '../user';
+import { Curriculum } from '../curriculum';
 
 @Injectable({
   providedIn: 'root'
@@ -95,7 +96,7 @@ export class UserService {
   getTopics() {
     return this.user?.topics;
   }
-  getCurricula() {
+  getCurricula(): Curriculum[] {
     return this.user?.curricula;
   }
   getOwnedCurricula() {
