@@ -34,3 +34,8 @@ img {
 #loginWrapper {
     height: 80vh;
 }
+
+#error-text {
+    font-family: "futura-medium", Fallback, sans-serif;
+    color: red;
+}
