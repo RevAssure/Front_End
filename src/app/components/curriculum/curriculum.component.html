@@ -1,16 +1,19 @@
-<div class="row">
+<div class="d-flex">
 
-    <full-calendar #calendar [options]="calendarOptions" class="bg-white col-8 offset-2 py-4 my-4 shadow">
-    </full-calendar>
-    <div class="card col-2 h-50">
+    <div class="col-8 offset-2 my-4">
+        <full-calendar #calendar [options]="calendarOptions" class="bg-white p-4 shadow">
+        </full-calendar>
+    </div>
+
+    <div *ngIf="currentView === 'dayGridDay'" class="card col-2 my-4 h-50">
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's
-                content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <h5 class="card-title">Add a topic to the current day</h5>
+            <select [(ngModel)]="selectedTopic" name="topics" id="topics">
+                <option *ngFor="let topic of topics" value="{{topic.id}}">
+                    {{topic.title}}
+                </option>
+            </select>
+            <button (click)="addTopicToDay()" class="rev-btn-confirm">Add Topic</button>
         </div>
     </div>
 </div>

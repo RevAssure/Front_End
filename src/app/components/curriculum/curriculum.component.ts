@@ -5,6 +5,7 @@ import { CurriculumService } from 'src/app/services/curriculum.service';
 import { Router } from '@angular/router';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Event } from 'src/app/event';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-curriculum',
@@ -15,28 +16,44 @@ export class CurriculumComponent implements OnInit {
 
 
 
-  constructor(private service: CurriculumService, private router: Router) { 
+  constructor(private service: CurriculumService, private router: Router, private activatedRoutes: ActivatedRoute) { 
     
   }
 
   ngOnInit(): void {
     this.topics = this.service.getTopics()
+    this.curriculumId = this.activatedRoutes.snapshot.paramMap.get("id")
   }
 
+  curriculumId: any
   events: any[] = []
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   currentView: string;
   topics: any[] = []
+  selectedTopic: number
 
   getCalendarApi() {
     return this.calendarComponent.getApi();
+  }
+
+  addTopicToDay() {
+    let e = {
+      id: 0,
+      startDatetime: new Date().getMilliseconds(),
+      curriculum: parseInt(this.curriculumId),
+      topic: this.selectedTopic
+    }
+    console.log(e)
+    this.service.addEvent(e).subscribe(result => {
+      console.log(result)
+    })
   }
 
   handleDateClick (arg: any) {
     // this.router.navigate([`/curriculum/${arg.dateStr}`])
     let calendarApi = this.getCalendarApi()
     calendarApi.changeView("dayGridDay", arg.dateStr)
-    this.currentView = this.calendarComponent.getApi().view.type
+    this.currentView = calendarApi.view.type
   }
 
   // public id: number,

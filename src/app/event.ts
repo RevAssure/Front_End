@@ -6,9 +6,9 @@ import { Topic } from './topic';
 export class Event {
     constructor(
     public id: number,
-    public curriculum: Curriculum,
+    public curriculum: number,
     public startDatetime: number,
-    public topic: Topic
+    public topic: number
     ){}
 }
 
