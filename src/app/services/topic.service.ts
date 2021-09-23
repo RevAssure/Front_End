@@ -1,10 +1,32 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Topic } from '../topic';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TopicService {
+  constructor(private http: HttpClient) { }
 
-constructor() { }
+  url: string = `${environment.revAssureBase}topic`;
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": ""
+    })
+  };
+
+  createTopic(jwt: string, topic: any): Observable<Topic> {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    return this.http.post<Topic>(this.url, topic, this.httpOptions);
+  }
+
+  getAllTopicsForCurrentTrainer(jwt: string): Observable<Topic[]> {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    return this.http.get<Topic[]>(this.url, this.httpOptions);
+  }
 
 }
