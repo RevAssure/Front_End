@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.trainer = this.userService.isTrainer;
+    console.log(this.trainer);
   }
   username = this.userService.getUsername;
 }
