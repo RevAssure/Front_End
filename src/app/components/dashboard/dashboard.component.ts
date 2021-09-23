@@ -11,11 +11,11 @@ export class DashboardComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
-  trainer: any;
-
+  trainer: boolean;
+  username: string;
   ngOnInit() {
-    this.trainer = this.userService.isTrainer;
-    console.log(this.trainer);
+    this.trainer = this.userService.isTrainer();
+    this.username = this.userService.getUsername();
   }
-  username = this.userService.getUsername;
+  
 }

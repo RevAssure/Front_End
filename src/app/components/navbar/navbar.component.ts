@@ -13,11 +13,11 @@ export class NavbarComponent implements OnInit {
 
   constructor(private authService: AuthorizationService, private userService: UserService) { }
 
+  trainer: boolean;
+  username: string;
+
   ngOnInit(): void {
-  }
-  
-  user = {
-    username: "Username",
-    trainer: true
+    this.trainer = this.userService.isTrainer();
+    this.username = this.userService.getUsername();
   }
 }

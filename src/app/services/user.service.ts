@@ -80,16 +80,16 @@ export class UserService {
   /**
    * Getters for the User object kept by UserService.
    */
-  getUsername() {
+  getUsername(): string {
     return this.user?.username;
   }
-  getFirstName() {
+  getFirstName(){
     return this.user?.firstName;
   }
   getLastName() {
     return this.user?.lastName;
   }
-  isTrainer() {
+  isTrainer(): boolean {
     return this.user?.trainer;
   }
   getTopics() {
