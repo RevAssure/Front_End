@@ -12,7 +12,6 @@ import { CreateTopicComponent } from '../components/create-topic/create-topic.co
 import { TopicComponent } from '../components/topic/topic.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login'},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'curriculum', component: CurriculumComponent},
@@ -21,7 +20,8 @@ const routes: Routes = [
   { path: 'modules', component: ModulesComponent},
   { path: 'createModule', component: CreateModuleComponent},
   { path: 'createTopic', component: CreateTopicComponent},
-  { path: 'topic', component: TopicComponent} //TODO: add :id param
+  { path: 'topic', component: TopicComponent}, //TODO: add :id param
+  { path: '', redirectTo: '/login', pathMatch:'full' } //WARNING: add new routes ABOVE this!!
 ]
 
 @NgModule({
