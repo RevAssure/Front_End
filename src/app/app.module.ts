@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,7 +22,7 @@ import { TopicComponent } from './components/topic/topic.component';
 import { UserService } from './services/user.service';
 import { CurriculumService } from './services/curriculum.service';
 import { AuthorizationService } from './services/authorization.service';
-import { UserAdapter } from './user';
+
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -50,10 +49,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AppRoutingModule,
     FullCalendarModule,
     HttpClientModule,
-    FormsModule,
-    //HttpClientTestingModule
+    FormsModule
   ],
-  providers: [UserService, CurriculumService, AuthorizationService, UserAdapter],
+  providers: [UserService, CurriculumService, AuthorizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
