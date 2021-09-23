@@ -9,7 +9,10 @@ export class DashboardComponent implements OnInit {
 
   constructor() { }
 
+  trainer: boolean;
+
   ngOnInit() {
+    this.trainer = true;
   }
 
 }

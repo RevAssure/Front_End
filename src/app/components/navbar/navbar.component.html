@@ -8,13 +8,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        <li class="nav-item" *ngIf="user.trainer">
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </li>
       </ul>
     </div>
 
     <div>
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-primary|secondary|success|danger|warning|info|light|dark" id="dropdownMenu1"
-          ngbDropdownToggle>Hello User!</button>
+          ngbDropdownToggle>Hello {{user.username}}!</button>
         <!--TODO: Data bind to reflect user.firstName-->
         <div ngbDropdownMenu aria-labelledby="dropdownMenu1">
           <button class="dropdown-item" routerLink="/login">Logout</button>

@@ -1,2 +1,16 @@
-<button routerLink="/curriculum" class="rev-btn-confirm" type="button">Curriculum</button>
-<button routerLink="/modules" class="rev-btn-confirm">Modules</button>
+
+<div>
+    
+    <div class="board rev-btn-confirm text-white col-6 offset-3" routerLink="/curriculum" type="button">
+        <!-- <button routerLink="/curriculum" class="rev-btn-confirm" type="button">Curriculum</button> -->
+        Curriculum
+    </div>
+
+
+
+    <div *ngIf="trainer" class="board rev-btn-confirm text-white col-6 offset-3" routerLink="/modules" type="button">
+        <!-- <button routerLink="/modules" class="rev-btn-confirm">Modules</button> -->
+        <span class="translate-middle">Modules</span>
+    </div>
+    
+</div>

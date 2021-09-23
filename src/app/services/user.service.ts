@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  url: string = "http://54.237.215.131:8082/revuser"
+  url: string = environment.revAssureBase;
 
   private firstName: string
   private firstNameChange = new Subject<string>();
@@ -36,7 +37,11 @@ export class UserService {
         username: result.username,
         firstName: result.firstName,
         lastName: result.lastName,
-        trainer: result.trainer
+        trainer: result.trainer,
+        topics: result.topics,
+        curricula: result.curricula,
+        modules: result.modules,
+        ownedCurricula: result.ownedCurricula
       }
       console.log(registeredUser)
       return registeredUser
