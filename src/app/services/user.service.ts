@@ -6,7 +6,13 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
 import { UserAdapter } from '../user';
+<<<<<<< HEAD
 import { Curriculum } from '../curriculum';
+=======
+import { Topic } from '../topic';
+import { Curriculum } from '../curriculum';
+import { Module } from '../module';
+>>>>>>> main
 
 @Injectable({
   providedIn: 'root'
@@ -84,25 +90,29 @@ export class UserService {
   getUsername(): string {
     return this.user?.username;
   }
+<<<<<<< HEAD
   getFirstName(){
+=======
+  getFirstName(): string {
+>>>>>>> main
     return this.user?.firstName;
   }
-  getLastName() {
+  getLastName(): string {
     return this.user?.lastName;
   }
   isTrainer(): boolean {
     return this.user?.trainer;
   }
-  getTopics() {
+  getTopics(): Topic[] {
     return this.user?.topics;
   }
   getCurricula(): Curriculum[] {
     return this.user?.curricula;
   }
-  getOwnedCurricula() {
+  getOwnedCurricula(): Curriculum[] {
     return this.user?.ownedCurricula;
   }
-  getModules() {
+  getModules(): Module[] {
     return this.user?.modules;
   }
 

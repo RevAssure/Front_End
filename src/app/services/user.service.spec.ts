@@ -43,7 +43,7 @@ describe('UserService', () => {
       expect(user.id).toEqual(dummyUser.id);
       expect(user.username).toEqual(dummyUser.username);
     });
-    const request = httpMock.expectOne(`${environment.revAssureBase}/revuser/register`);
+    const request = httpMock.expectOne(`${environment.revAssureBase}revuser/register`);
     expect(request.request.method).toBe('POST');
     request.flush(dummyUser);
   });
@@ -60,10 +60,10 @@ describe('UserService', () => {
       expect(service.getFirstName()).toEqual(dummyUser.firstName);
       expect(service.getLastName()).toEqual(dummyUser.lastName);
     });
-    const request = httpMock.expectOne(`${environment.revAssureBase}/revuser/authenticate`);
+    const request = httpMock.expectOne(`${environment.revAssureBase}revuser/authenticate`);
     expect(request.request.method).toBe('POST');
     request.flush(dummyJwt);
-    const request2 = httpMock.expectOne(`${environment.revAssureBase}/revuser`);
+    const request2 = httpMock.expectOne(`${environment.revAssureBase}revuser`);
     expect(request2.request.method).toBe('GET');
     request2.flush(dummyUser);
   });

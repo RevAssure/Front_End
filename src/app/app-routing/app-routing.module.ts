@@ -13,7 +13,7 @@ import { TopicComponent } from '../components/topic/topic.component';
 import { CreateCurriculaComponent } from '../components/create-curricula/create-curricula.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch:'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'curriculum', component: CurriculumComponent},
