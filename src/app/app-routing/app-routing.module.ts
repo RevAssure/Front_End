@@ -10,6 +10,7 @@ import { ModulesComponent } from '../components/modules/modules.component';
 import { CreateModuleComponent } from '../components/create-module/create-module.component';
 import { CreateTopicComponent } from '../components/create-topic/create-topic.component';
 import { TopicComponent } from '../components/topic/topic.component';
+import { CreateCurriculaComponent } from '../components/create-curricula/create-curricula.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'modules', component: ModulesComponent},
   { path: 'createModule', component: CreateModuleComponent},
   { path: 'createTopic', component: CreateTopicComponent},
+  { path: 'createCurriculum', component: CreateCurriculaComponent},
   { path: 'topic', component: TopicComponent} //TODO: add :id param
 ]
 

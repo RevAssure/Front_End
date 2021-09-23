@@ -1,4 +1,10 @@
 import { Injectable } from '@angular/core';
+import { AuthorizationService } from './authorization.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Curriculum } from '../curriculum';
+import { CurriculumAdapter } from '../curriculum';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -97,7 +103,18 @@ export class CurriculumService {
   ]
 
   
-  constructor() { }
+  constructor(private authService: AuthorizationService, private http: HttpClient, private curriculumAdapter: CurriculumAdapter) { }
+
+  url: string = `${environment.revAssureBase}curriculum`;
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": ""
+    })
+  };
+
+  curriculums: Curriculum[];
 
   getEvents() {
     return this.calendarEvents;
@@ -107,6 +124,25 @@ export class CurriculumService {
     return this.topics;
   }
 
+
+  createCurriculum(newTitle: string) {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
+    return this.http.post(this.url, {
+      name: newTitle,
+      associates: []  
+    }, this.httpOptions)
+  }
+
+  getCurriculum() {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
+    return this.http.get(this.url, this.httpOptions).pipe(map((result: any) => {
+      let curriculum = this.curriculumAdapter.adapt(result);
+      console.log(curriculum);
+      console.log(result);
+      return [];
+    }))
+  }
+ 
 }
 
 // topic_id: number;
