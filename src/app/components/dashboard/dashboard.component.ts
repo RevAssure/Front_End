@@ -15,12 +15,13 @@ export class DashboardComponent implements OnInit {
 
   trainer: boolean;
   username: string;
-  // curriculums: Curriculum[];
-  curriculums: string[] = ["Java Enterprise", "Salesforce"];
+  curriculums: Curriculum[];
+  // curriculums: string[];
   ngOnInit() {
     this.trainer = this.userService.isTrainer();
     this.username = this.userService.getUsername();
-    // this.curriculumService.getCurriculum().subscribe(result => this.curriculums = result);
+    this.curriculums = this.curriculumService.getCurriculum();
+    console.log(this.curriculums)
   }
 
 
