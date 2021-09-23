@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/user';
-import { servicesVersion } from 'typescript';
 
 @Component({
   selector: 'app-register',
@@ -28,9 +27,14 @@ export class RegisterComponent implements OnInit {
       lastName: this.lastName,
       username: this.username,
       password: this.password,
-      trainer: this.isTrainer
+      trainer: this.isTrainer,
+      topics: [],
+      curricula: [],
+      ownedCurricula: [],
+      modules: []
     }
     let returnedUser;
+    console.log(newUser)
     this.service.registerNewUser(newUser).subscribe((result) => {
       console.log(result)
       returnedUser = result

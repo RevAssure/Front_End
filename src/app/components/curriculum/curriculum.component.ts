@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Calendar, EventHoveringArg } from '@fullcalendar/core';
+import { EventHoveringArg } from '@fullcalendar/core';
 import { CalendarOptions } from '@fullcalendar/common';
 import { CurriculumService } from 'src/app/services/curriculum.service';
 import { Router } from '@angular/router';
@@ -34,7 +34,7 @@ export class CurriculumComponent implements OnInit {
   }
 
 
-  calendarOptions: CalendarOptions = {
+  calendarOptions: CalendarOptions & { dateClick: any } = {
     customButtons: {
       month: {
         text: 'Month',
