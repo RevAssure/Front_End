@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  revAssureBase: 'http://54.237.215.131:8082/revuser',
+  revAssureBase: 'http://54.237.215.131:8082/',
 };
 
 /*
