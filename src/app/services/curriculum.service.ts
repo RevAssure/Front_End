@@ -134,18 +134,13 @@ export class CurriculumService {
     }, this.httpOptions)
   }
 
+  addEvent(event: any) {
+    console.log(this.authService.jwt)
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
+    return this.http.post(`${environment.revAssureBase}event`, event, this.httpOptions)
+  }
+
   getCurriculum() {
-    // this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
-    // return this.http.get(this.url, this.httpOptions).pipe(map((result: any) => {
-    //   let curricula: any = []
-    //   for(let c of result) {
-    //     let curriculum = this.curriculumAdapter.adapt(c)
-    //     console.log("Curriculum in for loop: " + curriculum)
-    //     curricula.push(curriculum)
-    //   }
-    //   console.log("Curricula " + curricula[0])
-    //   return curricula
-    // }))
     return this.userService.getOwnedCurricula()
   }
  
