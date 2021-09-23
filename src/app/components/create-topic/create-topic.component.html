@@ -4,34 +4,32 @@
             <h3 class="card-title">Create a New Topic</h3>
             <div class="mb-3">
                 <label for="title" class="form-label">Topic Title</label>
-                <input id="title" class="form-control" type="text">
+                <input id="title" class="form-control" type="text" [(ngModel)]="title">
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description"></textarea>
+                <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
             </div>
             <div class="mb-3">
                 <label for="estimatedTime" class="form-label">Estimated Time (in minutes)</label>
-                <input id="estimatedTime" class="form-control" type="number">
+                <input id="estimatedTime" class="form-control" type="number" [(ngModel)]="estimatedDuration">
             </div>
             <div class="mb-3">
                 <label for="lectureNotes" class="form-label">Lecture Notes</label>
-                <textarea id="lectureNotes" class="form-control"></textarea>
+                <textarea id="lectureNotes" class="form-control" [(ngModel)]="lectureNotes"></textarea>
             </div>
             <div class="mb-3">
                 <label for="repoLink" class="form-label">Github Repo Link</label>
-                <input id="repoLink" class="form-control" type="url">
+                <input id="repoLink" class="form-control" type="url" [(ngModel)]="githubRepo">
             </div>
             <div class="mb-3">
                 <label for="techCategory" class="form-label">Category</label>
-                <select id="techCategory" class="form-control">
-                    <!-- TODO: -->
-                    <option value="1">Java</option>
-                    <option value="2">DevOps</option>
+                <select id="techCategory" class="form-control" [(ngModel)]="technologyCategoryId">
+                    <option *ngFor="let techCategory of techCategories" value={{techCategory.id}}>{{techCategory.name}}</option>
                 </select>
             </div>
             <div>
-                <button id="submit" class="rev-btn-confirm mr-2">Submit</button>
+                <button id="submit" class="rev-btn-confirm mr-2" (click)="createTopic()">Submit</button>
                 <button class="rev-btn-confirm" routerLink="/modules">Back to Modules</button>
             </div>
         </div>
