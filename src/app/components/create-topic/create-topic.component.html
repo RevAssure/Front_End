@@ -1,1 +1,40 @@
-<button class="rev-btn-confirm" routerLink="/modules">Back to Modules</button>
+<div class="container mt-5"> 
+    <div class="card shadow col-6 offset-3">
+        <div class="card-body">
+            <h3 class="card-title">Create a New Topic</h3>
+            <div class="mb-3">
+                <label for="title" class="form-label">Topic Title</label>
+                <input id="title" class="form-control" type="text">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="estimatedTime" class="form-label">Estimated Time (in minutes)</label>
+                <input id="estimatedTime" class="form-control" type="number">
+            </div>
+            <div class="mb-3">
+                <label for="lectureNotes" class="form-label">Lecture Notes</label>
+                <textarea id="lectureNotes" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="repoLink" class="form-label">Github Repo Link</label>
+                <input id="repoLink" class="form-control" type="url">
+            </div>
+            <div class="mb-3">
+                <label for="techCategory" class="form-label">Category</label>
+                <select id="techCategory" class="form-control">
+                    <!-- TODO: -->
+                    <option value="1">Java</option>
+                    <option value="2">DevOps</option>
+                </select>
+            </div>
+            <div>
+                <button id="submit" class="rev-btn-confirm mr-2">Submit</button>
+                <button class="rev-btn-confirm" routerLink="/modules">Back to Modules</button>
+            </div>
+        </div>
+    </div>
+</div>
+
