@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -27,6 +27,8 @@ import { TopicService } from './services/topic.service';
 import { UserAdapter } from './user';
 import { TechCategoryService } from './services/tech-category.service';
 import { CreateCurriculaComponent } from './components/create-curricula/create-curricula.component';
+import { UpdateTopicComponent } from './components/update-topic/update-topic/update-topic.component';
+import { ModuleService } from './services/module.service';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -46,7 +48,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CreateModuleComponent,
     CreateTopicComponent,
     TopicComponent,
-    CreateCurriculaComponent
+    CreateCurriculaComponent,
+    UpdateTopicComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +58,17 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule,
     HttpClientModule,
     FormsModule,
-    //HttpClientTestingModule
+    CommonModule
   ],
-  providers: [UserService, CurriculumService, TopicService, TechCategoryService, AuthorizationService, UserAdapter],
+  providers: [
+    UserService, 
+    CurriculumService, 
+    TopicService, 
+    TechCategoryService, 
+    AuthorizationService, 
+    UserAdapter,
+    ModuleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -24,9 +24,18 @@ export class TopicService {
     return this.http.post<Topic>(this.url, topic, this.httpOptions);
   }
 
+  getTopicById(jwt: string, id: number): Observable<Topic> {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    return this.http.get<Topic>(`${this.url}/${id}`, this.httpOptions);
+  }
+
   getAllTopicsForCurrentTrainer(jwt: string): Observable<Topic[]> {
     this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
     return this.http.get<Topic[]>(this.url, this.httpOptions);
   }
 
+  updateTopic(jwt: string, topic: any): Observable<Topic> {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    return this.http.put<Topic>(this.url, topic, this.httpOptions);
+  }
 }

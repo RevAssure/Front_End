@@ -1,7 +1,7 @@
 <div class="container mt-5"> 
     <div class="card shadow col-6 offset-3">
         <div class="card-body">
-            <h3 class="card-title">Create a New Topic</h3>
+            <h3 class="card-title">Edit Topic</h3>
             <div class="mb-3">
                 <label for="title" class="form-label">Topic Title</label>
                 <input id="title" class="form-control" type="text" [(ngModel)]="title">
@@ -35,7 +35,7 @@
                 </select>
             </div>
             <div>
-                <button id="submit" class="rev-btn-confirm mr-2" (click)="createTopic()">Submit</button>
+                <button id="submit" class="rev-btn-confirm mr-2" (click)="updateTopic()">Submit</button>
                 <button class="rev-btn-secondary" routerLink="/modules">Back to Modules</button>
             </div>
         </div>

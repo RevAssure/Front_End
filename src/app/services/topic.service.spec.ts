@@ -3,6 +3,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, async, inject, getTestBed } from '@angular/core/testing';
 import { environment } from 'src/environments/environment';
+import { Module } from '../module';
 import { TechnologyCategory } from '../technologycategory';
 import { Topic } from '../topic';
 import { User } from '../user';
@@ -25,7 +26,15 @@ fdescribe('Service: Topic', () => {
           1, 'username', 'firstName', 'lastName', true, [], [], [], []
         ),
         new TechnologyCategory(1, 'Java', [], []),
-        []
+        [new Module(
+          1, "TDD", "it's jank", new User(
+            1, 'username', 'firstName', 'lastName', true, [], [], [], []
+          ), new TechnologyCategory(
+            1, 'Java', [], []
+          ),
+          []
+        )
+      ]
     ),
     new Topic(
       2,
@@ -43,6 +52,7 @@ fdescribe('Service: Topic', () => {
   ];
 
   const dummyTopicDto = {
+    id: 1,
     title: dummyTopics[0].title,
     description: dummyTopics[0].description,
     estimatedDuration: dummyTopics[0].estimatedDuration,
@@ -88,4 +98,26 @@ fdescribe('Service: Topic', () => {
     expect(mockRequest.request.method).toBe('POST');
     mockRequest.flush(dummyTopics[0]);
   });
+
+  //PUT test
+  it('should return a JSON of persisted topic when doing PUT', () => {
+    //let dummyTopicDtoPut = dummyTopicDto && { id: 1 };
+    service.updateTopic(mockJwt, dummyTopicDto).subscribe((result : Topic) => {
+      expect(result).toEqual(dummyTopics[0]);
+    })
+    const mockRequest = httpMock.expectOne(`${environment.revAssureBase}topic`);
+    expect(mockRequest.request.method).toBe('PUT');
+    mockRequest.flush(dummyTopics[0]);
+  });
+
+  //GET by ID
+  it('should get JSON of a specific topic when doing GET by ID', () => {
+    service.getTopicById(mockJwt, dummyTopics[0].id).subscribe((result : Topic) => {
+      expect(result).toEqual(dummyTopics[0]);
+    });
+    const mockRequest = httpMock.expectOne(`${environment.revAssureBase}topic/${dummyTopics[0].id}`);
+    expect(mockRequest.request.method).toBe('GET');
+    mockRequest.flush(dummyTopics[0]);
+  });
+
 });
