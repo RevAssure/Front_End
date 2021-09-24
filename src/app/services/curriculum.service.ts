@@ -128,7 +128,7 @@ export class CurriculumService {
 
   createCurriculum(newTitle: string){
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
-    this.http.post<Curriculum>(this.url, {
+    return this.http.post<Curriculum>(this.url, {
       name: newTitle,
       associates: []  
     }, this.httpOptions)

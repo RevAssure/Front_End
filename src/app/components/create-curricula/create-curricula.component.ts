@@ -16,7 +16,7 @@ export class CreateCurriculaComponent implements OnInit {
   newCurriculumTitle: string;
 
   create() {
-    this.curriculumService.createCurriculum(this.newCurriculumTitle);
+    this.curriculumService.createCurriculum(this.newCurriculumTitle).subscribe(result => console.log(result));
   }
 
 
