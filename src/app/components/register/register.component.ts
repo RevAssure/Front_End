@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/user';
 
@@ -9,7 +10,7 @@ import { User } from 'src/app/user';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private service: UserService) { }
+  constructor(private service: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -43,7 +44,10 @@ export class RegisterComponent implements OnInit {
       returnedUser = result
       console.log(returnedUser)
       this.successful = true;
-      
+      setTimeout(() => {
+        this.router.navigateByUrl("/login");
+      }, 3000);
+    
     },
     (error) => {
       console.log(error);
