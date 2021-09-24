@@ -35,6 +35,10 @@
                     <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
                 </select>
             </div>
+            <div *ngIf="successful" id="success-message">
+                Topic successfully added!
+            </div>
+            <br>
             <div>
                 <button id="submit" class="rev-btn-confirm mr-2" (click)="createTopic()">Submit</button>
                 <button class="rev-btn-secondary" routerLink="/modules">Back to Modules</button>

@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Module } from 'src/app/module';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { TopicService } from 'src/app/services/topic.service';
-import { Topic } from 'src/app/topic';
 
 @Component({
   selector: 'app-module-list-item',
