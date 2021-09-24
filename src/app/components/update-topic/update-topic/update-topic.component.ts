@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TechnologyCategory } from 'src/app/technologycategory';
 import { UserService } from 'src/app/services/user.service';
 import { TechCategoryService } from 'src/app/services/tech-category.service';
@@ -8,6 +8,7 @@ import { Topic } from 'src/app/topic';
 import { ActivatedRoute } from '@angular/router';
 import { Module } from 'src/app/module';
 import { ModuleService } from 'src/app/services/module.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-update-topic',
@@ -18,7 +19,7 @@ export class UpdateTopicComponent implements OnInit {
 
   constructor(private userService: UserService, private techCategoryService: TechCategoryService,
     private topicService: TopicService, private authService: AuthorizationService,
-    private route: ActivatedRoute, private moduleService: ModuleService) { 
+    private route: ActivatedRoute, private moduleService: ModuleService, private location: Location) { 
 
     }
   
@@ -71,6 +72,9 @@ export class UpdateTopicComponent implements OnInit {
   }
 
   deleteTopic() {
-    this.topicService.deleteTopicById(this.authService.jwt, this.id).subscribe(_ => console.log(`Deleted topic #{id}.`));
+    this.topicService.deleteTopicById(this.authService.jwt, this.id).subscribe(_ => { 
+      console.log(`Deleted topic #{id}.`);
+      this.location.back();
+    });
   }
 }
