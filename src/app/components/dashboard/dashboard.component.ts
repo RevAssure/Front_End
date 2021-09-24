@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/user';
 import { UserService } from 'src/app/services/user.service';
 import { Curriculum } from 'src/app/curriculum';
 import { CurriculumService } from 'src/app/services/curriculum.service';
-import { Module } from 'src/app/module';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,10 +25,8 @@ export class DashboardComponent implements OnInit {
     this.trainer = this.userService.isTrainer();
     this.username = this.userService.getUsername();
     if(this.trainer) {
-      this.curriculumService.getCurriculum().subscribe(result => console.log(result))
       this.curriculumService.getCurriculum().subscribe(result => this.curriculums = result);
     } else {
-      this.curriculumService.getCurriculumAssociate().subscribe(result => console.log(result))
       this.curriculumService.getCurriculumAssociate().subscribe(result => this.curriculums = result);
     }
 
