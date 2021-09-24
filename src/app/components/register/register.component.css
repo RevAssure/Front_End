@@ -33,3 +33,11 @@ label {
     background-color:  #B9B9BA;
     width: 85%;
 }
+#error-message {
+    font-family: "futura-medium", Fallback, sans-serif;
+    color: red;
+}
+#success-message {
+    font-family: "futura-medium", Fallback, sans-serif;
+    color: green;
+}
