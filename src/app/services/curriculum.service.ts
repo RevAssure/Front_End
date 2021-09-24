@@ -141,9 +141,9 @@ export class CurriculumService {
     return this.http.post(`${environment.revAssureBase}event`, event, this.httpOptions)
   }
 
-  getCurriculum() {
+  getCurriculum(): Observable<Curriculum[]>{
       this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
-      return this.http.get(this.url, this.httpOptions);
+      return this.http.get<any[]>(this.url, this.httpOptions)
   }
  
 }
