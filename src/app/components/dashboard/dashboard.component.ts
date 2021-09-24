@@ -26,8 +26,14 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.trainer = this.userService.isTrainer();
     this.username = this.userService.getUsername();
-    this.curriculums = this.userService.getOwnedCurricula();
-    // this.curriculumService.getCurriculum().subscribe(result => console.log(result))
+    if(this.trainer) {
+      this.curriculumService.getCurriculum().subscribe(result => console.log(result))
+      this.curriculumService.getCurriculum().subscribe(result => this.curriculums = result);
+    } else {
+      this.curriculumService.getCurriculumAssociate().subscribe(result => console.log(result))
+      this.curriculumService.getCurriculumAssociate().subscribe(result => this.curriculums = result);
+    }
+
     // this.modules = this.userService.getModules();
   }
 

@@ -107,7 +107,7 @@ export class CurriculumService {
   constructor(private authService: AuthorizationService, private http: HttpClient, private curriculumAdapter: CurriculumAdapter) { }
 
   url: string = `${environment.revAssureBase}curriculum`;
-
+  associateURL: string = `${environment.revAssureBase}curriculum/assigned`;
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -143,7 +143,12 @@ export class CurriculumService {
 
   getCurriculum(): Observable<Curriculum[]>{
       this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
-      return this.http.get<any[]>(this.url, this.httpOptions)
+      return this.http.get<Curriculum[]>(this.url, this.httpOptions)
+  }
+
+  getCurriculumAssociate() {
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
+    return this.http.get<any[]>(this.associateURL, this.httpOptions)
   }
  
 }
