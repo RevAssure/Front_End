@@ -1,8 +1,12 @@
 <app-navbar></app-navbar>
 <div class="page-title">
     <div class="row col-10 offset-1">
-        <div class="col-2 offset-1 text-center">
+        <div class="col-3 text-center">
             <h3>Dashboard</h3>
+        </div>
+        <div class="col-2 text-center m-auto">
+            <h4 *ngIf="trainer; else elseBlock">Trainer</h4>
+            <ng-template #elseBlock><h5>Associate</h5></ng-template>
         </div>
     </div>
 </div>
