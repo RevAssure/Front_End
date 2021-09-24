@@ -19,6 +19,8 @@ export class RegisterComponent implements OnInit {
   username: string;
   password: string;
   isTrainer: boolean = false;
+  failedRegister: boolean = false;
+  successful: boolean = false;
 
   registerNewUser() {
     const newUser: User & {password: string} = {
@@ -36,9 +38,17 @@ export class RegisterComponent implements OnInit {
     let returnedUser;
     console.log(newUser)
     this.service.registerNewUser(newUser).subscribe((result) => {
+      this.failedRegister = false;
       console.log(result)
       returnedUser = result
       console.log(returnedUser)
+      this.successful = true;
+      
+    },
+    (error) => {
+      console.log(error);
+      this.failedRegister = true;
+      this.successful = false;
     });
   }
 

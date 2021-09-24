@@ -1,5 +1,9 @@
+#dashboard {
+    border: 1px solid  #F26925;
+}
+
 .board {
-    padding: 35px;
+    padding: 20px;
     font-size: 36px;
     text-align: center;
     border-radius: 6px;
