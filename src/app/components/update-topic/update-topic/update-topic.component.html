@@ -2,9 +2,9 @@
 <div class="container mt-5"> 
     <div class="card shadow col-6 offset-3">
         <div class="card-body">
-            <div class="d-flex align-items-baseline">
-                <h3 class="card-title mr-3">Edit Topic</h3>
-                <button class="rev-btn-confirm" (click)="deleteTopic()">Delete</button>
+            <div class="d-flex align-items-baseline justify-content-between">
+                <h3 class="card-title">Edit Topic</h3>
+                <button class="rev-btn-confirm" style="float:right;" (click)="deleteTopic()">Delete</button>
             </div>
 
             <div class="mb-3">
@@ -39,6 +39,13 @@
                     <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
                 </select>
             </div>
+            <div *ngIf="successfulUpdate" id="success-message">
+                Topic successfully updated!
+            </div>
+            <div *ngIf="successfulDelete" id="success-message">
+                Topic successfully deleted!
+            </div>
+            <br>
             <div>
                 <button id="submit" class="rev-btn-confirm mr-2" (click)="updateTopic()">Submit</button>
                 <button class="rev-btn-secondary" routerLink="/modules">Back to Modules</button>

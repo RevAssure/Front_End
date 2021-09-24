@@ -5,10 +5,9 @@ import { TechCategoryService } from 'src/app/services/tech-category.service';
 import { TopicService } from 'src/app/services/topic.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { Topic } from 'src/app/topic';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Module } from 'src/app/module';
 import { ModuleService } from 'src/app/services/module.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-update-topic',
@@ -19,8 +18,8 @@ export class UpdateTopicComponent implements OnInit {
 
   constructor(private userService: UserService, private techCategoryService: TechCategoryService,
     private topicService: TopicService, private authService: AuthorizationService,
-    private route: ActivatedRoute, private moduleService: ModuleService, private location: Location) { 
-
+    private route: ActivatedRoute, private moduleService: ModuleService,
+    private router: Router) { 
     }
   
   id: number;
@@ -31,6 +30,8 @@ export class UpdateTopicComponent implements OnInit {
   githubRepo: string =  '';
   technologyCategoryId: string = "1";
   moduleId: string = "0";
+  successfulUpdate: boolean = false;
+  successfulDelete: boolean = false;
 
   passedTopic: Topic;
 
@@ -68,13 +69,22 @@ export class UpdateTopicComponent implements OnInit {
       modules: [this.moduleId]
     }
     console.log(topicPutBody);
-    this.topicService.updateTopic(this.authService.jwt, topicPutBody).subscribe( (result) => console.log(result));
+    this.topicService.updateTopic(this.authService.jwt, topicPutBody).subscribe( (result) => {
+      console.log(result);
+      this.successfulUpdate = true;
+      setTimeout(() => {
+        this.router.navigateByUrl("/modules");
+      }, 3000);
+    });
   }
 
   deleteTopic() {
     this.topicService.deleteTopicById(this.authService.jwt, this.id).subscribe(_ => { 
       console.log(`Deleted topic #{id}.`);
-      this.location.back();
+      this.successfulDelete = true;
+      setTimeout(() => {
+        this.router.navigateByUrl("/modules");
+      }, 3000);
     });
   }
 }
