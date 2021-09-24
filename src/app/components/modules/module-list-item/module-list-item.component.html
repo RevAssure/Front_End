@@ -14,7 +14,7 @@
         </div>
         <div *ngFor="let topic of module.topics">
             &#8226;
-            <a href="/topic/{{topic.id}}"> {{topic.title}}</a>
+            <a routerLink="/topic/{{topic.id}}"> {{topic.title}}</a>
         </div>
     </div>
 
