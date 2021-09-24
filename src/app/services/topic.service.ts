@@ -38,4 +38,9 @@ export class TopicService {
     this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
     return this.http.put<Topic>(this.url, topic, this.httpOptions);
   }
+
+  deleteTopicById(jwt: string, id: number): Observable<any> {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    return this.http.delete(`${this.url}/${id}`, this.httpOptions);
+  }
 }

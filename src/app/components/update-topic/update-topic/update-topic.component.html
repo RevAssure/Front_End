@@ -1,7 +1,11 @@
 <div class="container mt-5"> 
     <div class="card shadow col-6 offset-3">
         <div class="card-body">
-            <h3 class="card-title">Edit Topic</h3>
+            <div class="d-flex align-items-baseline">
+                <h3 class="card-title">Edit Topic</h3>
+                <button class="rev-btn-confirm" (click)="deleteTopic()">Delete</button>
+            </div>
+
             <div class="mb-3">
                 <label for="title" class="form-label">Topic Title</label>
                 <input id="title" class="form-control" type="text" [(ngModel)]="title">

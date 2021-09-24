@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestBed, async, inject, getTestBed } from '@angular/core/testing';
+import { TestBed, getTestBed } from '@angular/core/testing';
 import { environment } from 'src/environments/environment';
 import { Module } from '../module';
 import { TechnologyCategory } from '../technologycategory';
@@ -9,7 +9,7 @@ import { Topic } from '../topic';
 import { User } from '../user';
 import { TopicService } from './topic.service';
 
-fdescribe('Service: Topic', () => {
+describe('Service: Topic', () => {
   let service: TopicService;
   let injector: TestBed;
   let httpMock: HttpTestingController;
@@ -120,4 +120,11 @@ fdescribe('Service: Topic', () => {
     mockRequest.flush(dummyTopics[0]);
   });
 
+  //DELETE by ID
+  it('should get a 200 when doing DELETE by ID', () => {
+    service.deleteTopicById(mockJwt, dummyTopics[0].id).subscribe();
+    const mockRequest = httpMock.expectOne(`${environment.revAssureBase}topic/${dummyTopics[0].id}`);
+    expect(mockRequest.request.method).toBe('DELETE');
+    mockRequest.flush(null);
+  });
 });

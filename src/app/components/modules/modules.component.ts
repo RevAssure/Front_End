@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Module } from 'src/app/module';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { ModuleService } from 'src/app/services/module.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-modules',
@@ -6,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modules.component.css']
 })
 export class ModulesComponent implements OnInit {
+  allModules: Module[] = [];
+  modules: Module[] = [];
 
-  constructor() { }
+  constructor(private moduleService: ModuleService, private authService: AuthorizationService,
+    private userService: UserService) { }
 
   ngOnInit() {
+    this.moduleService.getAllModules(this.authService.jwt).subscribe((modules) => {
+      this.allModules = modules;
+      this.modules = this.allModules;
+    });
   }
 
 }

@@ -69,4 +69,8 @@ export class UpdateTopicComponent implements OnInit {
     console.log(topicPutBody);
     this.topicService.updateTopic(this.authService.jwt, topicPutBody).subscribe( (result) => console.log(result));
   }
+
+  deleteTopic() {
+    this.topicService.deleteTopicById(this.authService.jwt, this.id).subscribe(_ => console.log(`Deleted topic #{id}.`));
+  }
 }
