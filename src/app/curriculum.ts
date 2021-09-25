@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Adapter } from './adapter';
 import { User } from './user';
+import { Event } from 'src/app/event';
 
 export class Curriculum {
     constructor(

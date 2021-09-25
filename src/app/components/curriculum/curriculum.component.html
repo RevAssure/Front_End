@@ -6,7 +6,7 @@
         </div>
     </div>
 </div>
-<div class="d-flex">
+<div *ngIf="isInitialized" class="d-flex">
 
     <div class="col-8 offset-2 my-4">
         <full-calendar #calendar [options]="calendarOptions" class="bg-white p-4 shadow">
@@ -25,3 +25,91 @@
         </div>
     </div>
 </div>
+
+<ng-template #viewEvent let-modal id="view-modal">
+    <div #viewing id="view">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">{{currentEvent.title}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <h5>Tech Category</h5>
+                <hr>
+                <p>{{currentEvent.technologyCategory.name}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Description</h5>
+                <hr>
+                <p>{{currentEvent.description}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Lecture Notes</h5>
+                <hr>
+                <p>{{currentEvent.lectureNotes}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Github Repo</h5>
+                <hr>
+                <p>{{currentEvent.githubRepo}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Length</h5>
+                <hr>
+                <p>{{currentEvent.estimatedDuration}} min</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="rev-btn-confirm" data-dismiss="modal" data-toggle="modal"
+                data-target="#edit-modal" (click)="modal.dismiss('Cross click')">Close</button>
+            <button type="button" style="color: white; background-color: red;"
+                (click)="deleteEvent(currentEvent.id); modal.dismiss('Cross click')">Delete Event</button>
+        </div>
+    </div>
+</ng-template>
+<!-- 
+<ng-template #editEvent let-modal id="edit-modal">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Editing {{currentEvent.title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <h5>Tech Category</h5>
+            <hr>
+            <p>{{currentEvent.technologyCategory.name}}</p>
+        </div>
+        <div class="mb-3">
+            <h5>Description</h5>
+            <hr>
+            <p>{{currentEvent.description}}</p>
+        </div>
+        <div class="mb-3">
+            <h5>Lecture Notes</h5>
+            <hr>
+            <p>{{currentEvent.lectureNotes}}</p>
+        </div>
+        <div class="mb-3">
+            <h5>Github Repo</h5>
+            <hr>
+            <p>{{currentEvent.githubRepo}}</p>
+        </div>
+        <div class="mb-3">
+            <h5>Length</h5>
+            <hr>
+            <p>{{currentEvent.estimatedDuration}} min</p>
+        </div>
+        <div class="mb-3">
+            <h5>Trainer</h5>
+            <hr>
+            <p>{{currentEvent.trainer.firstName}} {{currentEvent.trainer.lastName}}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="rev-btn-confirm" (click)="modal.close('Save click')">Edit</button>
+    </div>
+</ng-template> -->

@@ -4,7 +4,6 @@ import { LoginComponent } from '../components/login/login.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { Routes, RouterModule } from '@angular/router';
 import { CurriculumComponent } from '../components/curriculum/curriculum.component';
-import { DayViewComponent } from '../components/day-view/day-view.component';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { ModulesComponent } from '../components/modules/modules.component';
 import { CreateModuleComponent } from '../components/create-module/create-module.component';
@@ -34,7 +33,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload'})
   ],
   exports: [RouterModule]
 })
