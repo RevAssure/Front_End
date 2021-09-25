@@ -2,53 +2,100 @@
 <div class="container mt-5"> 
     <div class="card shadow col-6 offset-3">
         <div class="card-body">
-            <div class="d-flex align-items-baseline justify-content-between">
-                <h3 class="card-title">Edit Topic</h3>
-                <button class="rev-btn-confirm" style="float:right;" (click)="deleteTopic()">Delete</button>
-            </div>
+            <div *ngIf=isTopicOwner>
+                <div class="d-flex align-items-baseline justify-content-between">
+                    <h3 class="card-title">Editing Topic</h3>
+                    <button class="rev-btn-confirm" style="float:right;" (click)="deleteTopic()">Delete</button>
+                </div>
 
-            <div class="mb-3">
-                <label for="title" class="form-label">Topic Title</label>
-                <input id="title" class="form-control" type="text" [(ngModel)]="title">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Topic Title</label>
+                    <input id="title" class="form-control" type="text" [(ngModel)]="title">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="estimatedTime" class="form-label">Estimated Time (in minutes)</label>
+                    <input id="estimatedTime" class="form-control" type="number" [(ngModel)]="estimatedDuration">
+                </div>
+                <div class="mb-3">
+                    <label for="lectureNotes" class="form-label">Lecture Notes</label>
+                    <textarea id="lectureNotes" class="form-control" [(ngModel)]="lectureNotes"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="repoLink" class="form-label">Github Repo Link</label>
+                    <input id="repoLink" class="form-control" type="url" [(ngModel)]="githubRepo">
+                </div>
+                <div class="mb-3">
+                    <label for="techCategory" class="form-label">Category</label>
+                    <select id="techCategory" class="form-control" [(ngModel)]="technologyCategoryId">
+                        <option *ngFor="let techCategory of techCategories" value={{techCategory.id}}>{{techCategory.name}}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="modules" class="form-label">Module</label>
+                    <select id="modules" class="form-control" [(ngModel)]="moduleId">
+                        <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="successfulUpdate" id="success-message">
+                    Topic successfully updated!
+                </div>
+                <div *ngIf="successfulDelete" id="success-message">
+                    Topic successfully deleted!
+                </div>
+                <br>
+                <div>
+                    <button id="submit" class="rev-btn-confirm mr-2" (click)="updateTopic()">Submit</button>
+                    <button class="rev-btn-secondary" (click)="goBack()">Back</button>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="estimatedTime" class="form-label">Estimated Time (in minutes)</label>
-                <input id="estimatedTime" class="form-control" type="number" [(ngModel)]="estimatedDuration">
-            </div>
-            <div class="mb-3">
-                <label for="lectureNotes" class="form-label">Lecture Notes</label>
-                <textarea id="lectureNotes" class="form-control" [(ngModel)]="lectureNotes"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="repoLink" class="form-label">Github Repo Link</label>
-                <input id="repoLink" class="form-control" type="url" [(ngModel)]="githubRepo">
-            </div>
-            <div class="mb-3">
-                <label for="techCategory" class="form-label">Category</label>
-                <select id="techCategory" class="form-control" [(ngModel)]="technologyCategoryId">
-                    <option *ngFor="let techCategory of techCategories" value={{techCategory.id}}>{{techCategory.name}}</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="modules" class="form-label">Module</label>
-                <select id="modules" class="form-control" [(ngModel)]="moduleId">
-                    <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
-                </select>
-            </div>
-            <div *ngIf="successfulUpdate" id="success-message">
-                Topic successfully updated!
-            </div>
-            <div *ngIf="successfulDelete" id="success-message">
-                Topic successfully deleted!
-            </div>
-            <br>
-            <div>
-                <button id="submit" class="rev-btn-confirm mr-2" (click)="updateTopic()">Submit</button>
-                <button class="rev-btn-secondary" routerLink="/modules">Back to Modules</button>
+            <div *ngIf="!isTopicOwner">
+                <div class="d-flex align-items-baseline justify-content-between">
+                    <h3 class="card-title">Viewing Topic</h3>
+                    <button class="rev-btn-confirm" style="float:right;" (click)="cloneTopic()">Clone</button>
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Topic Title</label>
+                    <input id="title" class="form-control" type="text" [(ngModel)]="title" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea readonly class="form-control" id="description" [(ngModel)]="description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="estimatedTime" class="form-label">Estimated Time (in minutes)</label>
+                    <input readonly id="estimatedTime" class="form-control" type="number" [(ngModel)]="estimatedDuration">
+                </div>
+                <div class="mb-3">
+                    <label for="lectureNotes" class="form-label">Lecture Notes</label>
+                    <textarea readonly id="lectureNotes" class="form-control" [(ngModel)]="lectureNotes"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="repoLink" class="form-label">Github Repo Link</label>
+                    <input readonly id="repoLink" class="form-control" type="url" [(ngModel)]="githubRepo">
+                </div>
+                <div class="mb-3">
+                    <label for="techCategory" class="form-label">Category</label>
+                    <select disabled id="techCategory" class="form-control" [(ngModel)]="technologyCategoryId">
+                        <option *ngFor="let techCategory of techCategories" value={{techCategory.id}}>{{techCategory.name}}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="modules" class="form-label">Module</label>
+                    <select disabled id="modules" class="form-control" [(ngModel)]="moduleId">
+                        <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="successfulClone" id="success-message">
+                    Topic successfully cloned!
+                </div>
+                <br>
+                <div>
+                    <button class="rev-btn-secondary" (click)="goBack()">Back</button>
+                </div>
             </div>
         </div>
     </div>

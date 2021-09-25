@@ -59,4 +59,9 @@ describe('Service: TechCategory', () => {
     expect(mockRequest.request.method).toBe('GET');
     mockRequest.flush(dummyResponse);
   });
+
+  it('should return a dummy TechnologyCategory with ID 0 when getCategoryByIdIfExists() passes ID not on table', () => {
+    let returnedCategory = service.getCategoryByIdIfExists(545616);
+    expect(returnedCategory.id).toEqual(0);
+  });
 });
