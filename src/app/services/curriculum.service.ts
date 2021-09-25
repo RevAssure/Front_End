@@ -84,9 +84,15 @@ export class CurriculumService {
     return this.http.delete(`${environment.revAssureBase}event/${id}`, this.httpOptions)
   }
 
-  getCurriculum(): Observable<Curriculum[]>{
+  getCurriculum(isTrainer: boolean): Observable<Curriculum[]>{
       this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
-      return this.http.get<Curriculum[]>(this.url, this.httpOptions)
+      if(isTrainer) {
+        console.log("Trainer")
+        return this.http.get<Curriculum[]>(this.url, this.httpOptions)
+      } else {
+        console.log("Associate")
+        return this.http.get<Curriculum[]>(this.url + "/assigned", this.httpOptions)
+      }
   }
 
   getCurriculumById(curriculumId: number): Observable<Curriculum[]>{
