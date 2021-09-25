@@ -13,7 +13,8 @@
             <button class="rev-btn-confirm" routerLink="/createTopic">Add</button>
         </div>
         <div *ngFor="let topic of module.topics">
-            <button class="rev-btn-confirm" routerLink="/topic/{{topic.id}}">{{topic.title}}</button>
+            &#8226;
+            <a routerLink="/topic/{{topic.id}}"> {{topic.title}}</a>
         </div>
     </div>
 
