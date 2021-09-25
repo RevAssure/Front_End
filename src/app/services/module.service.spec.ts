@@ -60,6 +60,7 @@ describe('Service: Module', () => {
     expect(service).toBeTruthy();
   });
 
+  //GET All
   it('should get JSON array of all Modules owned by logged in user for GET', () => {
     service.getAllModules(mockJwt).subscribe((result : Module[]) => {
       expect(result[0]).toEqual(dummyModules[0]);
@@ -68,6 +69,16 @@ describe('Service: Module', () => {
     const mockRequest = httpMock.expectOne(`${environment.revAssureBase}module`);
     expect(mockRequest.request.method).toBe('GET');
     mockRequest.flush(dummyModules);
+  });
+
+  //POST
+  it('should get a JSON object of the submitted Module when performing POST', () => {
+    service.createModule(mockJwt, dummyModuleDto).subscribe((result : Module) => {
+      expect(result).toEqual(dummyModules[0]);
+    });
+    const mockRequest = httpMock.expectOne(`${environment.revAssureBase}module`);
+    expect(mockRequest.request.method).toBe('POST');
+    mockRequest.flush(dummyModules[0]);
   });
 
   it('should return a Module with correct ID when getModuleById() is called after getAllModules()', () => {

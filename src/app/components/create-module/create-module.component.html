@@ -1,2 +1,30 @@
 <app-navbar></app-navbar>
-<button class="rev-btn-confirm" routerLink="/modules">Back to Modules</button>
+<div class="container mt-5"> 
+    <div class="card shadow col-6 offset-3">
+        <div class="card-body">
+            <h3 class="card-title">Create a New Module</h3>
+            <div class="mb-3">
+                <label for="title" class="form-label">Module Name</label>
+                <input id="title" class="form-control" type="text" [(ngModel)]="name">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="techCategory" class="form-label">Category</label>
+                <select id="techCategory" class="form-control" [(ngModel)]="techCategoryId">
+                    <option *ngFor="let techCategory of techCategories" value={{techCategory.id}}>{{techCategory.name}}</option>
+                </select>
+            </div>
+            <!-- <div *ngIf="successful" id="success-message">
+                Module successfully added!
+            </div> -->
+            <br>
+            <div>
+                <button id="submit" class="rev-btn-confirm mr-2" (click)="createModule()">Submit</button>
+                <button class="rev-btn-secondary" routerLink="/modules">Back to Modules</button>
+            </div>
+        </div>
+    </div>
+</div>
