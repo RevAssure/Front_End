@@ -33,12 +33,26 @@ export class TopicService {
 
   /**
    * Performs a GET to "/topic" to get all topics if a trainer is logged in.
-   * @param jwt 
+   * @param jwt - JWT for authorization
    * @returns an Observable containing an array of the trainer's topics.
    */
+  getTopicById(jwt: string, id: number): Observable<Topic> {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    return this.http.get<Topic>(`${this.url}/${id}`, this.httpOptions);
+  }
+
   getAllTopicsForCurrentTrainer(jwt: string): Observable<Topic[]> {
     this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
     return this.http.get<Topic[]>(this.url, this.httpOptions);
   }
 
+  updateTopic(jwt: string, topic: any): Observable<Topic> {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    return this.http.put<Topic>(this.url, topic, this.httpOptions);
+  }
+
+  deleteTopicById(jwt: string, id: number): Observable<any> {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    return this.http.delete(`${this.url}/${id}`, this.httpOptions);
+  }
 }

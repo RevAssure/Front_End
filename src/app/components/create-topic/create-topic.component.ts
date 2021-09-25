@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { TechnologyCategory } from 'src/app/technologycategory';
-import { Topic } from 'src/app/topic';
 import { UserService } from 'src/app/services/user.service';
 import { TechCategoryService } from 'src/app/services/tech-category.service';
 import { TopicService } from 'src/app/services/topic.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { Module } from 'src/app/module';
+import { ModuleService } from 'src/app/services/module.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-topic',
@@ -14,7 +16,8 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
 export class CreateTopicComponent implements OnInit {
 
   constructor(private userService: UserService, private techCategoryService: TechCategoryService,
-    private topicService: TopicService, private authService: AuthorizationService) { }
+    private topicService: TopicService, private authService: AuthorizationService,
+    private moduleService: ModuleService, private router: Router) { }
 
   title: string =  '';
   description: string =  '';
@@ -22,11 +25,16 @@ export class CreateTopicComponent implements OnInit {
   lectureNotes: string = '';
   githubRepo: string =  '';
   technologyCategoryId: string = "1";
+  moduleId: string = "1";
+
+  successful: boolean = false;
 
   techCategories : TechnologyCategory[] = [];
+  modules: Module[] = [];
 
   ngOnInit() {
     this.techCategories = this.techCategoryService.categories;
+    this.moduleService.getAllModules(this.authService.jwt).subscribe(modules => this.modules = modules);
   }
 
   /**
@@ -42,9 +50,15 @@ export class CreateTopicComponent implements OnInit {
       githubRepo: this.githubRepo,
       trainer: this.userService.getUserId(),
       technologyCategory: Number.parseInt(this.technologyCategoryId),
-      modules: []
+      modules: [Number.parseInt(this.moduleId)]
     }
     console.log(newTopicPostBody);
-    this.topicService.createTopic(this.authService.jwt, newTopicPostBody).subscribe( (result) => console.log(result));
+    this.topicService.createTopic(this.authService.jwt, newTopicPostBody).subscribe( (result) => {
+      console.log(result);
+      this.successful = true;
+      setTimeout(() => {
+        this.router.navigateByUrl("/modules");
+      }, 3000);
+    });
   }
 }

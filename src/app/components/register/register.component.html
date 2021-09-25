@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container mt-5">
     <div id="register-container" class="card col-4 offset-4 mb-5 shadow">
         <!-- <div class="d-flex justify-content-center flex-column align-items-center">
@@ -32,6 +33,14 @@
                     Register as Trainer
                 </label>
             </div>
+            <div *ngIf="failedRegister" id="error-message">
+                Failed to register! Username already exists!
+            </div>
+            <div *ngIf="successful" id="success-message">
+                You have successfully registered in RevAssure!
+            </div>
+            <br>
+
             <div class="d-flex align-items-center">
                 <button class="rev-btn-confirm mr-3" (click)="registerNewUser()" type="button"
                     routerLink="/register">Register</button>

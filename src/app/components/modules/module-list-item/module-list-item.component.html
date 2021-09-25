@@ -1,0 +1,21 @@
+    <div>
+        <h4>Description</h4>
+        <div>
+            {{module.description}}
+        </div>
+    </div>
+    <div>
+        <h4>Tech Area:</h4> {{module.technologyCategory.name}}
+    </div>
+    <div>
+        <div class="d-flex align-items-baseline">
+            <h4 class="mr-3">Topics</h4>
+            <button class="rev-btn-confirm" routerLink="/createTopic">Add</button>
+        </div>
+        <div *ngFor="let topic of module.topics">
+            &#8226;
+            <a routerLink="/topic/{{topic.id}}"> {{topic.title}}</a>
+        </div>
+    </div>
+
+    

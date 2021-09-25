@@ -2,7 +2,11 @@
 <div class="container mt-5"> 
     <div class="card shadow col-6 offset-3">
         <div class="card-body">
-            <h3 class="card-title">Create a New Topic</h3>
+            <div class="d-flex align-items-baseline justify-content-between">
+                <h3 class="card-title">Edit Topic</h3>
+                <button class="rev-btn-confirm" style="float:right;" (click)="deleteTopic()">Delete</button>
+            </div>
+
             <div class="mb-3">
                 <label for="title" class="form-label">Topic Title</label>
                 <input id="title" class="form-control" type="text" [(ngModel)]="title">
@@ -35,12 +39,15 @@
                     <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
                 </select>
             </div>
-            <div *ngIf="successful" id="success-message">
-                Topic successfully added!
+            <div *ngIf="successfulUpdate" id="success-message">
+                Topic successfully updated!
+            </div>
+            <div *ngIf="successfulDelete" id="success-message">
+                Topic successfully deleted!
             </div>
             <br>
             <div>
-                <button id="submit" class="rev-btn-confirm mr-2" (click)="createTopic()">Submit</button>
+                <button id="submit" class="rev-btn-confirm mr-2" (click)="updateTopic()">Submit</button>
                 <button class="rev-btn-secondary" routerLink="/modules">Back to Modules</button>
             </div>
         </div>

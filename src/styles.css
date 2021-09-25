@@ -69,6 +69,13 @@ button {
     background-color: #393d44;
 }
 
+.page-title {
+    font-family: "futura-bold", Fallback, sans-serif;
+    color: white;
+    background-color: #474C55;
+    padding: 12px;
+}
+
 /* .rev-btn-secondary:hover {
     background-color: white;
     color: #474C55;

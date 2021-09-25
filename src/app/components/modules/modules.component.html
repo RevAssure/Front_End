@@ -1,3 +1,12 @@
+<app-navbar></app-navbar>
 <button class="rev-btn-confirm" routerLink="/createModule">Add Module</button>
-<button class="rev-btn-confirm" routerLink="/topic">Topic</button>
-<button class="rev-btn-confirm" routerLink="/createTopic">Add Topic</button>
+
+<div class="col-6 offset-3">
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+        <ngb-panel *ngFor="let module of modules" title="{{module.name}}">
+            <ng-template ngbPanelContent>
+                <app-module-list-item [module]="module"></app-module-list-item>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>

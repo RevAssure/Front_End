@@ -18,4 +18,6 @@ export class CreateCurriculaComponent implements OnInit {
   create() {
     this.curriculumService.createCurriculum(this.newCurriculumTitle).subscribe(result => console.log(result));
   }
+
+
 }

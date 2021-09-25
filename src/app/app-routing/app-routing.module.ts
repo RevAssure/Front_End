@@ -9,8 +9,8 @@ import { DashboardComponent } from '../components/dashboard/dashboard.component'
 import { ModulesComponent } from '../components/modules/modules.component';
 import { CreateModuleComponent } from '../components/create-module/create-module.component';
 import { CreateTopicComponent } from '../components/create-topic/create-topic.component';
-import { TopicComponent } from '../components/topic/topic.component';
 import { CreateCurriculaComponent } from '../components/create-curricula/create-curricula.component';
+import { UpdateTopicComponent } from '../components/update-topic/update-topic/update-topic.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch:'full' },
@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'createModule', component: CreateModuleComponent},
   { path: 'createTopic', component: CreateTopicComponent},
   { path: 'createCurriculum', component: CreateCurriculaComponent},
-  { path: 'topic', component: TopicComponent} //TODO: add :id param
+  { path: 'topic/:id', component: UpdateTopicComponent}
 ]
 
 @NgModule({
