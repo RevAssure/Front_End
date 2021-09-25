@@ -31,19 +31,23 @@ export class CurriculumService {
   private eventUpdate = new Subject<any>(); 
 
   createCurriculum(newTitle: string){
-    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
-    return this.http.post<Curriculum>(this.url, {
+    let newCurriculum: Curriculum = {
+      id: 0,
       name: newTitle,
-      associates: []  
-    }, this.httpOptions)
+      trainer: this.userService.getUserObject(),
+      events: [],
+      users: []
+    }
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
+    return this.http.post<Curriculum>(this.url, newCurriculum, this.httpOptions)
 
   }
 
   convertToCalendarEvent(e: any) {
     console.log(e.topic)
-    let foundTopic = this.userService.getTopics().filter(el => {
-      console.log(el.id + " " + e.id)
-      return el.id == e.topic
+    let foundTopic = this.userService.getTopics().filter(t => {
+      console.log(t.id + " " + e.id)
+      return t.id == e.topic.id
     })
     let title = foundTopic[0].title;
     console.log(title)
@@ -72,6 +76,12 @@ export class CurriculumService {
     console.log(this.authService.jwt)
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
     return this.http.post(`${environment.revAssureBase}event`, event, this.httpOptions)
+  }
+
+  deleteEventById(id: number) {
+    console.log(this.authService.jwt)
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
+    return this.http.delete(`${environment.revAssureBase}event/${id}`, this.httpOptions)
   }
 
   getCurriculum(): Observable<Curriculum[]>{

@@ -13,10 +13,6 @@ import { UserService } from 'src/app/services/user.service';
 import { Topic } from 'src/app/topic';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent } from 'src/app/calendarEvent';
-import { TechCategoryService } from 'src/app/services/tech-category.service';
-import { TechnologyCategory } from 'src/app/technologycategory';
-import { Module } from 'src/app/module';
-import { ModuleService } from 'src/app/services/module.service';
 
 @Component({
   selector: 'app-curriculum',
@@ -27,81 +23,72 @@ export class CurriculumComponent implements OnInit {
 
 
 
-  constructor(private techCategoryService: TechCategoryService, private moduleService: ModuleService, private modalService: NgbModal, private userService: UserService, private authService: AuthorizationService, private topicService: TopicService, private curriculumService: CurriculumService, private router: Router, private activatedRoutes: ActivatedRoute) { 
+  constructor(private modalService: NgbModal, private userService: UserService, private authService: AuthorizationService, private topicService: TopicService, private curriculumService: CurriculumService, private router: Router, private activatedRoutes: ActivatedRoute) { 
     
   }
 
   ngOnInit(): void {
+    this.isInitialized = false
     this.curriculumId = this.activatedRoutes.snapshot.paramMap.get("id")
-    this.techCategories = this.techCategoryService.categories;
-    this.moduleService.getAllModules(this.authService.jwt).subscribe(modules => this.modules = modules);
     this.topics = this.userService.getTopics()
     console.log(this.topics)
-    let currentCurriculum = this.userService.getOwnedCurricula().filter(c => c.id == this.curriculumId)
-    this.curriculum = currentCurriculum[0];
-    for(let e of this.curriculum.events) {
-      let date = new Date(e.startDatetime * 1000)
-      let year = date.getFullYear();
-      let month = (date.getMonth() + 1).toString();
-      month = parseInt(month) < 10 ? '0' + month.toString() : month
-      let day = date.getDate().toString();
-      day = parseInt(day) < 10 ? '0' + day.toString() : day
-      let eventTime = `${year}-${month}-${day}`
-      let calEvent: CalendarEvent = {
-        id: e.id,
-        title: e.topic.title,
-        start: eventTime,
-        description: e.topic.description,
-        estimatedDuration: e.topic.estimatedDuration,
-        lectureNotes: e.topic.lectureNotes,
-        githubRepo: e.topic.githubRepo,
-        trainer: e.topic.trainer,
-        technologyCategory: e.topic.technologyCategory
-
+    this.curriculumService.getCurriculum().subscribe((result) => {
+      this.curriculum = result.filter(c => c.id == this.curriculumId)[0]
+      for(let e of this.curriculum.events) {
+        let date = new Date(e.startDatetime * 1000)
+        let year = date.getFullYear();
+        let month = (date.getMonth() + 1).toString();
+        month = parseInt(month) < 10 ? '0' + month.toString() : month
+        let day = date.getDate().toString();
+        day = parseInt(day) < 10 ? '0' + day.toString() : day
+        let eventTime = `${year}-${month}-${day}`
+        let calEvent: CalendarEvent = {
+          id: e.id,
+          title: e.topic.title,
+          start: eventTime,
+          description: e.topic.description,
+          estimatedDuration: e.topic.estimatedDuration,
+          lectureNotes: e.topic.lectureNotes,
+          githubRepo: e.topic.githubRepo,
+          trainer: e.topic.trainer,
+          technologyCategory: e.topic.technologyCategory
+        }
+        this.calendarEvents.push(calEvent)
       }
-      this.calendarEvents.push(calEvent)
-    }
-    console.log(this.calendarEvents)
+      console.log(this.curriculum)
+    
+      this.calendarOptions.events = this.calendarEvents;
+      this.isInitialized = true;
+    })
+
   }
 
+
+  isInitialized: boolean = false;
   curriculumId: any
   curriculum: Curriculum
   events: Event[] = []
   calendarEvents: any[] = []
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-  @ViewChild('viewEvent') viewModal: ElementRef;
-  @ViewChild('viewing') topicView: ElementRef
-  @ViewChild('editing') editView: ElementRef
+  @ViewChild('viewEvent') modal: ElementRef;
   currentView: string;
   topics: Topic[] = []
   selectedTopic: number
   currentEvent: CalendarEvent;
-  techCategories : TechnologyCategory[] = [];
-  modules: Module[] = [];
-  title: string =  '';
-  description: string =  '';
-  estimatedDuration: number = 0;
-  lectureNotes: string = '';
-  githubRepo: string =  '';
-  technologyCategoryId: string = "1";
-  moduleId: string = "1";
 
   getCalendarApi() {
     return this.calendarComponent.getApi();
   }
 
+  reloadPage() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigateByUrl(`/curriculum/${this.curriculumId}`);
+    
+  }
+
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
-  }
-
-  editTopic() {
-    document.querySelector("#view")?.classList.add("d-none")
-    document.querySelector("#edit")?.classList.remove("d-none")
-  }
-
-  viewTopic() {
-    document.querySelector("#view")?.classList.remove("d-none")
-    document.querySelector("#edit")?.classList.add("d-none")
   }
 
   addTopicToDay() {
@@ -115,9 +102,17 @@ export class CurriculumComponent implements OnInit {
       topic: this.selectedTopic
     }
     console.log(e)
-    this.curriculumService.addEvent(e).subscribe(result => {
-      console.log(result)
+    this.curriculumService.addEvent(e).subscribe((result) => {
+      let newEvent: CalendarEvent = this.curriculumService.convertToCalendarEvent(result)
+      this.calendarEvents.push(newEvent);
+      this.calendarOptions.events = this.calendarEvents
+      this.reloadPage()
     })
+  }
+
+  deleteEvent(id: number) {
+    console.log("IN COMPONENT WITH ID: " + id)
+    this.curriculumService.deleteEventById(id).subscribe(result => this.reloadPage())
   }
 
   handleDateClick (arg: any) {
@@ -174,7 +169,7 @@ export class CurriculumComponent implements OnInit {
       let id = info.event.id;
       let event = this.calendarEvents.filter(el => el.id == id)
       this.currentEvent = event[0];
-      this.open(this.viewModal)
+      this.open(this.modal)
     }
   };
 
