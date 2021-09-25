@@ -9,7 +9,7 @@ import { Topic } from '../topic';
 import { User } from '../user';
 import { TopicService } from './topic.service';
 
-describe('Service: Topic', () => {
+describe('TopicService: Topic', () => {
   let service: TopicService;
   let injector: TestBed;
   let httpMock: HttpTestingController;
@@ -44,7 +44,7 @@ describe('Service: Topic', () => {
       'Lorum ipsum',
       'http://www.github.com',
       new User(
-        1, 'username', 'firstName', 'lastName', true, [], [], [], []
+        2, 'username', 'firstName', 'lastName', true, [], [], [], []
       ),
       new TechnologyCategory(1, 'Java', [], []),
       []
@@ -80,11 +80,21 @@ describe('Service: Topic', () => {
   });
 
   it('should get JSON array of all topics owned by logged in user for GET', () => {
-    service.getAllTopicsForCurrentTrainer(mockJwt).subscribe((result : Topic[]) => {
+    const dummyTopicsCurrentTrainerOnly = [dummyTopics[0]];
+    service.getAllTopicsByTrainer(mockJwt).subscribe((result : Topic[]) => {
+      expect(result[0]).toEqual(dummyTopics[0]);
+    });
+    const mockRequest = httpMock.expectOne(`${environment.revAssureBase}topic`);
+    expect(mockRequest.request.method).toBe('GET');
+    mockRequest.flush(dummyTopicsCurrentTrainerOnly);
+  });
+
+  it('should get JSON array of all topics GET on /topic/all', () => {
+    service.getAllTopics(mockJwt).subscribe((result : Topic[]) => {
       expect(result[0]).toEqual(dummyTopics[0]);
       expect(result[1]).toEqual(dummyTopics[1]);
     });
-    const mockRequest = httpMock.expectOne(`${environment.revAssureBase}topic`);
+    const mockRequest = httpMock.expectOne(`${environment.revAssureBase}topic/all`);
     expect(mockRequest.request.method).toBe('GET');
     mockRequest.flush(dummyTopics);
   });

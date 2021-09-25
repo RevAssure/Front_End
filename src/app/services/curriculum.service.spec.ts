@@ -24,17 +24,14 @@ describe('CurriculumService', () => {
   });
 
   fit('should return a list of curriculums with current user logged in', () => {
-    const dummyJwt: any = {
-      jwt: "thisIsJwt"
-    }
-    let curriculums: Curriculum[];
+    let curriculums: Curriculum[] = [];
     service.getCurriculum().subscribe((result) => {
       expect(result).toBe(curriculums);
     })
 
     const request = httpMock.expectOne(`${environment.revAssureBase}curriculum`);
     expect(request.request.method).toBe('GET');
-    request.flush(dummyJwt);
+    request.flush(curriculums);
 
   })
 

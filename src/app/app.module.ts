@@ -29,6 +29,8 @@ import { CreateCurriculaComponent } from './components/create-curricula/create-c
 import { UpdateTopicComponent } from './components/update-topic/update-topic/update-topic.component';
 import { ModuleService } from './services/module.service';
 import { ModuleListItemComponent } from './components/modules/module-list-item/module-list-item.component';
+import { AllTopicsComponent } from './components/all-topics/all-topics.component';
+import { MyTopicsComponent } from './components/my-topics/my-topics.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -49,7 +51,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     TopicComponent,
     CreateCurriculaComponent,
     UpdateTopicComponent,
-    ModuleListItemComponent
+    ModuleListItemComponent,
+    AllTopicsComponent,
+    MyTopicsComponent
   ],
   imports: [
     BrowserModule,
