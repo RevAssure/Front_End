@@ -29,6 +29,10 @@ export class CreateTopicComponent implements OnInit {
     this.techCategories = this.techCategoryService.categories;
   }
 
+  /**
+   * Create a new topic. The newTopicPostBody represents the TopicDto that will be
+   * posted to the back-end API.
+   */
   createTopic() {
     let newTopicPostBody = {
       title: this.title,
