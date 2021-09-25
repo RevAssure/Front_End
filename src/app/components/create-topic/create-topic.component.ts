@@ -7,6 +7,7 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
 import { Module } from 'src/app/module';
 import { ModuleService } from 'src/app/services/module.service';
 import { Router } from '@angular/router';
+import { Topic } from 'src/app/topic';
 
 @Component({
   selector: 'app-create-topic',
@@ -42,18 +43,19 @@ export class CreateTopicComponent implements OnInit {
    * posted to the back-end API.
    */
   createTopic() {
-    let newTopicPostBody = {
+    let newTopic: Topic = {
+      id: 0,
       title: this.title,
       description: this.description,
       estimatedDuration: this.estimatedDuration,
       lectureNotes: this.lectureNotes,
       githubRepo: this.githubRepo,
-      trainer: this.userService.getUserId(),
-      technologyCategory: Number.parseInt(this.technologyCategoryId),
-      modules: [Number.parseInt(this.moduleId)]
+      trainer: this.userService.getUserObject(),
+      technologyCategory: this.techCategoryService.getCategoryByIdIfExists(Number.parseInt(this.technologyCategoryId)),
+      modules: []
     }
-    console.log(newTopicPostBody);
-    this.topicService.createTopic(this.authService.jwt, newTopicPostBody).subscribe( (result) => {
+    console.log(newTopic);
+    this.topicService.createTopic(this.authService.jwt, newTopic).subscribe( (result) => {
       console.log(result);
       this.successful = true;
       setTimeout(() => {

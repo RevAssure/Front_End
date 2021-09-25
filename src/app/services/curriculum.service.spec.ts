@@ -23,7 +23,7 @@ describe('CurriculumService', () => {
     expect(service).toBeTruthy();
   });
 
-  fit('should return a list of curriculums with current user logged in', () => {
+  it('should return a list of curriculums with current user logged in', () => {
     let curriculums: Curriculum[] = [];
     service.getCurriculum().subscribe((result) => {
       expect(result).toBe(curriculums);

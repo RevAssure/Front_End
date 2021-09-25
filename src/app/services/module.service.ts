@@ -43,5 +43,13 @@ export class ModuleService {
   createModule(jwt: string, moduleDto: any): Observable<Module> {
     this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
     return this.http.post<Module>(`${this.url}`, moduleDto, this.httpOptions);
+    
+  getModuleById(id: number): Module | null {
+    for (let module of this.modules) {
+      if (module.id === id) {
+        return module;
+      }
+    }
+    return null;
   }
 }

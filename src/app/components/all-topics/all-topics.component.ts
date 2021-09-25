@@ -13,7 +13,7 @@ export class AllTopicsComponent implements OnInit {
   topics: Topic[] = [];
   myTopics: Topic[] = [];
   isShowingAll: boolean = true;
-  isShowingMy: boolean = false;
+  //isShowingMy: boolean = false;
 
   constructor(private topicService: TopicService, private authService: AuthorizationService,
     private userService: UserService) { }
@@ -38,13 +38,13 @@ export class AllTopicsComponent implements OnInit {
     this.getTopics();
   }
 
-  showAll(): void {
-    this.isShowingAll = true;
-    this.isShowingMy = false;
-  }
+  // showAll(): void {
+  //   this.isShowingAll = true;
+  //   this.isShowingMy = false;
+  // }
 
-  showMy(): void {
-    this.isShowingAll = false;
-    this.isShowingMy = true;
-  }
+  // showMy(): void {
+  //   this.isShowingAll = false;
+  //   this.isShowingMy = true;
+  // }
 }

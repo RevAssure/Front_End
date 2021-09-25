@@ -8,6 +8,7 @@ import { Topic } from 'src/app/topic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Module } from 'src/app/module';
 import { ModuleService } from 'src/app/services/module.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-update-topic',
@@ -19,7 +20,7 @@ export class UpdateTopicComponent implements OnInit {
   constructor(private userService: UserService, private techCategoryService: TechCategoryService,
     private topicService: TopicService, private authService: AuthorizationService,
     private route: ActivatedRoute, private moduleService: ModuleService,
-    private router: Router) { 
+    private location: Location) { 
     }
   
   id: number;
@@ -32,8 +33,10 @@ export class UpdateTopicComponent implements OnInit {
   moduleId: string = "0";
   successfulUpdate: boolean = false;
   successfulDelete: boolean = false;
+  successfulClone: boolean = false;
 
   passedTopic: Topic;
+  isTopicOwner: boolean = false;
 
   techCategories : TechnologyCategory[] = [];
   modules: Module[] = [];
@@ -52,28 +55,36 @@ export class UpdateTopicComponent implements OnInit {
       this.githubRepo = this.passedTopic.githubRepo;
       this.technologyCategoryId = `${this.passedTopic.technologyCategory.id}`;
       this.moduleId = `${this.passedTopic.modules[0].id}`;
+
+      this.isTopicOwner = topic.trainer.id === this.userService.getUserId();
     });
     this.techCategories = this.techCategoryService.categories;
   }
 
   updateTopic() {
-    let topicPutBody = {
+    let updatedTopic: Topic = {
       id: this.id,
       title: this.title,
       description: this.description,
       estimatedDuration: this.estimatedDuration,
       lectureNotes: this.lectureNotes,
       githubRepo: this.githubRepo,
-      trainer: this.userService.getUserId(),
-      technologyCategory: Number.parseInt(this.technologyCategoryId),
-      modules: [this.moduleId]
+      trainer: this.passedTopic.trainer,
+      technologyCategory: this.techCategoryService.getCategoryByIdIfExists(Number.parseInt(this.technologyCategoryId)),
+      modules: []
     }
-    console.log(topicPutBody);
-    this.topicService.updateTopic(this.authService.jwt, topicPutBody).subscribe( (result) => {
+    if (this.moduleId != "0") {
+      let module = this.moduleService.getModuleById(Number.parseInt(this.moduleId));
+      if (module != null) {
+        updatedTopic.modules.push(module)
+      }
+    }
+    console.log(updatedTopic);
+    this.topicService.updateTopic(this.authService.jwt, updatedTopic).subscribe( (result) => {
       console.log(result);
       this.successfulUpdate = true;
       setTimeout(() => {
-        this.router.navigateByUrl("/modules");
+        this.goBack();
       }, 3000);
     });
   }
@@ -83,8 +94,23 @@ export class UpdateTopicComponent implements OnInit {
       console.log(`Deleted topic #{id}.`);
       this.successfulDelete = true;
       setTimeout(() => {
-        this.router.navigateByUrl("/modules");
+        this.goBack();
       }, 3000);
     });
+  }
+  //TODO: implement cloneTopic()
+  cloneTopic() {
+    let newClone: Topic = this.passedTopic;
+    newClone.trainer = this.userService.getUserObject();
+    this.topicService.createTopic(this.authService.jwt, newClone).subscribe((_) => {
+      this.successfulClone = true;
+      setTimeout(() => {
+        this.goBack();
+      }, 3000);
+    })
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

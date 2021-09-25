@@ -101,7 +101,7 @@ describe('TopicService: Topic', () => {
 
   //POST test
   it('should return a JSON of persisted topic when doing POST', () => {
-    service.createTopic(mockJwt, dummyTopicDto).subscribe((result : Topic) => {
+    service.createTopic(mockJwt, dummyTopics[0]).subscribe((result : Topic) => {
       expect(result).toEqual(dummyTopics[0]);
     })
     const mockRequest = httpMock.expectOne(`${environment.revAssureBase}topic`);
@@ -112,7 +112,7 @@ describe('TopicService: Topic', () => {
   //PUT test
   it('should return a JSON of persisted topic when doing PUT', () => {
     //let dummyTopicDtoPut = dummyTopicDto && { id: 1 };
-    service.updateTopic(mockJwt, dummyTopicDto).subscribe((result : Topic) => {
+    service.updateTopic(mockJwt, dummyTopics[0]).subscribe((result : Topic) => {
       expect(result).toEqual(dummyTopics[0]);
     })
     const mockRequest = httpMock.expectOne(`${environment.revAssureBase}topic`);
