@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
     this.trainer = this.userService.isTrainer();
     this.username = this.userService.getUsername();
     if(this.trainer) {
-      this.curriculumService.getCurriculum().subscribe(result => this.curriculums = result);
+      this.curriculumService.getCurriculum(this.trainer).subscribe(result => this.curriculums = result);
     } else {
       this.curriculumService.getCurriculumAssociate().subscribe(result => this.curriculums = result);
     }

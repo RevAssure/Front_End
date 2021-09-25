@@ -28,12 +28,15 @@ export class CurriculumComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let initialDate: string | null = this.activatedRoutes.snapshot.queryParamMap.get('viewDate')
+    this.isTrainer = this.userService.isTrainer();
     this.isInitialized = false
     this.curriculumId = this.activatedRoutes.snapshot.paramMap.get("id")
     this.topics = this.userService.getTopics()
-    console.log(this.topics)
-    this.curriculumService.getCurriculum().subscribe((result) => {
+    this.curriculumService.getCurriculum(this.isTrainer).subscribe((result) => {
+      console.log(result)
       this.curriculum = result.filter(c => c.id == this.curriculumId)[0]
+      console.log(this.curriculum)
       for(let e of this.curriculum.events) {
         let date = new Date(e.startDatetime * 1000)
         let year = date.getFullYear();
@@ -55,8 +58,13 @@ export class CurriculumComponent implements OnInit {
         }
         this.calendarEvents.push(calEvent)
       }
-      console.log(this.curriculum)
-    
+      if(initialDate) {
+        this.calendarOptions.initialDate = initialDate;
+        this.calendarOptions.initialView = 'dayGridDay';
+        this.currentView = "dayGridDay"
+      } else {
+        this.calendarOptions.initialView = 'dayGridMonth';
+      }
       this.calendarOptions.events = this.calendarEvents;
       this.isInitialized = true;
     })
@@ -75,15 +83,27 @@ export class CurriculumComponent implements OnInit {
   topics: Topic[] = []
   selectedTopic: number
   currentEvent: CalendarEvent;
+  isTrainer: boolean;
 
   getCalendarApi() {
     return this.calendarComponent.getApi();
   }
 
   reloadPage() {
+    let api = this.getCalendarApi()
+    let date = new Date(api.getDate())
+    let year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString();
+    month = parseInt(month) < 10 ? '0' + month.toString() : month
+    let day = date.getDate().toString();
+    day = parseInt(day) < 10 ? '0' + day.toString() : day
+    let navigateToDate = `${year}-${month}-${day}`
+
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigateByUrl(`/curriculum/${this.curriculumId}`);
+    this.router.navigate([`/curriculum/${this.curriculumId}`], {queryParams: {
+      viewDate: navigateToDate
+    }});
     
   }
 
@@ -94,14 +114,13 @@ export class CurriculumComponent implements OnInit {
   addTopicToDay() {
     let calendarApi = this.getCalendarApi()
     let date = new Date(calendarApi.getDate())
-    // let startTime = `${date.getFullYear()}-${date.getMonth() < 10 ? '0' : ''}${date.getMonth() + 1}-${date.getDate()}`
+    // let startTime = `${date.getFullYear()}-${date.getMonth() < 10 ? '0' : ''}-${date.getMonth() + 1}-${date.getDate()}`
     let e = {
       id: 0,
       startDatetime: date.getTime() / 1000,
       curriculum: parseInt(this.curriculumId),
       topic: this.selectedTopic
     }
-    console.log(e)
     this.curriculumService.addEvent(e).subscribe((result) => {
       let newEvent: CalendarEvent = this.curriculumService.convertToCalendarEvent(result)
       this.calendarEvents.push(newEvent);
@@ -111,19 +130,17 @@ export class CurriculumComponent implements OnInit {
   }
 
   deleteEvent(id: number) {
-    console.log("IN COMPONENT WITH ID: " + id)
     this.curriculumService.deleteEventById(id).subscribe(result => this.reloadPage())
   }
 
   handleDateClick (arg: any) {
-    // this.router.navigate([`/curriculum/${arg.dateStr}`])
     let calendarApi = this.getCalendarApi()
     calendarApi.changeView("dayGridDay", arg.dateStr)
+    console.log(calendarApi.getDate())
     let date = new Date(calendarApi.getDate())
-    console.log(date.getTime() * 1000)
-    console.log()
     this.currentView = calendarApi.view.type
-    console.log(this.calendarOptions.events)
+
+
   }
 
 
@@ -152,12 +169,12 @@ export class CurriculumComponent implements OnInit {
       center:''
     },
     weekends: false,
-    initialView: 'dayGridMonth',
+    // initialView: 'dayGridMonth',
     fixedWeekCount: false,
     dateClick: this.handleDateClick.bind(this),
     selectable: true,
     dayMaxEventRows: true,
-    events: this.calendarEvents,
+    // events: this.calendarEvents,
     eventColor: '#72a4c2',
     eventMouseEnter: function(arg: EventHoveringArg) {
       arg.el.style.backgroundColor = '#1e90ff'
