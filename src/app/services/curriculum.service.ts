@@ -95,13 +95,6 @@ export class CurriculumService {
       }
   }
 
-  getCurriculumById(curriculumId: number): Observable<Curriculum[]>{
-    let result = []
-    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
-    return this.http.get<Curriculum[]>(this.url, this.httpOptions);
-    
-  }
-
   getCurriculumAssociate() {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
     return this.http.get<any[]>(this.associateURL, this.httpOptions)
