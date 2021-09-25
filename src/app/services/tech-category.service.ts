@@ -5,6 +5,10 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TechnologyCategory, TechnologyCategoryAdapter } from '../technologycategory';
 
+
+/**
+ * The TechCategoryService is used to get a collection of the current TechnologyCategories. 
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -23,6 +27,11 @@ constructor(private http: HttpClient, private techCategoryAdapter: TechnologyCat
     })
   };
 
+  /**
+   * Performs a GET to retrieve all existing TechnologyCategories.
+   * @param jwt - JWT for authorization
+   * @returns - an Observable with all the TechnologyCategories currently in the database
+   */
   getAllCategories(jwt : string): Observable<TechnologyCategory[]> {
       let data : TechnologyCategory[] = [];
       this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);

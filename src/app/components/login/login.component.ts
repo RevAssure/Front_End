@@ -21,6 +21,11 @@ export class LoginComponent implements OnInit {
   password: string;
   failedLogin: boolean = false;
 
+  /**
+   * Perform a user login. A successful login will set the JWT for the session and pull a list of 
+   * TechnologyCategories, followed by routing the user to their dashboard. Incorrect login credentials
+   * will display a message informing the user of their error.
+   */
   login() {
     this.userService.login(this.username, this.password).subscribe((result) => {
       this.failedLogin = false;

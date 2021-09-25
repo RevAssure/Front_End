@@ -37,6 +37,10 @@ export class CreateTopicComponent implements OnInit {
     this.moduleService.getAllModules(this.authService.jwt).subscribe(modules => this.modules = modules);
   }
 
+  /**
+   * Create a new topic. The newTopicPostBody represents the TopicDto that will be
+   * posted to the back-end API.
+   */
   createTopic() {
     let newTopicPostBody = {
       title: this.title,
