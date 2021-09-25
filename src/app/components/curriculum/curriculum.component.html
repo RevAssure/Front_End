@@ -25,3 +25,129 @@
         </div>
     </div>
 </div>
+
+<ng-template #viewEvent let-modal id="view-modal">
+    <div #viewing id="view">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">{{currentEvent.title}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <h5>Tech Category</h5>
+                <hr>
+                <p>{{currentEvent.technologyCategory.name}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Description</h5>
+                <hr>
+                <p>{{currentEvent.description}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Lecture Notes</h5>
+                <hr>
+                <p>{{currentEvent.lectureNotes}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Github Repo</h5>
+                <hr>
+                <p>{{currentEvent.githubRepo}}</p>
+            </div>
+            <div class="mb-3">
+                <h5>Length</h5>
+                <hr>
+                <p>{{currentEvent.estimatedDuration}} min</p>
+            </div>
+            <div class="mb-3">
+                <h5>Trainer</h5>
+                <hr>
+                <p>{{currentEvent.trainer.firstName}} {{currentEvent.trainer.lastName}}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="rev-btn-confirm" data-dismiss="modal" data-toggle="modal"
+                data-target="#edit-modal" (click)="editTopic()">Edit</button>
+        </div>
+    </div>
+    <div #editing id="edit" class="d-none">
+        <div class="mb-3">
+            <label for="title" class="form-label">Topic Title</label>
+            <input id="title" class="form-control" type="text" [(ngModel)]="title">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="estimatedTime" class="form-label">Estimated Time (in minutes)</label>
+            <input id="estimatedTime" class="form-control" type="number" [(ngModel)]="estimatedDuration">
+        </div>
+        <div class="mb-3">
+            <label for="lectureNotes" class="form-label">Lecture Notes</label>
+            <textarea id="lectureNotes" class="form-control" [(ngModel)]="lectureNotes"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="repoLink" class="form-label">Github Repo Link</label>
+            <input id="repoLink" class="form-control" type="url" [(ngModel)]="githubRepo">
+        </div>
+        <div class="mb-3">
+            <label for="techCategory" class="form-label">Category</label>
+            <select id="techCategory" class="form-control" [(ngModel)]="technologyCategoryId">
+                <option *ngFor="let techCategory of techCategories" value={{techCategory.id}}>{{techCategory.name}}
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="modules" class="form-label">Module</label>
+            <select id="modules" class="form-control" [(ngModel)]="moduleId">
+                <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
+            </select>
+        </div>
+    </div>
+</ng-template>
+<!-- 
+<ng-template #editEvent let-modal id="edit-modal">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Editing {{currentEvent.title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <h5>Tech Category</h5>
+            <hr>
+            <p>{{currentEvent.technologyCategory.name}}</p>
+        </div>
+        <div class="mb-3">
+            <h5>Description</h5>
+            <hr>
+            <p>{{currentEvent.description}}</p>
+        </div>
+        <div class="mb-3">
+            <h5>Lecture Notes</h5>
+            <hr>
+            <p>{{currentEvent.lectureNotes}}</p>
+        </div>
+        <div class="mb-3">
+            <h5>Github Repo</h5>
+            <hr>
+            <p>{{currentEvent.githubRepo}}</p>
+        </div>
+        <div class="mb-3">
+            <h5>Length</h5>
+            <hr>
+            <p>{{currentEvent.estimatedDuration}} min</p>
+        </div>
+        <div class="mb-3">
+            <h5>Trainer</h5>
+            <hr>
+            <p>{{currentEvent.trainer.firstName}} {{currentEvent.trainer.lastName}}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="rev-btn-confirm" (click)="modal.close('Save click')">Edit</button>
+    </div>
+</ng-template> -->

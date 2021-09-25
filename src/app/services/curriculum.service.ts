@@ -5,106 +5,17 @@ import { environment } from 'src/environments/environment';
 import { Curriculum } from '../curriculum';
 import { CurriculumAdapter } from '../curriculum';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { Event } from 'src/app/event';
+import { UserService } from './user.service';
+import { CalendarEvent } from '../calendarEvent';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurriculumService {
 
-  calendarEvents =  [
-    {
-      title: "Data Persistence",
-      date: "2021-09-16"
-    },
-    {
-      title: "Spring Boot",
-      date: "2021-09-16"
-    },
-    {
-      title: "Test",
-      date: "2021-09-16"
-    },
-    {
-      title: "Test",
-      date: "2021-09-16"
-    },
-    {
-      title: "Test",
-      date: "2021-09-07"
-    },
-    {
-      title: "Test",
-      date: "2021-09-07"
-    },
-    {
-      title: "Test",
-      date: "2021-09-07"
-    },
-    {
-      title: "Test",
-      date: "2021-09-01"
-    },
-    {
-      title: "Test",
-      date: "2021-09-01"
-    },
-    {
-      title: "Test",
-      date: "2021-09-01"
-    },
-    {
-      title: "Test",
-      date: "2021-09-23"
-    },
-    {
-      title: "Test",
-      date: "2021-09-23"
-    },
-    {
-      title: "Test",
-      date: "2021-09-23"
-    },
-    {
-      title: "Test",
-      date: "2021-09-30"
-    },
-    {
-      title: "Test",
-      date: "2021-09-30"
-    },
-    {
-      title: "Test",
-      date: "2021-09-30"
-    },
-    {
-      title: "Test",
-      date: "2021-08-31"
-    },
-  ]
-
-  topics = [
-    {
-      title: "Spring Boot",
-      tech_category: {id: 1, name: "Java"},
-    },
-    {
-      title: "Topic 2",
-      tech_category: {id: 1, name: "Docker"},
-    },
-    {
-      title: "Topic 3",
-      tech_category: {id: 1, name: "AWS"},
-    },
-    {
-      title: "Topic 4",
-      tech_category: {id: 1, name: "SQL"},
-    },
-
-  ]
-
-  
-  constructor(private authService: AuthorizationService, private http: HttpClient, private curriculumAdapter: CurriculumAdapter) { }
+  constructor(private authService: AuthorizationService, private userService: UserService, private http: HttpClient, private curriculumAdapter: CurriculumAdapter) { }
 
   url: string = `${environment.revAssureBase}curriculum`;
   associateURL: string = `${environment.revAssureBase}curriculum/assigned`;
@@ -114,17 +25,10 @@ export class CurriculumService {
       "Authorization": ""
     })
   };
-
+  
   curriculums: Curriculum[];
 
-  getEvents() {
-    return this.calendarEvents;
-  }
-
-  getTopics() {
-    return this.topics;
-  }
-
+  private eventUpdate = new Subject<any>(); 
 
   createCurriculum(newTitle: string){
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
@@ -133,6 +37,35 @@ export class CurriculumService {
       associates: []  
     }, this.httpOptions)
 
+  }
+
+  convertToCalendarEvent(e: any) {
+    console.log(e.topic)
+    let foundTopic = this.userService.getTopics().filter(el => {
+      console.log(el.id + " " + e.id)
+      return el.id == e.topic
+    })
+    let title = foundTopic[0].title;
+    console.log(title)
+    let date = new Date(e.startDatetime * 1000)
+    let year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString();
+    month = parseInt(month) < 10 ? '0' + month.toString() : month
+    let day = (date.getDate()).toString();
+    day = parseInt(day) < 10 ? '0' + day.toString() : day
+    let eventTime = `${year}-${month}-${day}`
+    let calEvent: CalendarEvent = {
+      id: e.id,
+      title: e.topic.title,
+      start: eventTime,
+      description: e.topic.description,
+      estimatedDuration: e.topic.estimatedDuration,
+      lectureNotes: e.topic.lectureNotes,
+      githubRepo: e.topic.githubRepo,
+      trainer: e.topic.trainer,
+      technologyCategory: e.topic.technologyCategory
+    }
+    return calEvent
   }
 
   addEvent(event: any) {
@@ -146,18 +79,16 @@ export class CurriculumService {
       return this.http.get<Curriculum[]>(this.url, this.httpOptions)
   }
 
+  getCurriculumById(curriculumId: number): Observable<Curriculum[]>{
+    let result = []
+    this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
+    return this.http.get<Curriculum[]>(this.url, this.httpOptions);
+    
+  }
+
   getCurriculumAssociate() {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
     return this.http.get<any[]>(this.associateURL, this.httpOptions)
   }
  
 }
-
-// topic_id: number;
-// trainer_id: number;
-// titie: string;
-// description: string;
-// estimated_duration: number;
-// tech_category_id: number;
-// lecture_notes: string;
-// github_repo_link: string;

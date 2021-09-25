@@ -14,7 +14,6 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // must go before pl
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
 import { CurriculumComponent } from './components/curriculum/curriculum.component'; // a plugin!
-import { DayViewComponent } from './components/day-view/day-view.component'
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ModulesComponent } from './components/modules/modules.component';
 import { CreateModuleComponent } from './components/create-module/create-module.component';
@@ -43,7 +42,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     RegisterComponent,
     NavbarComponent,
     CurriculumComponent,
-    DayViewComponent,
     DashboardComponent,
     ModulesComponent,
     CreateModuleComponent,

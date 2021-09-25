@@ -8,7 +8,7 @@ export class Event {
     public id: number,
     public curriculum: number,
     public startDatetime: number,
-    public topic: number
+    public topic: Topic
     ){}
 }
 
