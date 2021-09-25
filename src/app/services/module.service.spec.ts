@@ -70,4 +70,11 @@ describe('Service: Module', () => {
     mockRequest.flush(dummyModules);
   });
 
+  it('should return a Module with correct ID when getModuleById() is called after getAllModules()', () => {
+    service.getAllModules(mockJwt).subscribe((result: Module[]) => {
+      expect(service.getModuleById(1)).toEqual(result[0]);
+    })
+    const mockRequest = httpMock.expectOne(`${environment.revAssureBase}module`);
+    mockRequest.flush(dummyModules);
+  });
 });

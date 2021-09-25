@@ -28,4 +28,13 @@ export class ModuleService {
       tap(modules => this.modules = modules)
     );
   }
+
+  getModuleById(id: number): Module | null {
+    for (let module of this.modules) {
+      if (module.id === id) {
+        return module;
+      }
+    }
+    return null;
+  }
 }

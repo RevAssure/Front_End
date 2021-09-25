@@ -7,13 +7,13 @@
     <br>
     <input name="topicView" class="form-check-input" id="my-topics" type="radio" (click)="showMy()">
     <label class="form-check-label" for="my-topics">Show My Topics</label>
-</div>"
+</div>
 
 <div *ngIf="isShowingAll">
     <h2>All Topics</h2>
     <div>
         <ul>
-            <li *ngFor="let topic of topics" routerLink="/topic/{{topic.id}}">{{topic.title}}</li>
+            <li *ngFor="let topic of topics"><a routerLink="/topic/{{topic.id}}">{{topic.trainer.firstName}}: {{topic.title}}</a></li>
         </ul>
     </div>
 </div>
@@ -22,7 +22,7 @@
     <h2>My Topics</h2>
     <div>
         <ul>
-            <li *ngFor="let topic of myTopics" routerLink="/topic/{{topic.id}}">{{topic.title}}</li>
+            <li *ngFor="let topic of myTopics"><a routerLink="/topic/{{topic.id}}">{{topic.trainer.firstName}}: {{topic.title}}</a></li>
         </ul>
     </div>
 </div>

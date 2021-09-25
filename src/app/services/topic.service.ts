@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Topic } from '../topic';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TopicService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   url: string = `${environment.revAssureBase}topic`;
 
@@ -19,6 +20,24 @@ export class TopicService {
     })
   };
 
+  convertToDto(topic: Topic) {
+    let dto = {
+      title: topic.title,
+      description: topic.description,
+      estimatedDuration: topic.estimatedDuration,
+      lectureNotes: topic.lectureNotes,
+      githubRepo: topic.githubRepo,
+      trainer: this.userService.getUserId(),
+      technologyCategory: topic.technologyCategory.id,
+      modules: [0]
+    }
+    dto.modules.pop();
+    for (let module of topic.modules) {
+      dto.modules.push(module.id);
+    }
+    return dto;
+  }
+
   /**
    * Performs a POST to "/topic" to create a new topic. Passes a topic DTO as required by the
    * back-end API point.
@@ -26,9 +45,11 @@ export class TopicService {
    * @param topic - DTO for persisting a new topic 
    * @returns an Observable containing the newly persisted Topic
    */
-  createTopic(jwt: string, topic: any): Observable<Topic> {
+  createTopic(jwt: string, topic: Topic): Observable<Topic> {
     this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
-    return this.http.post<Topic>(this.url, topic, this.httpOptions);
+    const dto = this.convertToDto(topic);
+    console.log(dto);
+    return this.http.post<Topic>(this.url, dto, this.httpOptions);
   }
 
   /**
@@ -51,9 +72,10 @@ export class TopicService {
     return this.http.get<Topic[]>(`${this.url}/all`, this.httpOptions);
   }
 
-  updateTopic(jwt: string, topic: any): Observable<Topic> {
+  updateTopic(jwt: string, topic: Topic): Observable<Topic> {
+    const dto = this.convertToDto(topic);
     this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
-    return this.http.put<Topic>(this.url, topic, this.httpOptions);
+    return this.http.put<Topic>(this.url, dto, this.httpOptions);
   }
 
   deleteTopicById(jwt: string, id: number): Observable<any> {

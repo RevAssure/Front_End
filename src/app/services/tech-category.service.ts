@@ -14,11 +14,14 @@ import { TechnologyCategory, TechnologyCategoryAdapter } from '../technologycate
 })
 export class TechCategoryService {
 
-constructor(private http: HttpClient, private techCategoryAdapter: TechnologyCategoryAdapter) { }
+constructor(private http: HttpClient, private techCategoryAdapter: TechnologyCategoryAdapter) {
+  this.categories.push(this.nullCategory);
+ }
 
   url: string = `${environment.revAssureBase}technology_category`;
 
   categories : TechnologyCategory[] = [];
+  nullCategory: TechnologyCategory = new TechnologyCategory(0,"NULL",[],[]);
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -33,13 +36,22 @@ constructor(private http: HttpClient, private techCategoryAdapter: TechnologyCat
    * @returns - an Observable with all the TechnologyCategories currently in the database
    */
   getAllCategories(jwt : string): Observable<TechnologyCategory[]> {
-      let data : TechnologyCategory[] = [];
-      this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
-      return this.http.get<any[]>(this.url, this.httpOptions).pipe(
-        map( (result: any[]) => {
-          result.forEach( (item : any) => this.categories.push(this.techCategoryAdapter.adapt(item)));
-          return this.categories;
-        })
-      )
+    let data : TechnologyCategory[] = [];
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    return this.http.get<any[]>(this.url, this.httpOptions).pipe(
+      map( (result: any[]) => {
+        result.forEach( (item : any) => this.categories.push(this.techCategoryAdapter.adapt(item)));
+        return this.categories.slice(1);
+      })
+    )
+  }
+
+  getCategoryByIdIfExists(id: number): TechnologyCategory {
+    for (let category of this.categories) {
+      if (category.id === id) {
+        return category;
+      }
+    }
+    return this.categories[0];
   }
 }
