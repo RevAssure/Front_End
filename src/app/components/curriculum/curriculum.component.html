@@ -13,7 +13,7 @@
         </full-calendar>
     </div>
 
-    <div *ngIf="currentView === 'dayGridDay'" class="card col-2 my-4 h-50">
+    <div *ngIf="currentView === 'dayGridDay' && isTrainer" class="card col-2 my-4 h-50">
         <div class="card-body">
             <h5 class="card-title">Add a topic to the current day</h5>
             <select [(ngModel)]="selectedTopic" name="topics" id="topics">
@@ -53,7 +53,7 @@
             <div class="mb-3">
                 <h5>Github Repo</h5>
                 <hr>
-                <p>{{currentEvent.githubRepo}}</p>
+                <a target="_blank" href="{{currentEvent.githubRepo}}">Github</a>
             </div>
             <div class="mb-3">
                 <h5>Length</h5>
@@ -61,9 +61,7 @@
                 <p>{{currentEvent.estimatedDuration}} min</p>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="rev-btn-confirm" data-dismiss="modal" data-toggle="modal"
-                data-target="#edit-modal" (click)="modal.dismiss('Cross click')">Close</button>
+        <div *ngIf="isTrainer" class="modal-footer">
             <button type="button" style="color: white; background-color: red;"
                 (click)="deleteEvent(currentEvent.id); modal.dismiss('Cross click')">Delete Event</button>
         </div>
