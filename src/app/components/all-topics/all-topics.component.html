@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<button class="rev-btn-confirm" (click)="refresh()">Refresh List</button>
+
+<div class="form-check">
+    <input name="topicView" class="form-check-input" id="all-topics" type="radio" (click)="showAll()" checked>
+    <label class="form-check-label" for="all-topics">Show All Topics</label>
+    <br>
+    <input name="topicView" class="form-check-input" id="my-topics" type="radio" (click)="showMy()">
+    <label class="form-check-label" for="my-topics">Show My Topics</label>
+</div>"
+
+<div *ngIf="isShowingAll">
+    <h2>All Topics</h2>
+    <div>
+        <ul>
+            <li *ngFor="let topic of topics" routerLink="/topic/{{topic.id}}">{{topic.title}}</li>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="isShowingMy">
+    <h2>My Topics</h2>
+    <div>
+        <ul>
+            <li *ngFor="let topic of myTopics" routerLink="/topic/{{topic.id}}">{{topic.title}}</li>
+        </ul>
+    </div>
+</div>

@@ -11,6 +11,8 @@ import { CreateModuleComponent } from '../components/create-module/create-module
 import { CreateTopicComponent } from '../components/create-topic/create-topic.component';
 import { CreateCurriculaComponent } from '../components/create-curricula/create-curricula.component';
 import { UpdateTopicComponent } from '../components/update-topic/update-topic/update-topic.component';
+import { AllTopicsComponent } from '../components/all-topics/all-topics.component';
+import { MyTopicsComponent } from '../components/my-topics/my-topics.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch:'full' },
@@ -23,7 +25,9 @@ const routes: Routes = [
   { path: 'createModule', component: CreateModuleComponent},
   { path: 'createTopic', component: CreateTopicComponent},
   { path: 'createCurriculum', component: CreateCurriculaComponent},
-  { path: 'topic/:id', component: UpdateTopicComponent}
+  { path: 'topic/:id', component: UpdateTopicComponent},
+  { path: 'topics', component: AllTopicsComponent},
+  { path: 'topics/my', component: MyTopicsComponent}
 ]
 
 @NgModule({
