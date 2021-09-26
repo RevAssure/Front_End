@@ -22,6 +22,7 @@ export class TopicService {
 
   convertToDto(topic: Topic) {
     let dto = {
+      id: topic.id,
       title: topic.title,
       description: topic.description,
       estimatedDuration: topic.estimatedDuration,

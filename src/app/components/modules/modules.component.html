@@ -1,7 +1,14 @@
 <app-navbar></app-navbar>
-<button class="rev-btn-confirm" routerLink="/createModule">Add Module</button>
+<div class="page-title">
+    <div class="row justify-content-center">
+        <div class="col-3 text-center">
+            <h3>Modules</h3>
+        </div>
+    </div>
+</div>
 
 <div class="col-6 offset-3">
+    <button class="rev-btn-confirm justify-content-end" routerLink="/createModule">Add Module</button>
     <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
         <ngb-panel *ngFor="let module of modules" title="{{module.name}}">
             <ng-template ngbPanelContent>

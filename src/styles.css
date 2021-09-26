@@ -76,6 +76,14 @@ button {
     padding: 12px;
 }
 
+#error-message {
+    font-family: "futura-medium", Fallback, sans-serif;
+    color: red;
+}
+#success-message {
+    font-family: "futura-medium", Fallback, sans-serif;
+    color: green;
+}
 /* .rev-btn-secondary:hover {
     background-color: white;
     color: #474C55;

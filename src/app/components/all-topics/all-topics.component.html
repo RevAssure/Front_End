@@ -7,32 +7,57 @@
     <input name="topicView" class="form-check-input" id="my-topics" type="radio" (click)="showMy()">
     <label class="form-check-label" for="my-topics">Show My Topics</label>
 </div> -->
+<div class="page-title">
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <h3>Topics</h3>
 
-<div class="btn-group btn-group-toggle" ngbRadioGroup name="topics-view" [(ngModel)]="isShowingAll">
-    <button class="rev-btn-confirm" (click)="refresh()">Refresh List</button>
-    <label style="color:white;" ngbButtonLabel class="rev-btn-confirm">
-        <input ngbButton type="radio" [value]="true"> Show All Topics
-    </label>
-    <label style="color:white;" ngbButtonLabel class="rev-btn-confirm">
-        <input ngbButton type="radio" [value]="false"> Show My Topics
-    </label>
-  
+        </div>
+    </div>
+
 </div>
+<div class="row justify-content-center mt-5">
+    <div class="text-center">
+        <div>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="topics-view" [(ngModel)]="isShowingAll">
 
-<div *ngIf="isShowingAll">
-    <h2>All Topics</h2>
-    <div>
-        <ul>
-            <li *ngFor="let topic of topics"><a routerLink="/topic/{{topic.id}}">{{topic.trainer.firstName}}: {{topic.title}}</a></li>
-        </ul>
+                    <button class="rev-btn-confirm" (click)="refresh()">Refresh List</button>
+
+                    <label style="color:white;" ngbButtonLabel class="rev-btn-confirm">
+                        <input ngbButton type="radio" [value]="true"> Show All Topics
+                    </label>
+
+                    <label style="color:white;" ngbButtonLabel class="rev-btn-confirm">
+                        <input ngbButton type="radio" [value]="false"> Show My Topics
+                    </label>
+
+            </div>
+        </div>
     </div>
 </div>
 
-<div *ngIf="!isShowingAll">
-    <h2>My Topics</h2>
-    <div>
-        <ul>
-            <li *ngFor="let topic of myTopics"><a routerLink="/topic/{{topic.id}}">{{topic.trainer.firstName}}: {{topic.title}}</a></li>
-        </ul>
+<div class="container"> 
+    <div class="card shadow col-8 offset-2">
+        <div class="card-body justify-content-center">
+
+
+            <div *ngIf="isShowingAll">
+                <h2>All Topics</h2>
+                <div>
+                    <ul>
+                        <li *ngFor="let topic of topics"><a routerLink="/topic/{{topic.id}}">{{topic.trainer.firstName}}: {{topic.title}}</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div *ngIf="!isShowingAll">
+                <h2>My Topics</h2>
+                <div>
+                    <ul>
+                        <li *ngFor="let topic of myTopics"><a routerLink="/topic/{{topic.id}}">{{topic.trainer.firstName}}: {{topic.title}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
