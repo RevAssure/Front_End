@@ -15,10 +15,10 @@
     src: url("\src\assets\Futura-Std-Book.otf") format("opentype");
 }
 
-:root {
+/* :root {
     --fc-border-color: #474c55;
     --fc-daygrid-event-dot-width: 5px;
-  }
+  } */
   
 
 
