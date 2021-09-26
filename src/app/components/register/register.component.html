@@ -33,11 +33,11 @@
                     Register as Trainer
                 </label>
             </div>
-            <div *ngIf="failedRegister" id="error-message">
+            <div *ngIf="failedRegister" class="error-message">
                 Failed to register! Username already exists!
             </div>
             <div *ngIf="successful" class="success-message">
-                You have successfully registered in RevAssure!
+                You have successfully registered in RevAssure! Redirecting...
             </div>
             <br>
 

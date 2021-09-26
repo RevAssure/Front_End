@@ -53,12 +53,6 @@ button {
     background-color: #c9571e;
 }
 
-/* .rev-btn-confirm:hover {
-    background-color: white;
-    color: #F26925;
-
-} */
-
 .rev-btn-secondary {
     background-color: #474C55;
     border: 1px solid #474C55;
@@ -75,11 +69,6 @@ button {
     background-color: #474C55;
     padding: 12px;
 }
-
-/* .rev-btn-secondary:hover {
-    background-color: white;
-    color: #474C55;
-} */
 
 .success-message {
     font-family: "futura-bold", Fallback, sans-serif;
