@@ -30,7 +30,7 @@ export class UpdateTopicComponent implements OnInit {
   lectureNotes: string = '';
   githubRepo: string =  '';
   technologyCategoryId: string = "1";
-  moduleId: string = "0";
+  moduleId: string = "";
   successfulUpdate: boolean = false;
   successfulDelete: boolean = false;
   successfulClone: boolean = false;
@@ -73,7 +73,8 @@ export class UpdateTopicComponent implements OnInit {
       technologyCategory: this.techCategoryService.getCategoryByIdIfExists(Number.parseInt(this.technologyCategoryId)),
       modules: []
     }
-    if (this.moduleId != "0") {
+
+    if (this.moduleId) {
       let module = this.moduleService.getModuleById(Number.parseInt(this.moduleId));
       if (module != null) {
         updatedTopic.modules.push(module)
@@ -88,6 +89,7 @@ export class UpdateTopicComponent implements OnInit {
       }, 3000);
     });
   }
+  
 
   deleteTopic() {
     this.topicService.deleteTopicById(this.authService.jwt, this.id).subscribe(_ => { 
