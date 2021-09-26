@@ -80,3 +80,13 @@ button {
     background-color: white;
     color: #474C55;
 } */
+
+.success-message {
+    font-family: "futura-bold", Fallback, sans-serif;
+    color: green;
+}
+
+.error-message {
+    font-family: "futura-bold", Fallback, sans-serif;
+    color: red;
+}

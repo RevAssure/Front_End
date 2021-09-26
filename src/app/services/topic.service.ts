@@ -42,7 +42,7 @@ export class TopicService {
    * Performs a POST to "/topic" to create a new topic. Passes a topic DTO as required by the
    * back-end API point.
    * @param jwt - JWT for authorization
-   * @param topic - DTO for persisting a new topic 
+   * @param topic - new Topic to be persisted
    * @returns an Observable containing the newly persisted Topic
    */
   createTopic(jwt: string, topic: Topic): Observable<Topic> {
@@ -50,6 +50,19 @@ export class TopicService {
     const dto = this.convertToDto(topic);
     console.log(dto);
     return this.http.post<Topic>(this.url, dto, this.httpOptions);
+  }
+
+  /**
+   * Performs a POST to "/topic" to create a new topic. Passes a topic DTO as required by the
+   * back-end API point.
+   * @param jwt - JWT for authorization
+   * @param topic - DTO for persisting a new topic 
+   * @returns an Observable containing the newly persisted Topic
+   */
+   createTopicWithDto(jwt: string, topicDto: any): Observable<Topic> {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    console.log("Submitted Topic: " + topicDto);
+    return this.http.post<Topic>(this.url, topicDto, this.httpOptions);
   }
 
   /**
