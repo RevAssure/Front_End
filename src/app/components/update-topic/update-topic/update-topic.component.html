@@ -36,6 +36,7 @@
             <div class="mb-3">
                 <label for="modules" class="form-label">Module</label>
                 <select id="modules" class="form-control" [(ngModel)]="moduleId">
+                    <option value="">None</option>
                     <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
                 </select>
             </div>
