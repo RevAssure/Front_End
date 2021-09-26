@@ -39,9 +39,14 @@
                     <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
                 </select>
             </div>
+            <div *ngIf="successfulUpdate" class="success-message">
+                Saving Update...
+            </div>
+            <br>
             <div>
                 <button id="submit" class="rev-btn-confirm mr-2" (click)="updateTopic()">Submit</button>
-                <button class="rev-btn-secondary" routerLink="/modules">Back to Modules</button>
+                <button class="rev-btn-secondary mr-2" routerLink="/modules">Back to Modules</button>
+                <button class="rev-btn-secondary" routerLink="/topics">Back to Topics</button>
             </div>
         </div>
     </div>

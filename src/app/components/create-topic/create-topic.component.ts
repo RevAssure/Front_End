@@ -43,19 +43,19 @@ export class CreateTopicComponent implements OnInit {
    * posted to the back-end API.
    */
   createTopic() {
-    let newTopic: Topic = {
+    let newTopic = {
       id: 0,
       title: this.title,
       description: this.description,
       estimatedDuration: this.estimatedDuration,
       lectureNotes: this.lectureNotes,
       githubRepo: this.githubRepo,
-      trainer: this.userService.getUserObject(),
-      technologyCategory: this.techCategoryService.getCategoryByIdIfExists(Number.parseInt(this.technologyCategoryId)),
-      modules: []
+      trainer: this.userService.getUserId(),
+      technologyCategory: Number.parseInt(this.technologyCategoryId),
+      modules: [Number.parseInt(this.moduleId)]
     }
     console.log(newTopic);
-    this.topicService.createTopic(this.authService.jwt, newTopic).subscribe( (result) => {
+    this.topicService.createTopicWithDto(this.authService.jwt, newTopic).subscribe( (result) => {
       console.log(result);
       this.successful = true;
       setTimeout(() => {

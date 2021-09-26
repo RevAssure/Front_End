@@ -15,7 +15,7 @@ import { TechnologyCategory, TechnologyCategoryAdapter } from '../technologycate
 export class TechCategoryService {
 
 constructor(private http: HttpClient, private techCategoryAdapter: TechnologyCategoryAdapter) {
-  this.categories.push(this.nullCategory);
+  //this.categories.push(this.nullCategory);
  }
 
   url: string = `${environment.revAssureBase}technology_category`;
@@ -41,17 +41,19 @@ constructor(private http: HttpClient, private techCategoryAdapter: TechnologyCat
     return this.http.get<any[]>(this.url, this.httpOptions).pipe(
       map( (result: any[]) => {
         result.forEach( (item : any) => this.categories.push(this.techCategoryAdapter.adapt(item)));
-        return this.categories.slice(1);
+        return this.categories;
       })
     )
   }
 
   getCategoryByIdIfExists(id: number): TechnologyCategory {
-    for (let category of this.categories) {
+    let categories = this.categories;
+    categories.push(this.nullCategory);
+    for (let category of categories) {
       if (category.id === id) {
         return category;
       }
     }
-    return this.categories[0];
+    return categories[-1];
   }
 }

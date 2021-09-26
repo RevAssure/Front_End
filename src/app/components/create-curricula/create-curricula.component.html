@@ -7,11 +7,11 @@
                 <label for="title" class="form-label">Curriculum Title</label>
                 <input id="title" class="form-control" type="text" [(ngModel)]="newCurriculumTitle">
             </div>
-            <div *ngIf="failed" id="error-message">
+            <div *ngIf="failed" class="error-message">
                 Failed to create Curriculum!
             </div>
-            <div *ngIf="success" id="success-message">
-                You have successfully created a Curriculum! Redirect in 3 seconds...
+            <div *ngIf="success" class="success-message">
+                You have successfully created a Curriculum! Redirecting...
             </div>
             <br>
             <div>
