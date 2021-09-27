@@ -32,12 +32,12 @@ export class CurriculumComponent implements OnInit {
     this.isTrainer = this.userService.isTrainer();
     this.isInitialized = false
     this.curriculumId = this.activatedRoutes.snapshot.paramMap.get("id")
-    this.topics = this.userService.getTopics()
+    // this.topics = this.userService.getTopics()
+    this.topicService.getAllTopicsByTrainer(this.authService.jwt).subscribe(result => this.topics = result)
     this.curriculumService.getCurriculum(this.isTrainer).subscribe((result) => {
       console.log(result)
       this.curriculum = result.filter(c => c.id == this.curriculumId)[0]
       console.log(this.curriculum)
-      this.curriculumName = this.curriculum.name
       for(let e of this.curriculum.events) {
         let date = new Date(e.startDatetime * 1000)
         let year = date.getFullYear();
@@ -69,14 +69,12 @@ export class CurriculumComponent implements OnInit {
       this.calendarOptions.events = this.calendarEvents;
       this.isInitialized = true;
     })
-
   }
 
   isInitialized: boolean = false;
   curriculumId: any
   curriculum: Curriculum
   events: Event[] = []
-  curriculumName: string;
   calendarEvents: any[] = []
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   @ViewChild('viewEvent') modal: ElementRef;
