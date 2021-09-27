@@ -82,9 +82,7 @@ export class UpdateTopicComponent implements OnInit {
         updatedTopic.modules.push(module)
       }
     }
-    console.log(updatedTopic);
     this.topicService.updateTopic(this.authService.jwt, updatedTopic).subscribe( (result) => {
-      console.log(result);
       this.successfulUpdate = true;
       setTimeout(() => {
         this.goBack();
@@ -107,6 +105,7 @@ export class UpdateTopicComponent implements OnInit {
   //TODO: implement cloneTopic()
   cloneTopic() {
     let newClone: Topic = this.passedTopic;
+    newClone.id = 0;
     newClone.trainer = this.userService.getUserObject();
     this.topicService.createTopic(this.authService.jwt, newClone).subscribe((_) => {
       this.successfulClone = true;

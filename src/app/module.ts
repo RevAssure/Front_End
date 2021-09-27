@@ -19,6 +19,12 @@ export class Module {
     providedIn: 'root',
   })
 export class ModuleAdapter implements Adapter<Module>{
+    /**
+     * Converts DTO into Module object.
+     * @param newModule: DTO of Module.
+     * @returns Module
+     */
+
     adapt(newModule:any):Module{
         return new Module(
             newModule.id,

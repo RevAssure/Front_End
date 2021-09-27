@@ -24,6 +24,7 @@ export class ModuleService {
 
   /**
    * Gets an array of all Modules owned by the current user if they are a trainer when performing GET /module.
+   * Also caches the fetched modules array.
    * @param jwt JWT for authorization
    * @returns an Observable containing an array of all the current user's Modules
    */
@@ -35,15 +36,21 @@ export class ModuleService {
   }
 
   /**
-   * Persists a new Module using a provided Module DTO object when performing POST /module.
+   * Performs a POST to "/module" to register a new module to database.
    * @param jwt JWT for authorization
-   * @param moduleDto the DTO for creating a new Module
-   * @returns an Observable containing the new Module that has been created
+   * @param moduleDto the DTO for the new Module
+   * @returns an Observable containing the new Module as it is persisted in database
    */
   createModule(jwt: string, moduleDto: any): Observable<Module> {
     this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
     return this.http.post<Module>(`${this.url}`, moduleDto, this.httpOptions);
   }
+
+  /**
+   * Looks up the cached modules array for a module with the passed ID.
+   * @param id - (number) ID of requested module.
+   * @returns Module with requested ID.
+   */
   getModuleById(id: number): Module | null {
     for (let module of this.modules) {
       if (module.id === id) {

@@ -31,6 +31,8 @@ export class CurriculumService {
 
   /**
    * This function creates a new curriculum and persists it to the database
+   * All fields are initialized to appropriate falsy values except for title (uses function param as title)
+   * and trainer (uses currently logged in user).
    * @param newTitle Title of the new curriculum
    * @returns an Observable of the newly created curriculum from the database
    */
@@ -44,7 +46,6 @@ export class CurriculumService {
     }
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
     return this.http.post<Curriculum>(this.url, newCurriculum, this.httpOptions)
-
   }
 
   /**
@@ -58,7 +59,6 @@ export class CurriculumService {
       return t.id == e.topic.id
     })
     let title = foundTopic[0].title;
-    console.log(title)
     let date = new Date(e.startDatetime * 1000)
     let year = date.getFullYear();
     let month = (date.getMonth() + 1).toString();
@@ -91,9 +91,9 @@ export class CurriculumService {
   }
 
   /**
-   * Deletes an event by the event's id
-   * @param id id of event to be deleted
-   * @returns Observable of delete request
+   * Performs a DELETE to "/event/{id}" to delete an Event with ID {id} to database.
+   * @param id - (number) ID of Event to be deleted.
+   * @returns - an Observable that completes when a response is received from endpoint.
    */
   deleteEventById(id: number) {
     console.log(this.authService.jwt)
@@ -102,14 +102,15 @@ export class CurriculumService {
   }
 
   /**
-   * Retrives the curricula belonging to the user
-   * @param isTrainer boolean denoting whether the current user is a trainer or not
-   * @returns Observable of owned curricula
+   * Performs a GET depending on whether current user is a Trainer or not.
+   * If Trainer: GET "/curriculum", returns curricula owned by user.
+   * If Associate: GET "/curriculum/assigned", returns curricula assigned to user.
+   * @param isTrainer - (boolean) Denotes whether current user is a trainer or not.
+   * @returns - an Observable of the Curriculum array retrieved.
    */
   getCurriculum(isTrainer: boolean): Observable<Curriculum[]>{
       this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
       if(isTrainer) {
-        console.log("Trainer")
         return this.http.get<Curriculum[]>(this.url, this.httpOptions)
       } else {
         console.log("Associate")
@@ -118,8 +119,9 @@ export class CurriculumService {
   }
 
   /**
-   * Retrieves associates belonging to curriculum
-   * @returns Observable of associates belonging to curriculum
+   * Same as getCurriculum(), but always assumes the current user is an associate.
+   * Performs a GET on "/curriculum/assigned" for curricula assigned to user.
+   * @returns - an Observable of the Curriculum array retrieved.
    */
   getCurriculumAssociate() {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
