@@ -36,15 +36,16 @@
                     <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
                 </select>
             </div>
-            <div *ngIf="successful" id="success-message">
-                Topic successfully added!
+            <div *ngIf="successful" class="success-message">
+                Topic successfully added! Redirecting...
             </div>
             <br>
             <div>
                 <button id="submit" class="rev-btn-confirm mr-2" (click)="createTopic()">Submit</button>
-                <button class="rev-btn-secondary" routerLink="/modules">Back to Modules</button>
+                <button class="rev-btn-secondary mr-2" routerLink="/modules">Back to Modules</button>
+                <button class="rev-btn-secondary" routerLink="/topics">Back to Topics</button>
             </div>
         </div>
-    </div>
+    </div>s
 </div>
 
