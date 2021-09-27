@@ -16,6 +16,11 @@ export class Event {
     providedIn: 'root',
   })
 export class EventAdapter implements Adapter<Event>{
+    /**
+     * Converts DTO into Event object.
+     * @param newEvent: DTO of Event.
+     * @returns Event
+     */
     adapt(newEvent:any):Event{
         return new Event(
             newEvent.id,

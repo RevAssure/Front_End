@@ -22,6 +22,11 @@ export class Topic {
     providedIn: 'root',
   })
 export class TopicAdapter implements Adapter<Topic>{
+    /**
+     * Converts DTO into Topic object.
+     * @param newTopic: DTO of Topic.
+     * @returns Topic
+     */
     adapt(newTopic:any):Topic{
         return new Topic(
             newTopic.id,
