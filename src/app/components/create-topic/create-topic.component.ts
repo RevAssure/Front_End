@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TechnologyCategory } from 'src/app/technologycategory';
 import { UserService } from 'src/app/services/user.service';
 import { TechCategoryService } from 'src/app/services/tech-category.service';
@@ -7,7 +7,6 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
 import { Module } from 'src/app/module';
 import { ModuleService } from 'src/app/services/module.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Topic } from 'src/app/topic';
 import { Location } from '@angular/common';
 
 @Component({
