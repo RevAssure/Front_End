@@ -121,4 +121,8 @@ describe('CurriculumService', () => {
     expect(request.request.method).toBe('POST');
     request.flush(dummyEvent);
   })
+  
+  afterEach(() => {
+    httpMock.verify();
+  });
 });
