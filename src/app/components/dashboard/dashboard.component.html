@@ -17,9 +17,7 @@
     <div id="dashboard" class="card col-10 offset-1 mb-5 shadow">
 
         <div class="curriculumBoard">
-            <button *ngIf="trainer" class="rev-btn-secondary" routerLink="/createCurriculum">New Curriculum</button>
-
-            <ngb-accordion #acc="ngbAccordion" activeIds="">
+            <ngb-accordion #acc="ngbAccordion" id="curriculum-accordion" activeIds="">
                 <ngb-panel id="panel" title="Curriculum" class="text-white text-center">
                     <ng-template ngbPanelContent>
                         <div>
@@ -28,22 +26,15 @@
                                     <h2 class="curriculum text-center">{{item.name}}</h2>
                                 </a>
                             </div>
+                            <div class="col-10 offset-1 d-flex justify-content-center">
+                                <button id="new-curriculum" *ngIf="trainer" class="curriculum"
+                                    routerLink="/createCurriculum"><i class="bi bi-plus-circle-fill"></i> Add New
+                                    Curriculum</button>
+                            </div>
                         </div>
                     </ng-template>
                 </ngb-panel>
             </ngb-accordion>
-            <!-- <div id="curriculum-button" class="board rev-btn-confirm text-white" (click)="showCurriculum()" -->
-            <!-- type="button"> -->
-            <!-- <button routerLink="/curriculum" class="rev-btn-confirm" type="button">Curriculum</button> -->
-            <!-- Curriculum
-            </div>
-            <div>
-                <div class="col-10 offset-1" *ngFor="let item of curriculums">
-                    <a routerLink="/curriculum/{{item.id}}">
-                        <h2 class="curriculum text-center">{{item.name}}</h2>
-                    </a>
-                </div>
-            </div> -->
         </div>
 
 

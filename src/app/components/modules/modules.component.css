@@ -1,0 +1,11 @@
+::ng-deep #module-accordion .card .card-header {
+    background-color: #72a4c2;
+}
+
+::ng-deep #module-accordion .card .card-header button {
+    color: white;
+}
+
+::ng-deep #module-accordion .card .card-header button:hover {
+    color: rgb(238, 238, 238);
+}

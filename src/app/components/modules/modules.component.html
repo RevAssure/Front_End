@@ -7,9 +7,8 @@
     </div>
 </div>
 
-<div class="col-6 offset-3 mt-4">
-    <button class="rev-btn-confirm justify-content-end" routerLink="/createModule">Add Module</button>
-    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+<div class="col-6 offset-3">
+    <ngb-accordion id="module-accordion" #acc="ngbAccordion" [closeOthers]="true" activeIds="ngb-panel-0">
         <ngb-panel *ngFor="let module of modules" title="{{module.name}}">
             <ng-template ngbPanelContent>
                 <app-module-list-item [module]="module"></app-module-list-item>
