@@ -16,3 +16,19 @@ full-calendar {
 #view-modal {
     width: 100vw;
 }
+
+.author {
+    font-family: "futura-medium", Fallback, sans-serif;
+}
+
+#card-title {
+    font-family: "futura-medium", Fallback, sans-serif;
+}
+
+option {
+    font-family: "futura-medium", Fallback, sans-serif;
+}
+
+select {
+    font-family: "futura-medium", Fallback, sans-serif;
+}
