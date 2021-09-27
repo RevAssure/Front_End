@@ -29,14 +29,12 @@ export class CurriculumService {
   
   curriculums: Curriculum[];
 
-  private eventUpdate = new Subject<any>(); 
-
   /**
-   * Performs a POST to "/curriculum" to register a new curriculum to database.
+   * This function creates a new curriculum and persists it to the database
    * All fields are initialized to appropriate falsy values except for title (uses function param as title)
    * and trainer (uses currently logged in user).
-   * @param newTitle - (string) Title of new Curriculum
-   * @returns - an Observable of new Curriculum as it is persisted in database.
+   * @param newTitle Title of the new curriculum
+   * @returns an Observable of the newly created curriculum from the database
    */
   createCurriculum(newTitle: string){
     let newCurriculum: Curriculum = {
@@ -51,10 +49,10 @@ export class CurriculumService {
   }
 
   /**
-   * Converts an object representing an Event to a CalendarEvent object that is compatible with FullCalendar API.
-   * @param e - Object to be converted
-   * @param topics - (Topic[]) Array of topics that should contain the Topic the Event is derived from.
-   * @returns - Converted CalendarEvent.
+   * This function converts a database event into a FullCalendar calendar event object
+   * @param e the database event that needs parsing
+   * @param topics All topics that belong to the curriculum
+   * @returns A FullCalendar event object
    */
   convertToCalendarEvent(e: any, topics: Topic[]) {
     let foundTopic = topics.filter(t => {
@@ -83,9 +81,9 @@ export class CurriculumService {
   }
 
   /**
-   * Performs a POST to "/event" to register a new Event to database.
-   * @param event - Object representing Event to be persisted.
-   * @returns - an Observable of Object representing Event as it is persisted.
+   * Adds an event to the Database
+   * @param event Event Object
+   * @returns Observable of new event object
    */
   addEvent(event: any) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);

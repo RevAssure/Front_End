@@ -32,12 +32,11 @@ export class CurriculumComponent implements OnInit {
     this.isTrainer = this.userService.isTrainer();
     this.isInitialized = false
     this.curriculumId = this.activatedRoutes.snapshot.paramMap.get("id")
-    // this.topics = this.userService.getTopics()
     this.topicService.getAllTopicsByTrainer(this.authService.jwt).subscribe(result => this.topics = result)
+
+    // Loads the curriculum from the selection
     this.curriculumService.getCurriculum(this.isTrainer).subscribe((result) => {
-      console.log(result)
       this.curriculum = result.filter(c => c.id == this.curriculumId)[0]
-      console.log(this.curriculum)
       for(let e of this.curriculum.events) {
         let date = new Date(e.startDatetime * 1000)
         let year = date.getFullYear();
@@ -116,7 +115,6 @@ export class CurriculumComponent implements OnInit {
   addTopicToDay() {
     let calendarApi = this.getCalendarApi()
     let date = new Date(calendarApi.getDate())
-    // let startTime = `${date.getFullYear()}-${date.getMonth() < 10 ? '0' : ''}-${date.getMonth() + 1}-${date.getDate()}`
     let e = {
       id: 0,
       startDatetime: date.getTime() / 1000,
@@ -141,7 +139,6 @@ export class CurriculumComponent implements OnInit {
   handleDateClick (arg: any) {
     let calendarApi = this.getCalendarApi()
     calendarApi.changeView("dayGridDay", arg.dateStr)
-    console.log(calendarApi.getDate())
     let date = new Date(calendarApi.getDate())
     this.currentView = calendarApi.view.type
   }
