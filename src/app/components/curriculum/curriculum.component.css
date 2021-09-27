@@ -3,6 +3,16 @@ full-calendar {
     font-family: "futura-heavy", Fallback, sans-serif;
 }
 
+::ng-deep .fc-daygrid-event-harness {
+    width: 75%;
+    margin-left: 12.5%;
+}
+
+::ng-deep .fc-event-title {
+    font-size: 1rem;
+    margin-left: 3%
+}
+
 #view-modal {
     width: 100vw;
 }

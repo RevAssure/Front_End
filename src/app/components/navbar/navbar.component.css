@@ -1,3 +1,13 @@
 #navbar {
     background-color: #F26925;
 }
+
+#dropdownMenu1 {
+    background-color: #F26925;
+    border: none;
+    font-size: 1.25rem;
+}
+
+#dropdownMenu1:hover {
+    color: rgb(216, 216, 216)
+}
