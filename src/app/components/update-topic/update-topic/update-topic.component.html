@@ -3,7 +3,7 @@
     <div class="card shadow col-6 offset-3">
         <div class="card-body">
             <div *ngIf=isTopicOwner>
-                <div class="d-flex align-items-baseline">
+                <div class="d-flex align-items-baseline justify-content-between">
                     <h3 class="card-title mr-3">Edit Topic</h3>
                     <button class="rev-btn-confirm" style="float: right;" (click)="deleteTopic()">Delete</button>
                 </div>
@@ -42,10 +42,10 @@
                     </select>
                 </div>
                 <div *ngIf="successfulUpdate" class="success-message">
-                    Topic successfully updated!
+                    Topic successfully updated! Redirecting...
                 </div>
                 <div *ngIf="successfulDelete" class="success-message">
-                    Topic successfully deleted!
+                    Topic successfully deleted! Redirecting...
                 </div>
                 <br>
                 <div>
