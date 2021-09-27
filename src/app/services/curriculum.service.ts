@@ -29,8 +29,11 @@ export class CurriculumService {
   
   curriculums: Curriculum[];
 
-  private eventUpdate = new Subject<any>(); 
-
+  /**
+   * This function creates a new curriculum and persists it to the database
+   * @param newTitle Title of the new curriculum
+   * @returns an Observable of the newly created curriculum from the database
+   */
   createCurriculum(newTitle: string){
     let newCurriculum: Curriculum = {
       id: 0,
@@ -44,9 +47,14 @@ export class CurriculumService {
 
   }
 
+  /**
+   * This function converts a database event into a FullCalendar calendar event object
+   * @param e the database event that needs parsing
+   * @param topics All topics that belong to the curriculum
+   * @returns A FullCalendar event object
+   */
   convertToCalendarEvent(e: any, topics: Topic[]) {
     let foundTopic = topics.filter(t => {
-      console.log(t.id + " " + e.id)
       return t.id == e.topic.id
     })
     let title = foundTopic[0].title;
@@ -72,18 +80,32 @@ export class CurriculumService {
     return calEvent
   }
 
+  /**
+   * Adds an event to the Database
+   * @param event Event Object
+   * @returns Observable of new event object
+   */
   addEvent(event: any) {
-    console.log(this.authService.jwt)
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
     return this.http.post(`${environment.revAssureBase}event`, event, this.httpOptions)
   }
 
+  /**
+   * Deletes an event by the event's id
+   * @param id id of event to be deleted
+   * @returns Observable of delete request
+   */
   deleteEventById(id: number) {
     console.log(this.authService.jwt)
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
     return this.http.delete(`${environment.revAssureBase}event/${id}`, this.httpOptions)
   }
 
+  /**
+   * Retrives the curricula belonging to the user
+   * @param isTrainer boolean denoting whether the current user is a trainer or not
+   * @returns Observable of owned curricula
+   */
   getCurriculum(isTrainer: boolean): Observable<Curriculum[]>{
       this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
       if(isTrainer) {
@@ -95,6 +117,10 @@ export class CurriculumService {
       }
   }
 
+  /**
+   * Retrieves associates belonging to curriculum
+   * @returns Observable of associates belonging to curriculum
+   */
   getCurriculumAssociate() {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${this.authService.jwt}`);
     return this.http.get<any[]>(this.associateURL, this.httpOptions)
