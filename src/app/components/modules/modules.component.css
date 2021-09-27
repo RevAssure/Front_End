@@ -1,5 +1,5 @@
 ::ng-deep #module-accordion .card .card-header {
-    background-color: #72a4c2;
+    background-color: gray;
 }
 
 ::ng-deep #module-accordion .card .card-header button {

@@ -121,7 +121,7 @@ export class CurriculumComponent implements OnInit {
       topic: this.selectedTopic
     }
     this.curriculumService.addEvent(e).subscribe((result) => {
-      let newEvent: CalendarEvent = this.curriculumService.convertToCalendarEvent(result)
+      let newEvent: CalendarEvent = this.curriculumService.convertToCalendarEvent(result, this.topics)
       this.calendarEvents.push(newEvent);
       this.calendarOptions.events = this.calendarEvents
       this.reloadPage()

@@ -15,9 +15,11 @@ export class NavbarComponent implements OnInit {
 
   trainer: boolean;
   username: string;
+  firstName: string;
 
   ngOnInit(): void {
     this.trainer = this.userService.isTrainer();
     this.username = this.userService.getUsername();
+    this.firstName = this.userService.getFirstName();
   }
 }
