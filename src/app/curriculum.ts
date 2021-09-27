@@ -17,6 +17,11 @@ export class Curriculum {
     providedIn: 'root',
   })
 export class CurriculumAdapter implements Adapter<Curriculum>{
+    /**
+     * Converts DTO into Curriculum object.
+     * @param newTopic: DTO of Curriculum.
+     * @returns Curriculum
+     */
     adapt(newCurriculum:any):Curriculum{
         return new Curriculum(
             newCurriculum.id,

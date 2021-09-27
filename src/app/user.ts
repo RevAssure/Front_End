@@ -22,6 +22,11 @@ export class User {
     providedIn: 'root',
   })
 export class UserAdapter implements Adapter<User>{
+    /**
+     * Converts DTO into User object.
+     * @param revUser: DTO of User.
+     * @returns User
+     */
     adapt(revUser:any):User{
         return new User(
             revUser.id,
