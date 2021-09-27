@@ -36,8 +36,8 @@
                     <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
                 </select>
             </div>
-            <div *ngIf="successful" id="success-message">
-                Topic successfully added!
+            <div *ngIf="successful" class="success-message">
+                Topic successfully added! Redirecting...
             </div>
             <br>
             <div>
