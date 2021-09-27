@@ -40,10 +40,9 @@
                 You have successfully registered in RevAssure! Redirecting...
             </div>
             <br>
-
             <div class="d-flex align-items-center">
                 <button class="rev-btn-confirm mr-3" (click)="registerNewUser()" type="button"
-                    routerLink="/register">Register</button>
+                    routerLink="/register" [disabled]="!firstName || !lastName || !username || !password">Register</button>
                 <a id="login-link" routerLink="/login">
                     Back to Login</a>
             </div>
