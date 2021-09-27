@@ -16,8 +16,8 @@
 
     <div *ngIf="currentView === 'dayGridDay' && isTrainer" class="card col-2 my-4 h-50">
         <div class="card-body">
-            <h5 class="card-title">Add a topic to the current day</h5>
-            <select [(ngModel)]="selectedTopic" name="topics" id="topics">
+            <h5 id="card-title" class="card-title">Add a topic to the current day</h5>
+            <select [(ngModel)]="selectedTopic" class="custom-select mb-3" name="topics" id="topics">
                 <option *ngFor="let topic of topics" value="{{topic.id}}">
                     {{topic.title}}
                 </option>
@@ -31,7 +31,7 @@
     <div #viewing id="view">
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">{{currentEvent.title}}</h4>
-            <button>
+            <button style="background-color: red;" (click)="modal.dismiss('cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>

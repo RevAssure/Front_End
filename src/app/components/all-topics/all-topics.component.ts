@@ -25,6 +25,12 @@ export class AllTopicsComponent implements OnInit {
   getTopics(): void {
     this.topicService.getAllTopics(this.authService.jwt).subscribe(topics => {
       this.topics = topics;
+      this.topics = this.topics.sort((a,b) => {
+        let textA = a.technologyCategory.name.toUpperCase();
+        let textB = b.technologyCategory.name.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
+      })
+      console.log(this.myTopics)
       this.myTopics = [];
       for (let topic of topics) {
         if (topic.trainer.id === this.userService.getUserId()) {
