@@ -64,4 +64,6 @@ describe('Service: TechCategory', () => {
     let returnedCategory = service.getCategoryByIdIfExists(545616);
     expect(returnedCategory.id).toEqual(0);
   });
+
+  //To-Do: make a test returning a dummy category that exists
 });

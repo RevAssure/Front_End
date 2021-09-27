@@ -1,14 +1,18 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router, RouterModule } from '@angular/router';
 
 import { CreateCurriculaComponent } from './create-curricula.component';
 
-describe('CreateCurriculaComponent', () => {
+fdescribe('CreateCurriculaComponent', () => {
   let component: CreateCurriculaComponent;
   let fixture: ComponentFixture<CreateCurriculaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateCurriculaComponent ]
+      imports: [RouterModule.forRoot([]), HttpClientModule],
+      declarations: [ CreateCurriculaComponent],
+      //providers: [Router]
     })
     .compileComponents();
   });
@@ -19,7 +23,7 @@ describe('CreateCurriculaComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  fit('should create', () => {
     expect(component).toBeTruthy();
   });
 });
