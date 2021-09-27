@@ -37,7 +37,6 @@ export class CreateTopicComponent implements OnInit {
     this.techCategories = this.techCategoryService.categories;
     this.moduleService.getAllModules(this.authService.jwt).subscribe(modules => this.modules = modules);
     let moduleId = this.route.snapshot.queryParamMap.get('moduleId')
-    console.log(moduleId)
     if(moduleId) {
       this.moduleId = `${moduleId}`
     }

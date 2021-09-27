@@ -20,7 +20,7 @@
 <div class="row justify-content-center mt-5 mb-3">
     <div class="text-center">
         <div>
-            <div class="btn-group btn-group-toggle" ngbRadioGroup name="topics-view" [(ngModel)]="isShowingAll">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="topics-view" [(ngModel)]="isShowingAll" ngDefaultControl>
 
                 <button class="rev-btn-confirm" (click)="refresh()">Refresh List</button>
 
