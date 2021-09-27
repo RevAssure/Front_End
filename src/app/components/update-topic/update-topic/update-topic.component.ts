@@ -60,7 +60,9 @@ export class UpdateTopicComponent implements OnInit {
     });
     this.techCategories = this.techCategoryService.categories;
   }
-
+  /**
+   * This function allows a trainer to update a topic
+   */
   updateTopic() {
     let updatedTopic: Topic = {
       id: this.id,
@@ -90,7 +92,9 @@ export class UpdateTopicComponent implements OnInit {
     });
   }
   
-
+  /**
+   * This function allows a trainer to delete a topic
+   */
   deleteTopic() {
     this.topicService.deleteTopicById(this.authService.jwt, this.id).subscribe(_ => { 
       console.log(`Deleted topic #{id}.`);
