@@ -72,7 +72,6 @@ export class CurriculumComponent implements OnInit {
 
   }
 
-
   isInitialized: boolean = false;
   curriculumId: any
   curriculum: Curriculum
@@ -178,6 +177,7 @@ export class CurriculumComponent implements OnInit {
     dayMaxEventRows: true,
     // events: this.calendarEvents,
     eventColor: '#72a4c2',
+    eventDisplay: 'block',
     eventMouseEnter: function(arg: EventHoveringArg) {
       arg.el.style.backgroundColor = '#1e90ff'
     },
