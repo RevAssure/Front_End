@@ -9,6 +9,7 @@ import { Observable, Subject } from 'rxjs';
 import { Event } from 'src/app/event';
 import { UserService } from './user.service';
 import { CalendarEvent } from '../calendarEvent';
+import { Topic } from '../topic';
 
 @Injectable({
   providedIn: 'root'
@@ -43,9 +44,8 @@ export class CurriculumService {
 
   }
 
-  convertToCalendarEvent(e: any) {
-    console.log(e.topic)
-    let foundTopic = this.userService.getTopics().filter(t => {
+  convertToCalendarEvent(e: any, topics: Topic[]) {
+    let foundTopic = topics.filter(t => {
       console.log(t.id + " " + e.id)
       return t.id == e.topic.id
     })
