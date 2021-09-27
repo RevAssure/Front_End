@@ -14,7 +14,7 @@ import { Module } from '../module';
   providedIn: 'root'
 })
 export class UserService {
-
+ 
   constructor(private http: HttpClient, private userAdapter: UserAdapter) { }
 
   url: string = `${environment.revAssureBase}revuser`;

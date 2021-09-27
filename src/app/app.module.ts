@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordion, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -18,7 +18,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ModulesComponent } from './components/modules/modules.component';
 import { CreateModuleComponent } from './components/create-module/create-module.component';
 import { CreateTopicComponent } from './components/create-topic/create-topic.component';
-import { TopicComponent } from './components/topic/topic.component';
 import { UserService } from './services/user.service';
 import { CurriculumService } from './services/curriculum.service';
 import { AuthorizationService } from './services/authorization.service';
@@ -30,7 +29,7 @@ import { UpdateTopicComponent } from './components/update-topic/update-topic/upd
 import { ModuleService } from './services/module.service';
 import { ModuleListItemComponent } from './components/modules/module-list-item/module-list-item.component';
 import { AllTopicsComponent } from './components/all-topics/all-topics.component';
-import { MyTopicsComponent } from './components/my-topics/my-topics.component';
+import { RouterModule, Router } from '@angular/router';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -48,12 +47,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ModulesComponent,
     CreateModuleComponent,
     CreateTopicComponent,
-    TopicComponent,
     CreateCurriculaComponent,
     UpdateTopicComponent,
     ModuleListItemComponent,
-    AllTopicsComponent,
-    MyTopicsComponent
+    AllTopicsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +59,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   providers: [
     UserService, 
@@ -71,7 +69,11 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     TechCategoryService, 
     AuthorizationService, 
     UserAdapter,
-    ModuleService
+    ModuleService,
+    // NgbAccordion,
+    // Router,
+    RouterModule
+    //NgModel
   ],
   bootstrap: [AppComponent]
 })
