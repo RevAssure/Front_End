@@ -37,6 +37,7 @@ export class CurriculumComponent implements OnInit {
       console.log(result)
       this.curriculum = result.filter(c => c.id == this.curriculumId)[0]
       console.log(this.curriculum)
+      this.curriculumName = this.curriculum.name
       for(let e of this.curriculum.events) {
         let date = new Date(e.startDatetime * 1000)
         let year = date.getFullYear();
@@ -75,6 +76,7 @@ export class CurriculumComponent implements OnInit {
   curriculumId: any
   curriculum: Curriculum
   events: Event[] = []
+  curriculumName: string;
   calendarEvents: any[] = []
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   @ViewChild('viewEvent') modal: ElementRef;

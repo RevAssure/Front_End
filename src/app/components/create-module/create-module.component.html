@@ -5,21 +5,46 @@
             <h3 class="card-title">Create a New Module</h3>
             <div class="mb-3">
                 <label for="title" class="form-label">Module Name</label>
-                <input id="title" class="form-control" type="text" [(ngModel)]="name">
+                <input id="title" class="form-control" type="text" [(ngModel)]="name" required minlength="1" maxlength="255" #nameInput="ngModel">
+                <div *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)">
+                    <div *ngIf="nameInput.errors?.required" class="error-message">
+                        A module name is required.
+                    </div>
+                    <div *ngIf="nameInput.errors?.maxlength" class="error-message">
+                        Module name cannot be more than 255 characters.
+                    </div>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
+                <textarea class="form-control" id="description" [(ngModel)]="description" required minlength="5" maxlength="7000" #descriptionInput="ngModel"></textarea>
+                <div *ngIf="descriptionInput.invalid && (descriptionInput.dirty || descriptionInput.touched)">
+                    <div *ngIf="descriptionInput.errors?.required" class="error-message">
+                        Description is required.
+                    </div>
+                    <div *ngIf="descriptionInput.errors?.minlength" class="error-message">
+                        Description must be at least 5 characters.
+                    </div>
+                    <div *ngIf="descriptionInput.errors?.maxlength" class="error-message">
+                        Description cannot be more than 7000 characters.
+                    </div>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="techCategory" class="form-label">Category</label>
-                <select id="techCategory" class="form-control" [(ngModel)]="techCategoryId">
+                <select id="techCategory" class="form-control" [(ngModel)]="techCategoryId" required #categoryInput="ngModel">
+                    <option value="">Select a category</option>
                     <option *ngFor="let techCategory of techCategories" value={{techCategory.id}}>{{techCategory.name}}</option>
                 </select>
             </div>
-            <!-- <div *ngIf="successful" id="success-message">
-                Module successfully added!
-            </div> -->
+            <div *ngIf="categoryInput.invalid && (categoryInput.dirty || categoryInput.touched)">
+                <div *ngIf="categoryInput.errors?.required" class="error-message">
+                    You must select a technology category.
+                </div>
+            </div>
+            <div *ngIf="successful" class="success-message">
+                Module successfully added! Redirecting back to module list in a few seconds.
+            </div>
             <br>
             <div>
                 <button id="submit" class="rev-btn-confirm mr-2" (click)="createModule()">Submit</button>

@@ -1,5 +1,11 @@
 <app-navbar></app-navbar>
-<button class="rev-btn-confirm" routerLink="/createModule">Add Module</button>
+<div class="page-title">
+    <div class="row justify-content-center">
+        <div class="col-3 text-center">
+            <h3>Modules</h3>
+        </div>
+    </div>
+</div>
 
 <div class="col-6 offset-3">
     <ngb-accordion id="module-accordion" #acc="ngbAccordion" [closeOthers]="true" activeIds="ngb-panel-0">
