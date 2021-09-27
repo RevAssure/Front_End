@@ -79,3 +79,7 @@ button {
     font-family: "futura-bold", Fallback, sans-serif;
     color: red;
 }
+
+button, a {
+    font-family: "futura-medium", Fallback, sans-serif;
+}
