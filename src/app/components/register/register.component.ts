@@ -22,7 +22,9 @@ export class RegisterComponent implements OnInit {
   isTrainer: boolean = false;
   failedRegister: boolean = false;
   successful: boolean = false;
-
+  /**
+   * This function allows a user to register as a new user of the app
+   */
   registerNewUser() {
     const newUser: User & {password: string} = {
       id: 0,
@@ -47,7 +49,7 @@ export class RegisterComponent implements OnInit {
       setTimeout(() => {
         this.router.navigateByUrl("/login");
       }, 3000);
-    
+
     },
     (error) => {
       console.log(error);

@@ -110,6 +110,9 @@ export class CurriculumComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
+  /**
+   * This function adds a topis to the curriculum day
+   */
   addTopicToDay() {
     let calendarApi = this.getCalendarApi()
     let date = new Date(calendarApi.getDate())
@@ -127,7 +130,10 @@ export class CurriculumComponent implements OnInit {
       this.reloadPage()
     })
   }
-
+  /**
+   * This function deletes an event from the curriculum
+   * @param id the id of the event 
+   */
   deleteEvent(id: number) {
     this.curriculumService.deleteEventById(id).subscribe(result => this.reloadPage())
   }
@@ -138,8 +144,6 @@ export class CurriculumComponent implements OnInit {
     console.log(calendarApi.getDate())
     let date = new Date(calendarApi.getDate())
     this.currentView = calendarApi.view.type
-
-
   }
 
 
