@@ -54,6 +54,6 @@ constructor(private http: HttpClient, private techCategoryAdapter: TechnologyCat
         return category;
       }
     }
-    return categories[-1];
+    return categories[categories.length-1];
   }
 }

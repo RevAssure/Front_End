@@ -43,6 +43,9 @@
             <div *ngIf="successfulUpdate" class="success-message">
                 Saving Update...
             </div>
+            <div *ngIf="successfulDelete" class="success-message">
+                Successfully deleted! Redirecting...
+            </div>
             <br>
             <div>
                 <button id="submit" class="rev-btn-confirm mr-2" (click)="updateTopic()">Submit</button>
