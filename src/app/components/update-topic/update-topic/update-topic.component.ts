@@ -54,8 +54,7 @@ export class UpdateTopicComponent implements OnInit {
       this.lectureNotes = this.passedTopic.lectureNotes;
       this.githubRepo = this.passedTopic.githubRepo;
       this.technologyCategoryId = `${this.passedTopic.technologyCategory.id}`;
-      this.moduleId = `${this.passedTopic.modules[0].id}`;
-
+      this.moduleId = `${this.passedTopic.modules[0]?.id}`;
       this.isTopicOwner = topic.trainer.id === this.userService.getUserId();
     });
     this.techCategories = this.techCategoryService.categories;
