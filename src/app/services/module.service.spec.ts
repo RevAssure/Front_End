@@ -8,7 +8,7 @@ import { TechnologyCategory } from '../technologycategory';
 import { User } from '../user';
 import { ModuleService } from './module.service';
 
-fdescribe('Service: Module', () => {
+describe('Service: Module', () => {
   let service: ModuleService;
   let injector: TestBed;
   let httpMock: HttpTestingController;

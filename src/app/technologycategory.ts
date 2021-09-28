@@ -16,6 +16,11 @@ export class TechnologyCategory {
     providedIn: 'root',
   })
 export class TechnologyCategoryAdapter implements Adapter<TechnologyCategory>{
+    /**
+     * Converts DTO into TechnologyCategory object.
+     * @param newTechnologyCategory: DTO of TechnologyCategory.
+     * @returns TechnologyCategory
+     */
     adapt(newTechnologyCategory:any):TechnologyCategory{
         let techCategory = new TechnologyCategory(
             newTechnologyCategory.id,

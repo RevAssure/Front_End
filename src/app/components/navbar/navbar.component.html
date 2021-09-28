@@ -1,6 +1,9 @@
 <nav id="navbar" class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a href="/login" class="navbar-brand ml-3 text-white"><img class="mr-3" src="..\..\..\assets\images\favicon.png"
+    
+    <!--This image allows a user to instantly log out and navigate to the home page. 
+      In future iterations, this href can be changed to a routerLink to naviagte to a predefined home screen. -->
+    <a href="" class="navbar-brand ml-3 text-white"><img class="mr-3" src="..\..\..\assets\images\favicon.png"
         style="height: auto; width: 15%;">RevAssure</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,6 +12,8 @@
     <div class="collapse navbar-collapse" id="navbarNav">
     </div>
 
+    <!--Through ngOnInit, the username is checked to be defined, indicating a user is logged in successfully.
+        If they are, they can see this dropdown menu to navigate to the dashboard or log out of the application. -->
     <div>
       <div *ngIf="username != undefined" ngbDropdown class="d-inline-block">
         <button class="rev-btn-secondary" id="dropdownMenu1" ngbDropdownToggle>Hello, {{firstName}}</button>

@@ -13,6 +13,9 @@ export class AuthorizationService {
 
   constructor() { }
 
+  /**
+   * String property that can be accessed to get the JWT for current user.
+   */
   jwt: string = "";
 
   /**

@@ -1,39 +1,26 @@
 <app-navbar></app-navbar>
-
-<!-- <div class="form-check">
-    <input name="topicView" class="form-check-input" id="all-topics" type="radio" (click)="showAll()" checked>
-    <label class="form-check-label" for="all-topics">Show All Topics</label>
-    <br>
-    <input name="topicView" class="form-check-input" id="my-topics" type="radio" (click)="showMy()">
-    <label class="form-check-label" for="my-topics">Show My Topics</label>
-</div> -->
 <div class="page-title">
     <div class="row justify-content-center">
         <div class="col-6 text-center">
             <h3>Topics</h3>
-
         </div>
     </div>
-
 </div>
 
+<!--A button group containing a Refresh button to query Topic table for all topics, 2 radio buttons that will alternate
+    the component display between All Topics and My Topics, and a button to routerLink to the createTopic component-->
 <div class="row justify-content-center mt-5 mb-3">
     <div class="text-center">
         <div>
-            <div class="btn-group btn-group-toggle" ngbRadioGroup name="topics-view" [(ngModel)]="isShowingAll">
-
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="topics-view" [(ngModel)]="isShowingAll" ngDefaultControl>
                 <button class="rev-btn-confirm" (click)="refresh()">Refresh List</button>
-
                 <label style="color:white;" ngbButtonLabel class="rev-btn-confirm">
                     <input ngbButton type="radio" [value]="true"> Show All Topics
                 </label>
-
                 <label style="color:white;" ngbButtonLabel class="rev-btn-confirm">
                     <input ngbButton type="radio" [value]="false"> Show My Topics
                 </label>
-
                 <button class="rev-btn-confirm" routerLink="/createTopic">Add Topic</button>
-
             </div>
         </div>
     </div>
@@ -43,7 +30,7 @@
     <div class="card shadow col-8 offset-2">
         <div class="card-body justify-content-center">
 
-
+            <!--Displays the owner of the topic to the right of each topic if user is on All Topic View-->
             <div *ngIf="isShowingAll">
                 <h2>All Topics</h2>
                 <div>
@@ -56,6 +43,7 @@
                 </div>
             </div>
 
+            <!--Displays the My Topic View if user is on My Topic View-->
             <div *ngIf="!isShowingAll">
                 <h2>My Topics</h2>
                 <div>

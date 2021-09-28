@@ -9,6 +9,9 @@ import { ModuleService } from 'src/app/services/module.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
+/**
+ * This component allows trainer to create topics
+ */
 @Component({
   selector: 'app-create-topic',
   templateUrl: './create-topic.component.html',
@@ -16,10 +19,12 @@ import { Location } from '@angular/common';
 })
 export class CreateTopicComponent implements OnInit {
 
+  // Injected services to grab information and other modules
   constructor(private userService: UserService, private techCategoryService: TechCategoryService,
     private topicService: TopicService, private authService: AuthorizationService,
     private moduleService: ModuleService, private location: Location, private route: ActivatedRoute) { }
 
+  // Information for new topic
   title: string =  '';
   description: string =  '';
   estimatedDuration: number = 0;
@@ -27,17 +32,17 @@ export class CreateTopicComponent implements OnInit {
   githubRepo: string =  '';
   technologyCategoryId: string = "1";
   moduleId: string = "";
-
-  successful: boolean = false;
-
   techCategories : TechnologyCategory[] = [];
   modules: Module[] = [];
 
+  // boolean states wheather the operation is success or not
+  successful: boolean = false;
+
+  // runs on init
   ngOnInit() {
     this.techCategories = this.techCategoryService.categories;
     this.moduleService.getAllModules(this.authService.jwt).subscribe(modules => this.modules = modules);
     let moduleId = this.route.snapshot.queryParamMap.get('moduleId')
-    console.log(moduleId)
     if(moduleId) {
       this.moduleId = `${moduleId}`
     }

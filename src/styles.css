@@ -83,3 +83,8 @@ button {
 button, a {
     font-family: "futura-medium", Fallback, sans-serif;
 }
+
+button:disabled,
+button[disabled]{
+    opacity: 0.5;
+}

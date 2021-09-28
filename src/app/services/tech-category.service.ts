@@ -15,7 +15,6 @@ import { TechnologyCategory, TechnologyCategoryAdapter } from '../technologycate
 export class TechCategoryService {
 
 constructor(private http: HttpClient, private techCategoryAdapter: TechnologyCategoryAdapter) {
-  //this.categories.push(this.nullCategory);
  }
 
   url: string = `${environment.revAssureBase}technology_category`;
@@ -46,6 +45,12 @@ constructor(private http: HttpClient, private techCategoryAdapter: TechnologyCat
     )
   }
 
+  /**
+   * Looks up cached categories array for a TechnologyCategory with the ID passed.
+   * If the specified ID is not found, returns a dummy entry named 'NULL' with ID 0.
+   * @param id - (number) ID of desired TechnologyCategory.
+   * @returns - a TechnologyCategory with either the requested ID or an ID 0 TechnologyCategory named 'NULL'.
+   */
   getCategoryByIdIfExists(id: number): TechnologyCategory {
     let categories = this.categories;
     categories.push(this.nullCategory);

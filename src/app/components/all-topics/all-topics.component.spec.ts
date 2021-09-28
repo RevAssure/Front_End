@@ -1,16 +1,25 @@
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { AllTopicsComponent } from './all-topics.component';
+import { NavbarComponent} from '../navbar/navbar.component';
+import { Component } from '@angular/core';
 
-fdescribe('AllTopicsComponent', () => {
+
+@Component({
+  selector: 'app-navbar',
+  template: ''
+})
+class FakeNavbarComponent implements Partial<NavbarComponent>{}
+describe('AllTopicsComponent', () => {
   let component: AllTopicsComponent;
   let fixture: ComponentFixture<AllTopicsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      declarations: [ AllTopicsComponent ]
+      imports: [HttpClientTestingModule, FormsModule],
+      declarations: [ AllTopicsComponent, FakeNavbarComponent]
     })
     .compileComponents();
   });

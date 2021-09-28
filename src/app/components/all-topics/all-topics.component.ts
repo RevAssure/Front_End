@@ -22,6 +22,9 @@ export class AllTopicsComponent implements OnInit {
     this.getTopics();
   }
 
+  /**
+   * Retrieves all the Topics from the database and sorts it into two Topic arrays, topics and myTopics
+   */
   getTopics(): void {
     this.topicService.getAllTopics(this.authService.jwt).subscribe(topics => {
       this.topics = topics;
@@ -43,14 +46,4 @@ export class AllTopicsComponent implements OnInit {
   refresh(): void {
     this.getTopics();
   }
-
-  // showAll(): void {
-  //   this.isShowingAll = true;
-  //   this.isShowingMy = false;
-  // }
-
-  // showMy(): void {
-  //   this.isShowingAll = false;
-  //   this.isShowingMy = true;
-  // }
 }

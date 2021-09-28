@@ -5,11 +5,27 @@
             <h3 class="card-title">Create a New Topic</h3>
             <div class="mb-3">
                 <label for="title" class="form-label">Topic Title</label>
-                <input id="title" class="form-control" type="text" [(ngModel)]="title">
+                <input id="title" class="form-control" type="text" [(ngModel)]="title" required minlength="1" maxlength="255" #titleInput="ngModel">
+                <div *ngIf="titleInput.invalid && (titleInput.dirty || titleInput.touched)">
+                    <!--Display this message if input field is empty-->
+                    <div *ngIf="titleInput.errors?.required" class="error-message">
+                        A topic name is required.
+                    </div>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
+                <textarea class="form-control" id="description" [(ngModel)]="description" required minlength="5" maxlength="7000" #descriptionInput="ngModel"></textarea>
+                <div *ngIf="descriptionInput.invalid && (descriptionInput.dirty || descriptionInput.touched)">
+                    <!--Display this message if input field is empty-->
+                    <div *ngIf="descriptionInput.errors?.required" class="error-message">
+                        Description is required.
+                    </div>
+                    <!--Display this message if input is less than 5 characters-->
+                    <div *ngIf="descriptionInput.errors?.minlength" class="error-message">
+                        Description must be at least 5 characters.
+                    </div>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="estimatedTime" class="form-label">Estimated Time (in minutes)</label>
@@ -26,6 +42,7 @@
             <div class="mb-3">
                 <label for="techCategory" class="form-label">Category</label>
                 <select id="techCategory" class="form-control" [(ngModel)]="technologyCategoryId">
+                    <!--populate tech category options-->
                     <option *ngFor="let techCategory of techCategories" value={{techCategory.id}}>{{techCategory.name}}</option>
                 </select>
             </div>
@@ -33,19 +50,22 @@
                 <label for="modules" class="form-label">Module</label>
                 <select id="modules" class="form-control" [(ngModel)]="moduleId">
                     <option value="">None</option>
+                    <!--populate modules options-->
                     <option *ngFor="let module of modules" value={{module.id}}>{{module.name}}</option>
                 </select>
             </div>
+            <!--Display this message if successfully created-->
             <div *ngIf="successful" class="success-message">
                 Topic successfully added! Redirecting...
             </div>
             <br>
             <div>
-                <button id="submit" class="rev-btn-confirm mr-2" (click)="createTopic()">Submit</button>
+                <!--Grayed out button if input field is left empty-->
+                <button id="submit" class="rev-btn-confirm mr-2" (click)="createTopic()" [disabled]="!title || !description || !technologyCategoryId">Submit</button>
                 <button class="rev-btn-secondary mr-2" routerLink="/modules">Back to Modules</button>
                 <button class="rev-btn-secondary" routerLink="/topics">Back to Topics</button>
             </div>
         </div>
-    </div>s
+    </div>
 </div>
 

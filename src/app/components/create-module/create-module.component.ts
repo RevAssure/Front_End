@@ -5,6 +5,9 @@ import { ModuleService } from 'src/app/services/module.service';
 import { TechCategoryService } from 'src/app/services/tech-category.service';
 import { TechnologyCategory } from 'src/app/technologycategory';
 
+/**
+ * This component displays a form for trainer to create a module
+ */
 @Component({
   selector: 'app-create-module',
   templateUrl: './create-module.component.html',
@@ -12,17 +15,20 @@ import { TechnologyCategory } from 'src/app/technologycategory';
 })
 export class CreateModuleComponent implements OnInit {
 
+  //Injected services to grab information and Router for routing
   constructor(private moduleService: ModuleService, private techCategoryService: TechCategoryService, 
     private authService: AuthorizationService, private router: Router) { }
 
+  //information will be used to create a new module
   name: string = "";
   description: string = "";
   techCategoryId: string = "";
-
   techCategories: TechnologyCategory[] = [];
 
+  // boolean describe the state of the operation, successfully created or not
   successful: boolean = false;
 
+  // runs on init, setup tech categories for user to select
   ngOnInit() {
     this.techCategories = this.techCategoryService.categories;
   }
@@ -40,6 +46,7 @@ export class CreateModuleComponent implements OnInit {
       (module) => {
         console.log(module);
         this.successful = true;
+        // route back to modules after 3 seconds
         setTimeout( () => this.router.navigateByUrl('/modules'), 3000);
       });
   }

@@ -1,8 +1,4 @@
-import { Injectable } from '@angular/core';
-import { Adapter } from './adapter';
-import { Curriculum } from './curriculum';
 import { TechnologyCategory } from './technologycategory';
-import { Topic } from './topic';
 import { User } from './user';
 
 export class CalendarEvent {

@@ -1,10 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container mt-5">
     <div id="register-container" class="card col-4 offset-4 mb-5 shadow">
-        <!-- <div class="d-flex justify-content-center flex-column align-items-center">
-            <img src="..\..\..\assets\images\rev-logo.png" class="card-img-top py-4" alt="...">
-            <div class="divider mb-4 mt-4"></div>
-        </div> -->
         <div class="card-body px-3">
             <h2 id="register-header" class="card-title">Register</h2>
             <div class="mb-3">
@@ -33,17 +29,19 @@
                     Register as Trainer
                 </label>
             </div>
+            <!--If failedRegister is true then display the following message-->
             <div *ngIf="failedRegister" class="error-message">
                 Failed to register! Username already exists!
             </div>
+            <!--If successful is true then display the following message-->
             <div *ngIf="successful" class="success-message">
                 You have successfully registered in RevAssure! Redirecting...
             </div>
             <br>
-
             <div class="d-flex align-items-center">
+                <!--The button will be grayed out if user left any of the fields empty-->
                 <button class="rev-btn-confirm mr-3" (click)="registerNewUser()" type="button"
-                    routerLink="/register">Register</button>
+                    routerLink="/register" [disabled]="!firstName || !lastName || !username || !password">Register</button>
                 <a id="login-link" routerLink="/login">
                     Back to Login</a>
             </div>

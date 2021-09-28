@@ -14,7 +14,7 @@ import { Module } from '../module';
   providedIn: 'root'
 })
 export class UserService {
-
+ 
   constructor(private http: HttpClient, private userAdapter: UserAdapter) { }
 
   url: string = `${environment.revAssureBase}revuser`;
@@ -33,19 +33,16 @@ export class UserService {
    * @param newUser User to be registered and persisted.
    * @returns Observable of User returned from backend.
    */
-  // TODO: What should happen after registerNewUser() gets an OK response? 
-  // Should the user be logged in? Should UserService also handle that (including giving JWT to AuthService)?
   registerNewUser(newUser: User): Observable<User> {
     return this.http.post<User>(`${this.url}/register`, newUser).pipe(map((result: any) => {
       let registeredUser: User = this.userAdapter.adapt(result);
-      console.log(registeredUser);
       return registeredUser;
     }));
   }
 
   /**
    * Performs a POST to "/revuser/authenticate" to login.
-   * Doesn't 
+   * After successful login, also calls getUser().
    * @param username 
    * @param password 
    * @returns Observable of the user's JWT as a string.
@@ -55,10 +52,8 @@ export class UserService {
       username,
       password
     }
-    console.log(`${this.url}/authenticate`);
     return this.http.post(`${this.url}/authenticate`, authObject).pipe(
       switchMap((jwt:any) => {
-        console.log(`Now about to call getUser() with jwt: ${jwt}`);
         return this.getUser(jwt)
       })
     );
@@ -72,10 +67,8 @@ export class UserService {
    */
   private getUser(jwtObject: any & {jwt: string}) {
     this.httpOptions.headers = this.httpOptions.headers.set('Authorization', `Bearer ${jwtObject.jwt}`);
-    console.log(this.httpOptions)
     return this.http.get(`${this.url}`, this.httpOptions).pipe(map((result: any) => {
       this.user = this.userAdapter.adapt(result);
-      console.log(this.user);
       return jwtObject;
     }));
   }
@@ -113,8 +106,4 @@ export class UserService {
   getModules(): Module[] {
     return this.user?.modules;
   }
-
-  // TODO: contemplate putting in setters for topics/curricula/modules/ownedCurricula.
-  // Should they simply push/pop to those arrays?
-  // Find out whether it's possible to get an array property from a private object via getter than push/pop directly to it.
 }
