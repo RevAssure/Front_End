@@ -11,16 +11,15 @@ other users.
 
 ### Tech Stack:
 - Angular 12
-- Apache Maven
-- AWS Elastic Beanstalk / S3 / RDS / CodePipeline / CodeBuild
+- NodeJS
+- AWS S3
 - GitHub
-- Jacoco
-- Java 8
-- Junit
-- Log4J
-- Mockito
-- PostGreSQL deployed on AWS RDS
-- Spring Boot / Spring MVC / Spring Security / Spring Data
+- JavaScript & TypeScript
+- Karma & Jasmine
+- HTML
+- Angular Bootstrap/ Bootstrap
+- FullCalendar API: https://fullcalendar.io/
+- Figma
 
 ### User Stories:
 - As a user I can create an account to have a Revature account
@@ -29,22 +28,35 @@ other users.
 - As a user I can access my calendar to view my schedule
 - As an associate I can view what topics are going to be covered on my calendar
 - As a trainer I can create a new curriculum
-- As a trainer I can edit my curriculums
-- As a trainer I can view curriculums created by other trainers
+- As a trainer I can add topics to days in the curriculum
+- As a trainer I can view topics & modules created by other trainers
 - As a trainer I can create a new topic
+- As a trainer I can clone someone else's topic
 - As a trainer I can edit my topics
-- As a trainer I can view topics created by other trainers
+- As a trainer I can delete my topics
+- As a trainer I can create a new module
+- As a trainer I can edit my modules
+- As a trainer I can assign topics to modules
 
 ### To-Do List
-- Improvement 1
+- Delete modules (may never be implemented because of design ramifications)
+- Drag and drop topics in calendar
+- Filter/ search for modules and topics
+- Topics automatically update status based on time (Upcoming, In-progress, Completed)
+- Save user session so that login isn't needed for every refresh / visit
+- Input validation for registration
+- Add a home page
 
 ### Getting Started
-- How to install this project, include git clone and all environment setups
+- Before you start, make sure you have Node Package Manager installed on your computer: **https://nodejs.org/en/**
+- Navigate to this project directory via cmd line
+- Download the project from Github and run the ```npm install``` command to download required Node modules.
+- Install Angular CLI via the ```npm install @angular/cli``` command
+- Run ```ng serve``` and then access the webapp via **http://localhost:4200/**
 
 ### Usage
-- How to use project after install
-- all code required to get started
-- images of what it should look like
+- The usage of this app requires the RevAssure Back_End database setup, located at **https://github.com/RevAssure/P3_Backend**.
+- In order to use this app with your own backend endpoints, you must change the URL stored in the RevAssureBase constant in all <em>src/environments/</em> files.
  
 ### Contributors:
 - Jacob Brummett
@@ -62,7 +74,8 @@ other users.
 - Matt Vasil
 - Alwyn Zhang
 - Christopher Zhang
-### Front-end repository:
-https://github.com/RevAssure/Front_End
+
+### Back-end repository:
+https://github.com/RevAssure/P3_Backend
 ### License 
 https://mit-license.org/
