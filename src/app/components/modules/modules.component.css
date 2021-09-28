@@ -1,11 +1,21 @@
 ::ng-deep #module-accordion .card .card-header {
     background-color: gray;
+    padding: 0;
 }
 
 ::ng-deep #module-accordion .card .card-header button {
     color: white;
+    width: 100%;
+    padding: 1.125rem 2rem;
+    text-decoration: none;
+    text-align: left;
 }
 
 ::ng-deep #module-accordion .card .card-header button:hover {
     color: rgb(238, 238, 238);
+}
+
+
+ngb-accordion ::ng-deep .card-header button:focus {
+  box-shadow: none;
 }

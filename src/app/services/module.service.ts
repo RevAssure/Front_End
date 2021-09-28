@@ -29,7 +29,7 @@ export class ModuleService {
    * @returns an Observable containing an array of all the current user's Modules
    */
   getAllModules(jwt: string): Observable<Module[]> {
-    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    this.setAuthorizationHeader(jwt);
     return this.http.get<Module[]>(`${this.url}`, this.httpOptions).pipe(
       tap(modules => this.modules = modules)
     );
@@ -42,14 +42,34 @@ export class ModuleService {
    * @returns an Observable containing the new Module as it is persisted in database
    */
   createModule(jwt: string, moduleDto: any): Observable<Module> {
-    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+    this.setAuthorizationHeader(jwt);
     return this.http.post<Module>(`${this.url}`, moduleDto, this.httpOptions);
+  }
+  
+  /**
+   * Updates an existing Module with new data when performing PUT /module.
+   * @param jwt JWT for authorization
+   * @param moduleDto the DTO for with new Module data 
+   * @returns an Observable containing the updated Module
+   */
+  updateModule(jwt: string, moduleDto: any): Observable<Module> {
+    this.setAuthorizationHeader(jwt);
+    return this.http.put<Module>(`${this.url}`, moduleDto, this.httpOptions);
   }
 
   /**
-   * Looks up the cached modules array for a module with the passed ID.
-   * @param id - (number) ID of requested module.
-   * @returns Module with requested ID.
+   * Helper method to set the authorization header for HTTP requests.
+   * @param jwt JWT for authorization
+   */
+  setAuthorizationHeader(jwt: string): void {
+    this.httpOptions.headers = this.httpOptions.headers.set("Authorization", `Bearer ${jwt}`);
+  }
+  
+  /**
+   * Retrieves a Module from the local cache if the ID exists.
+   * Otherwise returns null.
+   * @param id (number) ID of the Module to be retrieved
+   * @returns a Module with an ID that matches the ID parameter or null if no Module matches 
    */
   getModuleById(id: number): Module | null {
     for (let module of this.modules) {

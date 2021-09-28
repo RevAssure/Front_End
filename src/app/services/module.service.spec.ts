@@ -81,11 +81,22 @@ describe('Service: Module', () => {
     mockRequest.flush(dummyModules[0]);
   });
 
+  //GET by ID
   it('should return a Module with correct ID when getModuleById() is called after getAllModules()', () => {
     service.getAllModules(mockJwt).subscribe((result: Module[]) => {
       expect(service.getModuleById(1)).toEqual(result[0]);
     })
     const mockRequest = httpMock.expectOne(`${environment.revAssureBase}module`);
     mockRequest.flush(dummyModules);
+  });
+
+  //PUT
+  it('should get a JSON object of the submitted Module when performing POST', () => {
+    service.updateModule(mockJwt, dummyModuleDto).subscribe((result : Module) => {
+      expect(result).toEqual(dummyModules[0]);
+    });
+    const mockRequest = httpMock.expectOne(`${environment.revAssureBase}module`);
+    expect(mockRequest.request.method).toBe('PUT');
+    mockRequest.flush(dummyModules[0]);
   });
 });

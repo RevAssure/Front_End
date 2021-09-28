@@ -11,16 +11,17 @@ import { CreateTopicComponent } from '../components/create-topic/create-topic.co
 import { CreateCurriculaComponent } from '../components/create-curricula/create-curricula.component';
 import { UpdateTopicComponent } from '../components/update-topic/update-topic/update-topic.component';
 import { AllTopicsComponent } from '../components/all-topics/all-topics.component';
+import { UpdateModuleComponent } from '../components/modules/update-module/update-module.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch:'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // { path: 'curriculum', component: CurriculumComponent},
   { path: 'curriculum/:id', component: CurriculumComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'modules', component: ModulesComponent},
   { path: 'createModule', component: CreateModuleComponent},
+  { path: 'module/:id', component: UpdateModuleComponent},
   { path: 'createTopic', component: CreateTopicComponent},
   { path: 'createCurriculum', component: CreateCurriculaComponent},
   { path: 'topic/:id', component: UpdateTopicComponent},

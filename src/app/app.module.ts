@@ -29,7 +29,8 @@ import { UpdateTopicComponent } from './components/update-topic/update-topic/upd
 import { ModuleService } from './services/module.service';
 import { ModuleListItemComponent } from './components/modules/module-list-item/module-list-item.component';
 import { AllTopicsComponent } from './components/all-topics/all-topics.component';
-import { RouterModule, Router } from '@angular/router';
+import { UpdateModuleComponent } from './components/modules/update-module/update-module.component';
+import { RouterModule } from '@angular/router';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -50,7 +51,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CreateCurriculaComponent,
     UpdateTopicComponent,
     ModuleListItemComponent,
-    AllTopicsComponent
+    AllTopicsComponent,
+    UpdateModuleComponent
   ],
   imports: [
     BrowserModule,
@@ -70,10 +72,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AuthorizationService, 
     UserAdapter,
     ModuleService,
-    // NgbAccordion,
-    // Router,
     RouterModule
-    //NgModel
   ],
   bootstrap: [AppComponent]
 })
