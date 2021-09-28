@@ -10,12 +10,16 @@ import { CurriculumService } from 'src/app/services/curriculum.service';
 })
 export class DashboardComponent implements OnInit {
 
+  // Injected CurriculumService and UserService to bring in methods to grab needed information
   constructor(private userService: UserService, private curriculumService: CurriculumService) { }
 
+  // A boolean determines if user logged in is trainer or associate
   trainer: boolean;
+  // username of the current user logged in
   username: string;
+  // curriculum of the current user logged in
   curriculums: Curriculum[];
-  // modules: Module[];
+  // boolean determines to show curriculum items or not
   show: boolean = false;
 
   /**
@@ -24,13 +28,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.trainer = this.userService.isTrainer();
     this.username = this.userService.getUsername();
+
+    // subscribe to observable to set curriculums to the current user logged in
     if(this.trainer) {
       this.curriculumService.getCurriculum(this.trainer).subscribe(result => this.curriculums = result);
     } else {
       this.curriculumService.getCurriculumAssociate().subscribe(result => this.curriculums = result);
     }
-
-    // this.modules = this.userService.getModules();
   }
 
 
