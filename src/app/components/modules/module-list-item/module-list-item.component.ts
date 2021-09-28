@@ -20,7 +20,7 @@ export class ModuleListItemComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit(): void {
-    if(this.module.trainer.id === this.userService.getUserId()){
+    if(this.module?.trainer?.id === this.userService.getUserId()){
       this.canDisplayEditButton = true;
     }
   }
