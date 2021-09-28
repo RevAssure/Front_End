@@ -28,14 +28,11 @@
                     (click)="routeToTopic(['/createTopic'], { queryParams: { moduleId:module?.id } })">Add New</button>
             </div>
             <ul class="list-group list-group-flush">
-                <li *ngFor="let topic of module?.topics" class="list-group-item pl-0 py-1">
-                    <a routerLink="/topic/{{topic.id}}"> {{topic.title}}</a>
+                <li *ngFor="let topic of module?.topics" class="list-group-item d-flex justify-content-between">
+                    <a routerLink="/topic/{{topic.id}}">{{topic.technologyCategory.name}}: {{topic.title}}
+                    </a><span class="author">{{topic.trainer.firstName}} {{topic.trainer.lastName}}</span>
                 </li>
             </ul>
-            <!-- <div *ngFor="let topic of module.topics">
-                &#8226;
-                <a routerLink="/topic/{{topic.id}}"> {{topic.title}}</a>
-            </div> -->
         </div>
     </div>
 </div>
