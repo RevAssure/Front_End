@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
    * Perform a user login. A successful login will set the JWT for the session and pull a list of 
    * TechnologyCategories, followed by routing the user to their dashboard. Incorrect login credentials
    * will display a message informing the user of their error.
+   * 
+   * Current limitation: application will wait for TechnologyCategories table to be retrieved.
+   * Login will not finish if the request never completes.
    */
   login() {
     this.userService.login(this.username, this.password).subscribe((result) => {

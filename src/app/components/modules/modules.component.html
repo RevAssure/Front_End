@@ -6,9 +6,11 @@
         </div>
     </div>
 </div>
+<!--Button to add a module-->
 <div class="col-6 offset-3 my-3">
     <button class="rev-btn-confirm" routerLink="/createModule">Add Module</button>
 </div>
+<!--Collapseable accordion that renders Module List Item Component when collapsed-->
 <div class="col-6 offset-3 mb-3">
     <ngb-accordion id="module-accordion" #acc="ngbAccordion" [closeOthers]="true" activeIds="ngb-panel-0">
         <ngb-panel *ngFor="let module of modules" title="{{module.name}}">

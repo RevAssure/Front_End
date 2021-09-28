@@ -20,21 +20,22 @@ import { CalendarEvent } from 'src/app/calendarEvent';
   styleUrls: ['./curriculum.component.css']
 })
 export class CurriculumComponent implements OnInit {
-
-
-
   constructor(private modalService: NgbModal, private userService: UserService, private authService: AuthorizationService, private topicService: TopicService, private curriculumService: CurriculumService, private router: Router, private activatedRoutes: ActivatedRoute) { 
-    
   }
 
+  /**
+   * On-initialization setup.
+   */
   ngOnInit(): void {
+    // Extracts URL params and retrieve list of current user's topics if they are a trainer.
     let initialDate: string | null = this.activatedRoutes.snapshot.queryParamMap.get('viewDate')
     this.isTrainer = this.userService.isTrainer();
     this.isInitialized = false
     this.curriculumId = this.activatedRoutes.snapshot.paramMap.get("id")
     this.topicService.getAllTopicsByTrainer(this.authService.jwt).subscribe(result => this.topics = result)
 
-    // Loads the curriculum from the selection
+    // Calls CurriculumService function to retrieve the curriculum with the requested ID and display it.
+    // Includes CalendarOptions initialization for FullCalendar API.
     this.curriculumService.getCurriculum(this.isTrainer).subscribe((result) => {
       this.curriculum = result.filter(c => c.id == this.curriculumId)[0]
       for(let e of this.curriculum.events) {
@@ -70,6 +71,7 @@ export class CurriculumComponent implements OnInit {
     })
   }
 
+  // Variable declarations
   isInitialized: boolean = false;
   curriculumId: any
   curriculum: Curriculum
@@ -83,10 +85,16 @@ export class CurriculumComponent implements OnInit {
   currentEvent: CalendarEvent;
   isTrainer: boolean;
 
+  /**
+   * @returns reference to FullCalendar API.
+   */
   getCalendarApi() {
     return this.calendarComponent.getApi();
   }
 
+  /**
+   * Reloads the calendar display and attempts to navigate back to the same day the view was previously focused on.
+   */
   reloadPage() {
     let api = this.getCalendarApi()
     let date = new Date(api.getDate())
@@ -105,12 +113,17 @@ export class CurriculumComponent implements OnInit {
     
   }
 
+  /**
+   * Pops up a modal.
+   * @param content Content to be rendered in modal.
+   */
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
   /**
-   * This function adds a topis to the curriculum day
+   * Calls CurriculumService function to insert an Event for currently selected Topic to the selected day.
+   * Refreshes calendar after the request completes.
    */
   addTopicToDay() {
     let calendarApi = this.getCalendarApi()
@@ -129,13 +142,18 @@ export class CurriculumComponent implements OnInit {
     })
   }
   /**
-   * This function deletes an event from the curriculum
-   * @param id the id of the event 
+   * Calls CurriculumService function to deletes an event from the curriculum.
+   * Refreshes calendar after the request completes.
+   * @param id (number) ID of Event to be deleted. 
    */
   deleteEvent(id: number) {
     this.curriculumService.deleteEventById(id).subscribe(result => this.reloadPage())
   }
 
+  /**
+   * Switches calendar to Day View and navigates to selected day when a day is clicked.
+   * @param arg 
+   */
   handleDateClick (arg: any) {
     let calendarApi = this.getCalendarApi()
     calendarApi.changeView("dayGridDay", arg.dateStr)
@@ -143,7 +161,7 @@ export class CurriculumComponent implements OnInit {
     this.currentView = calendarApi.view.type
   }
 
-
+  // Default values declaration for CalendarOptions.
   calendarOptions: CalendarOptions & {dateClick: any} = {
     customButtons: {
       month: {

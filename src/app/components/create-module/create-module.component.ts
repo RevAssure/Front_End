@@ -15,7 +15,7 @@ import { TechnologyCategory } from 'src/app/technologycategory';
 })
 export class CreateModuleComponent implements OnInit {
 
-  //Injected services to grab information and Router for routing
+  //Inject services to grab information and Router for routing
   constructor(private moduleService: ModuleService, private techCategoryService: TechCategoryService, 
     private authService: AuthorizationService, private router: Router) { }
 
@@ -25,16 +25,19 @@ export class CreateModuleComponent implements OnInit {
   techCategoryId: string = "";
   techCategories: TechnologyCategory[] = [];
 
-  // boolean describe the state of the operation, successfully created or not
+  // boolean describing the state of the operation, successfully created or not
   successful: boolean = false;
 
-  // runs on init, setup tech categories for user to select
+  /**
+   * On init, retrieve cached array of TechnologyCategories
+   */
   ngOnInit() {
     this.techCategories = this.techCategoryService.categories;
   }
 
   /**
-   * Create a new Module by supplying a DTO object.
+   * Constructs a Module DTO from user input and passes it into ModuleService function to insert it into database.
+   * Routes back to Module list view afterwards.
    */
   createModule(){
     let moduleDto = {
@@ -46,7 +49,6 @@ export class CreateModuleComponent implements OnInit {
       (module) => {
         console.log(module);
         this.successful = true;
-        // route back to modules after 3 seconds
         setTimeout( () => this.router.navigateByUrl('/modules'), 3000);
       });
   }

@@ -15,29 +15,25 @@ import { User } from 'src/app/user';
 })
 export class RegisterComponent implements OnInit {
   
-  // Injected UserService to bring in methods to grab needed information and Router for routing
+  // Inject UserService to bring in methods to grab needed information and Router for routing
   constructor(private service: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  /**
-   * information received from the page input
-   */
+  // information received from the page input
   firstName: string;
   lastName: string;
   username: string;
   password: string;
   
-  /**
-   * boolean values to suggest the state of operations
-   */
+  // boolean flags to indicate the state of operations
   isTrainer: boolean = false;
   failedRegister: boolean = false;
   successful: boolean = false;
 
   /**
-   * This function allows a user to register as a new user of the app
+   * Calls UserService function to insert a new user
    */
   registerNewUser() {
     // Create a new user with inputs from the web page

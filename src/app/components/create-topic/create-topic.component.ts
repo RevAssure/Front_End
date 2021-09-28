@@ -19,7 +19,7 @@ import { Location } from '@angular/common';
 })
 export class CreateTopicComponent implements OnInit {
 
-  // Injected services to grab information and other modules
+  // Inject services to grab information and other modules
   constructor(private userService: UserService, private techCategoryService: TechCategoryService,
     private topicService: TopicService, private authService: AuthorizationService,
     private moduleService: ModuleService, private location: Location, private route: ActivatedRoute) { }
@@ -38,7 +38,10 @@ export class CreateTopicComponent implements OnInit {
   // boolean states wheather the operation is success or not
   successful: boolean = false;
 
-  // runs on init
+  /**
+   * On init, query database for array of all modules and retrieve cached array of TechnologyCategories.
+   * Also retrieves Module ID from URL param if one is included.
+   */
   ngOnInit() {
     this.techCategories = this.techCategoryService.categories;
     this.moduleService.getAllModules(this.authService.jwt).subscribe(modules => this.modules = modules);
@@ -50,7 +53,7 @@ export class CreateTopicComponent implements OnInit {
   
 
   /**
-   * Create a new topic. The newTopicPostBody represents the TopicDto that will be
+   * Calls TopicService function to insert a new topic. newTopic represents the TopicDto that will be
    * posted to the back-end API.
    */
   createTopic() {
