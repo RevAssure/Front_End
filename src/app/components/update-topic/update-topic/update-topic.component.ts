@@ -41,6 +41,11 @@ export class UpdateTopicComponent implements OnInit {
   techCategories : TechnologyCategory[] = [];
   modules: Module[] = [];
 
+  /**
+   * Calls various service layer functions to:
+   * - Retrieve array of Modules and TechnologyCategories
+   * - Retrieve current values of current Topic's fields
+   */
   ngOnInit() {
     this.moduleService.getAllModules(this.authService.jwt).subscribe(modules => 
       this.modules = modules  
@@ -61,7 +66,8 @@ export class UpdateTopicComponent implements OnInit {
     this.techCategories = this.techCategoryService.categories;
   }
   /**
-   * This function allows a trainer to update a topic
+   * Calls TopicService function to update the current Topic.
+   * Routes to previous view that the client was on afterwards.
    */
   updateTopic() {
     let updatedTopic: Topic = {
@@ -91,9 +97,10 @@ export class UpdateTopicComponent implements OnInit {
   }
   
   /**
-   * This function allows a trainer to delete a topic
+   * Calls TopicService function to delete the current Topic.
+   * Routes to previous view that the client was on afterwards.
    */
-  deleteTopic() {
+   deleteTopic() {
     this.topicService.deleteTopicById(this.authService.jwt, this.id).subscribe(_ => { 
       console.log(`Deleted topic #{id}.`);
       this.successfulDelete = true;
@@ -102,8 +109,11 @@ export class UpdateTopicComponent implements OnInit {
       }, 3000);
     });
   }
-  //TODO: implement cloneTopic()
-  cloneTopic() {
+  /**
+   * Calls TopicService function to insert a clone of the current Topic under current user's ownership.
+   * Routes to previous view that the client was on afterwards.
+   */
+   cloneTopic() {
     let newClone: Topic = this.passedTopic;
     newClone.id = 0;
     newClone.trainer = this.userService.getUserObject();
@@ -115,6 +125,9 @@ export class UpdateTopicComponent implements OnInit {
     })
   }
 
+  /**
+   * Routes to previous view that the client was on.
+   */
   goBack() {
     this.location.back();
   }

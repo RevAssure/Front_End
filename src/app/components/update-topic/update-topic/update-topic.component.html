@@ -2,6 +2,7 @@
 <div class="container mt-5"> 
     <div class="card shadow col-6 offset-3">
         <div class="card-body">
+            <!--Card containing topic edit form. Only renders if current user owns the topic-->
             <div *ngIf=isTopicOwner>
                 <div class="d-flex align-items-baseline justify-content-between">
                     <h3 class="card-title mr-3">Edit Topic</h3>
@@ -53,6 +54,7 @@
                     <button class="rev-btn-secondary" routerLink="/topics">Back to Topics</button>
                 </div>
             </div>
+            <!--Card containing topic view in the format of a read-only form. Only renders if current user doesn't own this topic.-->
             <div *ngIf="!isTopicOwner">
                 <div class="d-flex align-items-baseline justify-content-between">
                     <h3 class="card-title">View Topic</h3>

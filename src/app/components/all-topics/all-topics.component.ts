@@ -13,7 +13,6 @@ export class AllTopicsComponent implements OnInit {
   topics: Topic[] = [];
   myTopics: Topic[] = [];
   isShowingAll: boolean = true;
-  //isShowingMy: boolean = false;
 
   constructor(private topicService: TopicService, private authService: AuthorizationService,
     private userService: UserService) { }
@@ -23,7 +22,7 @@ export class AllTopicsComponent implements OnInit {
   }
 
   /**
-   * Retrieves all the Topics from the database and sorts it into two Topic arrays, topics and myTopics
+   * Retrieves all the Topics from the database and sorts it into two Topic arrays, topics (all topics) and myTopics (current trainer's topics)
    */
   getTopics(): void {
     this.topicService.getAllTopics(this.authService.jwt).subscribe(topics => {
@@ -33,7 +32,6 @@ export class AllTopicsComponent implements OnInit {
         let textB = b.technologyCategory.name.toUpperCase();
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
       })
-      console.log(this.myTopics)
       this.myTopics = [];
       for (let topic of topics) {
         if (topic.trainer.id === this.userService.getUserId()) {
@@ -43,6 +41,9 @@ export class AllTopicsComponent implements OnInit {
     });
   }
 
+  /**
+   * Re-perform database queries to retrieve updated lists of topics.
+   */
   refresh(): void {
     this.getTopics();
   }

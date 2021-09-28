@@ -10,7 +10,7 @@ import { CurriculumService } from 'src/app/services/curriculum.service';
 })
 export class DashboardComponent implements OnInit {
 
-  // Injected CurriculumService and UserService to bring in methods to grab needed information
+  // Inject CurriculumService and UserService to bring in methods to grab needed information
   constructor(private userService: UserService, private curriculumService: CurriculumService) { }
 
   // A boolean determines if user logged in is trainer or associate
@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
   show: boolean = false;
 
   /**
-   * Set trainer, username, and curriculums to current user logged in
+   * Calls CurriculumService functions to retrieve trainer, username, and curriculums for current user
    */
   ngOnInit() {
     this.trainer = this.userService.isTrainer();

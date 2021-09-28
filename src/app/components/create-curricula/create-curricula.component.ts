@@ -12,7 +12,7 @@ import { CurriculumService } from 'src/app/services/curriculum.service';
 })
 export class CreateCurriculaComponent implements OnInit {
 
-  // Injected required modules and service
+  // Inject required modules and service
   constructor(private curriculumService: CurriculumService, private router: Router) { }
 
   ngOnInit(): void {
@@ -25,13 +25,15 @@ export class CreateCurriculaComponent implements OnInit {
     // boolean states operation failed
   failed: boolean = false;
 
-  // calls createCurriculum function from service and subscribe to result returned
+  /**
+   * Calls CurriculumService function to insert curriculum into database.
+   * Routes back to Dashboard view afterwards.
+   */
   create() {
     this.curriculumService.createCurriculum(this.newCurriculumTitle).subscribe((result) => {
-      console.log(result)
       this.success = true;
       this.failed = false;
-      // redirect back to dashboard after successful created curricula after 3 seconds
+      // Redirect back to dashboard after successful created curricula after 3 seconds
       setTimeout(() => {
         this.router.navigateByUrl("/dashboard");
       }, 3000);

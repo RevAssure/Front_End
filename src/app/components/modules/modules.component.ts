@@ -16,6 +16,9 @@ export class ModulesComponent implements OnInit {
   constructor(private moduleService: ModuleService, private authService: AuthorizationService,
     private userService: UserService) { }
 
+  /**
+   * Calls ModuleService function to retrieve list of all modules.
+   */
   ngOnInit() {
     this.moduleService.getAllModules(this.authService.jwt).subscribe((modules) => {
       this.allModules = modules;
